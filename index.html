@@ -1,0 +1,2021 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8"/>
+<meta name="viewport" content="width=device-width, initial-scale=1.0"/>
+<title>Cal | CSE Student & Engineering Portfolio</title>
+<style>
+* { margin:0; padding:0; box-sizing:border-box; }
+body { background:#04040a; overflow-y:auto; overflow-x:hidden; user-select:none; cursor:default; }
+canvas { display:block; position:fixed; inset:0; z-index:0; }
+
+/* ── Hero wrapper (full viewport) ── */
+#hero-section {
+  position: relative;
+  width: 100%;
+  height: 100vh;
+  min-height: 600px;
+  pointer-events: none;
+  z-index: 1;
+}
+#hero-section > * { pointer-events: auto; }
+
+/* ── Scroll cue ── */
+#scroll-cue {
+  position: absolute; bottom: 28px; left: 50%; transform: translateX(-50%);
+  display: flex; flex-direction: column; align-items: center; gap: 8px;
+  opacity: 0; animation: cueAppear 1s ease 3s forwards;
+  pointer-events: none; z-index: 6;
+}
+@keyframes cueAppear { to { opacity: 1; } }
+@keyframes cueBounce { 0%,100%{transform:rotate(45deg) translateY(0)} 50%{transform:rotate(45deg) translateY(5px)} }
+.cue-label { font-size:9px; letter-spacing:2.5px; text-transform:uppercase; color:rgba(200,210,255,0.3); font-family:'Courier New',monospace; }
+.cue-arrow { width:14px; height:14px; border-right:1.5px solid rgba(200,210,255,0.3); border-bottom:1.5px solid rgba(200,210,255,0.3); transform:rotate(45deg); animation:cueBounce 1.8s ease-in-out infinite; }
+
+/* ══════════════════════════════════════════════════════
+   ABOUT SECTION — light theme
+══════════════════════════════════════════════════════ */
+#about-section {
+  position: relative;
+  z-index: 2;
+  background: linear-gradient(180deg, #eef0f4 0%, #ffffff 30%, #f5f6f9 100%);
+  padding: 80px 40px 100px;
+  font-family: 'Georgia', 'Times New Roman', serif;
+}
+#about-section::before {
+  content:''; position:absolute; top:0; left:0; right:0; height:1px;
+  background: linear-gradient(90deg, transparent, rgba(100,110,150,0.18), transparent);
+}
+.about-inner { max-width: 980px; margin: 0 auto; }
+
+/* Profile card */
+.profile-card {
+  display: flex; align-items: flex-start; gap: 56px;
+  background: #ffffff; border-radius: 20px; padding: 48px 52px;
+  box-shadow: 0 4px 40px rgba(0,0,0,0.07), 0 1px 4px rgba(0,0,0,0.04);
+  border: 1px solid rgba(0,0,0,0.06);
+}
+.profile-left { display:flex; flex-direction:column; align-items:center; gap:20px; flex-shrink:0; }
+.profile-photo-wrap {
+  width:160px; height:160px; border-radius:50%; overflow:hidden;
+  border:3px solid #e4e8ee; box-shadow:0 4px 20px rgba(0,0,0,0.10);
+  background: linear-gradient(135deg,#cdd3de,#b5bcc9);
+  display:flex; align-items:center; justify-content:center; flex-shrink:0;
+}
+.profile-initials { font-size:52px; font-weight:700; color:rgba(255,255,255,0.82); font-family:'Georgia',serif; letter-spacing:-2px; line-height:1; }
+.social-icons { display:flex; gap:10px; }
+.social-icon {
+  width:36px; height:36px; border-radius:50%; background:#1a1a1a;
+  display:flex; align-items:center; justify-content:center;
+  cursor:pointer; transition:background 0.18s,transform 0.15s; text-decoration:none;
+}
+.social-icon:hover { background:#333; transform:scale(1.1); }
+.social-icon svg { width:16px; height:16px; fill:white; }
+.profile-right { flex:1; min-width:0; }
+.profile-name { font-size:28px; font-weight:700; color:#18191e; margin-bottom:6px; letter-spacing:-0.3px; line-height:1.2; font-family:'Georgia',serif; }
+.profile-tagline { font-size:15px; font-weight:600; color:#35383f; margin-bottom:18px; line-height:1.4; font-family:'Georgia',serif; }
+.profile-bio { font-size:14px; color:#52555e; line-height:1.85; margin-bottom:14px; font-family:'Georgia',serif; }
+.profile-edu-header { font-size:13.5px; font-weight:700; color:#22242a; margin:22px 0 10px; font-family:'Georgia',serif; }
+.profile-edu-list { list-style:none; margin:0; padding:0; }
+.profile-edu-list li { font-size:13.5px; color:#35383f; font-weight:600; line-height:1.7; padding:3px 0 3px 20px; position:relative; font-family:'Georgia',serif; }
+.profile-edu-list li::before { content:'•'; position:absolute; left:4px; color:#aaa; font-size:14px; }
+
+/* Stats row */
+.stats-row { display:grid; grid-template-columns:repeat(4,1fr); gap:16px; margin-top:36px; }
+.stat-card {
+  background:#ffffff; border-radius:14px; padding:28px 20px; text-align:center;
+  box-shadow:0 2px 16px rgba(0,0,0,0.05),0 1px 3px rgba(0,0,0,0.04);
+  border:1px solid rgba(0,0,0,0.055); transition:transform 0.2s,box-shadow 0.2s;
+}
+.stat-card:hover { transform:translateY(-3px); box-shadow:0 8px 32px rgba(0,0,0,0.09); }
+.stat-number { font-size:36px; font-weight:700; color:#18191e; line-height:1; margin-bottom:6px; font-family:'Georgia',serif; letter-spacing:-1px; }
+.stat-label { font-size:10.5px; text-transform:uppercase; letter-spacing:1.5px; color:#8c909a; font-family:'Courier New',monospace; }
+.stat-accent { display:block; width:28px; height:3px; border-radius:2px; margin:10px auto 0; }
+
+/* Bottom row */
+.bottom-row { display:grid; grid-template-columns:1fr 1fr; gap:16px; margin-top:16px; }
+.info-card {
+  background:#ffffff; border-radius:14px; padding:30px 32px;
+  box-shadow:0 2px 16px rgba(0,0,0,0.05); border:1px solid rgba(0,0,0,0.055);
+}
+.info-card-title { font-size:15px; font-weight:700; color:#22242a; font-family:'Georgia',serif; margin-bottom:18px; letter-spacing:0.1px; }
+.skills-tags { display:flex; flex-wrap:wrap; gap:8px; }
+.skill-tag {
+  font-size:12px; font-family:'Courier New',monospace; color:#3a3d45;
+  background:#f0f2f6; border:1px solid #dde0e8; border-radius:6px;
+  padding:5px 12px; letter-spacing:0.2px; transition:background 0.15s;
+}
+.skill-tag:hover { background:#e4e8f2; }
+.interest-list { list-style:none; margin:0; padding:0; }
+.interest-list li { font-size:13.5px; color:#3a3d45; font-family:'Georgia',serif; line-height:1.7; padding:4px 0 4px 18px; position:relative; }
+.interest-list li::before { content:'→'; position:absolute; left:0; color:#bbb; font-size:12px; }
+
+@media(max-width:700px){
+  .profile-card { flex-direction:column; align-items:center; padding:32px 22px; gap:28px; }
+  .profile-right { text-align:center; }
+  .stats-row { grid-template-columns:repeat(2,1fr); }
+  .bottom-row { grid-template-columns:1fr; }
+  #about-section { padding:56px 18px 80px; }
+}
+
+/* ── Dipole hover tooltip — home screen only ── */
+.dipole-menu {
+  position: fixed;
+  z-index: 50;
+  pointer-events: none;
+  opacity: 0;
+  transform: translateY(6px);
+  transition: opacity .18s ease, transform .18s ease;
+}
+.dipole-menu.visible {
+  opacity: 1;
+  transform: translateY(0);
+}
+.dipole-menu-panel {
+  position: relative;
+  background: rgba(10,10,18,0.88);
+  border-radius: 10px;
+  padding: 0;
+  box-shadow: 0 6px 28px rgba(0,0,0,0.6), 0 1px 0 rgba(255,255,255,0.05);
+  backdrop-filter: blur(10px);
+  -webkit-backdrop-filter: blur(10px);
+  overflow: hidden;
+  border: 1px solid rgba(255,255,255,0.07);
+}
+.dm-tooltip {
+  display: flex;
+  align-items: center;
+  gap: 10px;
+  padding: 11px 20px 11px 17px;
+  white-space: nowrap;
+}
+.dm-dot {
+  width: 8px; height: 8px;
+  border-radius: 50%;
+  flex-shrink: 0;
+  opacity: 0.9;
+}
+.dm-title {
+  font-size: 15px;
+  font-weight: 600;
+  letter-spacing: 0.2px;
+  color: rgba(230,235,255,0.92);
+  font-family: 'Georgia', serif;
+}
+/* colored left-border accent strip */
+.dipole-menu-panel::before {
+  content: '';
+  position: absolute;
+  left: 0; top: 0; bottom: 0;
+  width: 3px;
+  background: var(--dm-accent, rgba(200,210,255,0.7));
+  border-radius: 10px 0 0 10px;
+}
+
+/* ── Content page panel — light white theme ── */
+#page-panel {
+  position:fixed;
+  left: 16px; top: 130px; right: 16px; bottom: 16px;
+  width: auto; height: auto;
+  background: linear-gradient(160deg, #f8f9fb 0%, #ffffff 50%, #f3f5f8 100%);
+  border: 1px solid rgba(0,0,0,0.07); border-radius:18px;
+  box-shadow: 0 12px 64px rgba(0,0,0,0.12), 0 2px 8px rgba(0,0,0,0.06);
+  z-index:15; opacity:0; pointer-events:none;
+  transition:opacity .35s cubic-bezier(0.4,0,0.2,1), transform .35s cubic-bezier(0.4,0,0.2,1);
+  transform: translateY(14px);
+  transform-origin: center top;
+  display:flex; flex-direction:column; overflow:hidden;
+}
+#page-panel.visible { opacity:1; pointer-events:auto; transform:translateY(0); }
+#page-header {
+  padding:20px 26px 15px; border-bottom: 1px solid rgba(0,0,0,0.07);
+  display:flex; align-items:baseline; gap:12px; flex-shrink:0;
+  background: rgba(255,255,255,0.8);
+}
+#page-title    { font-size:16px; font-weight:700; color:#1a1c22; font-family:'Georgia',serif; letter-spacing:0.3px; }
+#page-subtitle { font-size:11px; color:#9096a8; font-family:'Courier New',monospace; letter-spacing:1.5px; text-transform:uppercase; }
+#page-body {
+  flex:1; padding:28px 32px; overflow-y:auto;
+  scrollbar-width:thin; scrollbar-color:rgba(0,0,0,0.12) transparent;
+}
+#page-body::-webkit-scrollbar { width:4px; }
+#page-body::-webkit-scrollbar-thumb { background:rgba(0,0,0,0.12); border-radius:2px; }
+
+.placeholder-text { font-size:13px; color:#aaa; font-family:'Georgia',serif; line-height:1.9; text-align:center; padding-top:48px; }
+.content-block { max-width:720px; }
+.content-block h3 { font-size:17px; font-weight:700; letter-spacing:0.2px; color:#18191e; font-family:'Georgia',serif; margin:0 0 12px; padding-bottom:10px; border-bottom: 1px solid rgba(0,0,0,0.08); }
+.content-block h4 { font-size:11px; font-weight:700; color:#7a8090; font-family:'Courier New',monospace; margin:26px 0 8px; text-transform:uppercase; letter-spacing:1.5px; }
+.content-block p { font-size:14px; color:#3a3d45; font-family:'Georgia',serif; line-height:1.9; margin-bottom:14px; }
+.content-block ul { list-style:none; margin:0 0 18px; padding:0; }
+.content-block ul li { font-size:13.5px; color:#52555e; font-family:'Georgia',serif; line-height:1.75; padding:5px 0 5px 20px; position:relative; border-bottom: 1px solid rgba(0,0,0,0.04); }
+.content-block ul li:last-child { border-bottom:none; }
+.content-block ul li::before { content:'—'; position:absolute; left:0; color:#bbb; font-size:11px; top:7px; }
+.content-divider { height:1px; background: linear-gradient(90deg, rgba(0,0,0,0.06), rgba(0,0,0,0.02)); margin:28px 0; }
+.content-tag { display:inline-block; font-size:10px; letter-spacing:1.5px; text-transform:uppercase; font-family:'Courier New',monospace; color:#6b7280; background:#f0f2f6; border:1px solid #dde0e8; border-radius:4px; padding:3px 9px; margin:0 5px 8px 0; }
+.reveal { opacity:0; transform:translateY(22px); }
+
+/* ── Banner strip (page mode only) — dark background ── */
+#banner-strip {
+  position:fixed; top:0; left:0; right:0; height:120px;
+  background: rgba(4,4,10,0.96);
+  border-bottom: 1px solid rgba(255,255,255,0.07);
+  z-index:5; opacity:0; pointer-events:none;
+  transition:opacity .3s ease;
+}
+#banner-strip.visible { opacity:1; }
+
+/* ── DOM dipole layer — sits above banner, fully interactive ── */
+#banner-dipoles {
+  position:fixed; top:0; left:0; right:0; height:120px;
+  z-index:25; opacity:0; pointer-events:none;
+  transition:opacity .3s ease;
+  display:flex; align-items:center; justify-content:center;
+  gap:12px;
+}
+#banner-dipoles.visible { opacity:1; pointer-events:auto; }
+
+.bd-sphere {
+  height:40px;
+  border-radius:40px;
+  padding:0 20px;
+  cursor:pointer;
+  transition:transform .15s ease, box-shadow .15s ease, filter .15s ease;
+  flex-shrink:0;
+  display:flex; align-items:center; justify-content:center; gap:9px;
+  font-family:'Georgia', serif;
+  font-size:12px;
+  font-weight:600;
+  letter-spacing:0.8px;
+  color:rgba(15,15,20,0.85);
+  white-space:nowrap;
+  user-select:none;
+  box-shadow: 0 2px 12px rgba(0,0,0,0.25);
+}
+.bd-sphere:hover { transform:scale(1.06); box-shadow: 0 4px 20px rgba(0,0,0,0.35); filter:brightness(1.08); }
+.bd-sphere:active { transform:scale(0.97); }
+.bd-sphere.home-sphere {
+  height:46px;
+  padding:0 24px;
+  font-size:13px;
+  box-shadow: 0 3px 16px rgba(0,0,0,0.3);
+}
+.bd-dot {
+  width:9px; height:9px; border-radius:50%;
+  flex-shrink:0;
+  background: rgba(0,0,0,0.22);
+}
+
+/* ── Home hint label ── */
+#home-hint {
+  position:fixed; top:92px; left:50%; transform:translateX(-50%);
+  font-size:10px; letter-spacing:1.8px; text-transform:uppercase;
+  color:rgba(200,210,255,0.38); font-family:'Courier New',monospace;
+  pointer-events:none; white-space:nowrap; z-index:26;
+  opacity:0; transition:opacity .3s ease;
+}
+#home-hint.visible { opacity:1; }
+
+/* ── Hint — sits above the Enter Portfolio button ── */
+#hint {
+  display:block; text-align:center;
+  color:rgba(150,160,195,0.38); font-size:10px; letter-spacing:2px;
+  text-transform:uppercase; pointer-events:none; white-space:nowrap;
+  font-family:'Courier New',monospace; margin-bottom:14px;
+  transition:opacity .5s;
+}
+#hint.hidden { opacity:0; }
+
+/* ── Fade overlay ── */
+#fade-overlay {
+  position:fixed; inset:0; z-index:999;
+  background:#04040a; opacity:0;
+  pointer-events:none;
+  transition:opacity 0.30s ease;
+}
+#fade-overlay.fade-out { opacity:1; pointer-events:auto; }
+
+/* ── Enter Portfolio button ── */
+#enter-btn {
+  position: absolute;
+  bottom: 18%;
+  left: 50%;
+  transform: translateX(-50%);
+  z-index: 6;
+  opacity: 0;
+  animation: enterBtnAppear 1.2s ease 3.8s forwards;
+  pointer-events: auto;
+  cursor: pointer;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+}
+@keyframes enterBtnAppear {
+  0%   { opacity:0; transform: translateX(-50%) translateY(10px); }
+  100% { opacity:1; transform: translateX(-50%) translateY(0); }
+}
+#enter-btn button {
+  font-family: 'Georgia', serif;
+  font-size: 13px;
+  font-weight: 600;
+  letter-spacing: 2.5px;
+  text-transform: uppercase;
+  color: #2a2c34;
+  background: linear-gradient(135deg, rgba(255,255,255,0.92) 0%, rgba(235,238,248,0.88) 100%);
+  border: 1px solid rgba(200,210,240,0.6);
+  border-radius: 40px;
+  padding: 13px 36px;
+  cursor: pointer;
+  box-shadow: 0 4px 28px rgba(0,0,0,0.35), 0 1px 6px rgba(180,200,255,0.2);
+  backdrop-filter: blur(6px);
+  transition: background 0.2s, transform 0.18s, box-shadow 0.18s;
+  white-space: nowrap;
+}
+#enter-btn button:hover {
+  background: linear-gradient(135deg, rgba(255,255,255,0.98) 0%, rgba(220,228,255,0.95) 100%);
+  transform: scale(1.04);
+  box-shadow: 0 8px 40px rgba(0,0,0,0.4), 0 2px 10px rgba(180,200,255,0.3);
+}
+#enter-btn button:active {
+  transform: scale(0.98);
+}
+
+/* ── Scroll-driven canvas mask strip ──
+   When scrolled, a white gradient plate covers the lower portion of the
+   fixed canvas so only the top BANNER_HEIGHT px of the animation shows.
+   It transitions in as scroll increases. ── */
+#canvas-mask {
+  position: fixed;
+  left: 0; right: 0;
+  /* sits just below the banner strip height, covers rest of viewport */
+  top: 120px;
+  bottom: 0;
+  z-index: 1; /* above canvas (z=0), below about-section (z=2) */
+  background: linear-gradient(180deg, #eef0f4 0%, #f5f6f9 100%);
+  opacity: 0;
+  pointer-events: none;
+  transition: opacity 0.05s linear;
+}
+
+/* ── Click-to-expand overlay on canvas when scrolled ──
+   An invisible click zone over the visible banner strip area that
+   scrolls back to top when in scrolled-down state. ── */
+#banner-click-zone {
+  position: fixed;
+  top: 0; left: 0; right: 0;
+  height: 120px;
+  z-index: 3; /* above canvas mask, below dipole menus */
+  cursor: n-resize;
+  pointer-events: none; /* enabled via JS when scrolled */
+  background: transparent;
+}
+#banner-expand-hint {
+  position: absolute;
+  bottom: 6px;
+  left: 50%;
+  transform: translateX(-50%);
+  font-size: 9px;
+  letter-spacing: 2px;
+  text-transform: uppercase;
+  color: rgba(200,210,255,0.0); /* starts invisible, JS fades it in on hover */
+  font-family: 'Courier New', monospace;
+  white-space: nowrap;
+  pointer-events: none;
+  transition: color 0.3s ease;
+}
+#banner-click-zone:hover #banner-expand-hint {
+  color: rgba(200,210,255,0.45);
+}
+
+/* ── Scroll lock when subpage is open ── */
+body.page-open {
+  overflow: hidden;
+}
+
+/* ══════════════════════════════════════════════════════
+   CAREER TIMELINE SECTION
+══════════════════════════════════════════════════════ */
+#timeline-section {
+  position: relative;
+  z-index: 2;
+  background: linear-gradient(180deg, #f5f6f9 0%, #eef0f4 100%);
+  padding: 80px 40px 100px;
+  font-family: 'Georgia', 'Times New Roman', serif;
+}
+#timeline-section::before {
+  content:''; position:absolute; top:0; left:0; right:0; height:1px;
+  background: linear-gradient(90deg, transparent, rgba(100,110,150,0.14), transparent);
+}
+.timeline-inner { max-width: 980px; margin: 0 auto; }
+
+.timeline-heading {
+  font-size: 42px;
+  font-weight: 700;
+  letter-spacing: -1px;
+  color: #18191e;
+  font-family: 'Georgia', serif;
+  margin-bottom: 16px;
+  text-align: center;
+  line-height: 1.15;
+}
+.timeline-subheading {
+  font-size: 13px;
+  letter-spacing: 1px;
+  color: #aaa;
+  font-family: 'Courier New', monospace;
+  text-transform: uppercase;
+  text-align: center;
+  margin-bottom: 64px;
+}
+
+/* The snake spine — a vertical line that the nodes sit on */
+.timeline-track {
+  position: relative;
+  display: flex;
+  flex-direction: column;
+  gap: 0;
+}
+
+/* Vertical connecting line */
+.timeline-track::before {
+  content: '';
+  position: absolute;
+  left: 50%;
+  top: 24px;
+  bottom: 24px;
+  width: 2px;
+  transform: translateX(-50%);
+  background: linear-gradient(180deg, #e0e3ec 0%, #d4d8e4 50%, #e0e3ec 100%);
+}
+
+.tl-row {
+  display: grid;
+  grid-template-columns: 1fr 56px 1fr;
+  align-items: start;
+  margin-bottom: 0;
+  position: relative;
+}
+
+/* The center node circle */
+.tl-node {
+  grid-column: 2;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  padding: 18px 0;
+  position: relative;
+  z-index: 2;
+}
+.tl-node-dot {
+  width: 14px;
+  height: 14px;
+  border-radius: 50%;
+  border: 2px solid #fff;
+  box-shadow: 0 0 0 2px currentColor, 0 2px 8px rgba(0,0,0,0.12);
+  flex-shrink: 0;
+}
+
+/* Content card — alternates left / right */
+.tl-card {
+  background: #ffffff;
+  border-radius: 14px;
+  padding: 22px 26px;
+  box-shadow: 0 2px 16px rgba(0,0,0,0.055), 0 1px 3px rgba(0,0,0,0.04);
+  border: 1px solid rgba(0,0,0,0.055);
+  transition: transform 0.2s, box-shadow 0.2s;
+  margin: 10px 0;
+}
+.tl-card:hover {
+  transform: translateY(-2px);
+  box-shadow: 0 6px 28px rgba(0,0,0,0.09);
+}
+
+/* Left-side card sits in col 1, right-aligned */
+.tl-row.left .tl-card {
+  grid-column: 1;
+  margin-right: 20px;
+  text-align: right;
+}
+/* Right-side card sits in col 3, left-aligned */
+.tl-row.right .tl-card {
+  grid-column: 3;
+  margin-left: 20px;
+  text-align: left;
+}
+/* Empty spacer on the opposite side */
+.tl-row.left  .tl-spacer { grid-column: 3; }
+.tl-row.right .tl-spacer { grid-column: 1; }
+
+.tl-date {
+  font-size: 22px;
+  font-weight: 700;
+  font-family: 'Georgia', serif;
+  color: #18191e;
+  letter-spacing: -0.5px;
+  margin-bottom: 8px;
+  line-height: 1;
+}
+.tl-title {
+  font-size: 15px;
+  font-weight: 700;
+  color: #18191e;
+  font-family: 'Georgia', serif;
+  margin-bottom: 3px;
+  line-height: 1.3;
+}
+.tl-org {
+  font-size: 12.5px;
+  font-weight: 600;
+  margin-bottom: 8px;
+  font-family: 'Georgia', serif;
+}
+.tl-desc {
+  font-size: 13px;
+  color: #52555e;
+  font-family: 'Georgia', serif;
+  line-height: 1.75;
+  margin: 0;
+}
+.tl-tags {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 6px;
+  margin-top: 10px;
+}
+.tl-row.left .tl-tags { justify-content: flex-end; }
+.tl-tag {
+  font-size: 10px;
+  font-family: 'Courier New', monospace;
+  letter-spacing: 0.5px;
+  color: #5a6070;
+  background: #f0f2f6;
+  border: 1px solid #dde0e8;
+  border-radius: 4px;
+  padding: 2px 8px;
+}
+
+/* Connector lines from card to spine */
+.tl-row.left  .tl-card::after,
+.tl-row.right .tl-card::before {
+  display: none; /* handled by grid gap */
+}
+
+@media(max-width:700px){
+  .timeline-track::before { left: 20px; }
+  .tl-row { grid-template-columns: 40px 1fr; }
+  .tl-node { grid-column: 1; padding: 16px 0; }
+  .tl-row.left  .tl-card,
+  .tl-row.right .tl-card { grid-column: 2; margin-left: 12px; margin-right: 0; text-align: left; }
+  .tl-row.left  .tl-tags  { justify-content: flex-start; }
+  .tl-row.left  .tl-spacer,
+  .tl-row.right .tl-spacer { display: none; }
+  #timeline-section { padding: 56px 18px 80px; }
+}
+/* ── Back to top button — fixed, above content, hidden until scrolled ── */
+#back-to-top {
+  position: fixed;
+  bottom: 32px;
+  right: 32px;
+  z-index: 10;
+  width: 44px;
+  height: 44px;
+  border-radius: 50%;
+  background: rgba(255,255,255,0.92);
+  border: 1px solid rgba(0,0,0,0.08);
+  box-shadow: 0 4px 20px rgba(0,0,0,0.12), 0 1px 4px rgba(0,0,0,0.06);
+  cursor: pointer;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  opacity: 0;
+  pointer-events: none;
+  transition: opacity 0.3s ease, transform 0.2s ease, box-shadow 0.2s ease;
+  backdrop-filter: blur(6px);
+  -webkit-backdrop-filter: blur(6px);
+}
+#back-to-top.visible {
+  opacity: 1;
+  pointer-events: auto;
+}
+#back-to-top:hover {
+  transform: translateY(-3px);
+  box-shadow: 0 8px 28px rgba(0,0,0,0.15), 0 2px 6px rgba(0,0,0,0.08);
+  background: rgba(255,255,255,0.98);
+}
+#back-to-top:active {
+  transform: translateY(0);
+}
+#back-to-top svg {
+  width: 16px;
+  height: 16px;
+  stroke: #3a3d45;
+  fill: none;
+  stroke-width: 2;
+  stroke-linecap: round;
+  stroke-linejoin: round;
+}
+</style>
+</head>
+<body>
+
+<!-- Scroll-driven canvas mask (covers canvas below banner height when scrolled) -->
+<div id="canvas-mask"></div>
+<!-- Back to top button — fixed overlay, visible when scrolled into portfolio -->
+<button id="back-to-top" aria-label="Back to top" onclick="smoothScrollTo(0,1000)">
+  <svg viewBox="0 0 24 24"><polyline points="18 15 12 9 6 15"/></svg>
+</button>
+<!-- Click-to-scroll-top zone over banner when scrolled down -->
+<div id="banner-click-zone">
+  <div id="banner-expand-hint">↑ click to expand</div>
+</div>
+
+<div id="hero-section">
+<canvas id="c"></canvas>
+<!-- Frosted banner strip — visible only in page mode -->
+<div id="banner-strip"></div>
+<!-- DOM dipole layer — visible in page mode, sits above banner, fully interactive -->
+<div id="banner-dipoles">
+  <div class="bd-sphere" id="bd-eng"   style="background:rgb(210,150,80)"  data-di="0"><div class="bd-dot"></div>Engineering</div>
+  <div class="bd-sphere" id="bd-tools" style="background:rgb(110,160,220)" data-di="1"><div class="bd-dot"></div>Tools</div>
+  <div class="bd-sphere home-sphere" id="bd-home" style="background:rgb(200,210,255)" data-di="2"><div class="bd-dot"></div>Home</div>
+  <div class="bd-sphere" id="bd-about" style="background:rgb(110,185,140)" data-di="3"><div class="bd-dot"></div>About Me</div>
+  <div class="bd-sphere" id="bd-exp"   style="background:rgb(200,120,200)" data-di="4"><div class="bd-dot"></div>Experience</div>
+</div>
+<!-- Home hint label — visible only in page mode, centered under home sphere -->
+<div id="home-hint">click to go home</div>
+<div id="fade-overlay"></div>
+
+<!-- Dipole hover tooltips (home screen) — display label only, click dipole to enter -->
+<div id="menu-eng" class="dipole-menu">
+  <div class="dipole-menu-panel" style="--dm-accent:rgba(210,150,80,0.8);">
+    <div class="dm-tooltip">
+      <div class="dm-dot" style="background:rgb(210,150,80)"></div>
+      <span class="dm-title">Engineering</span>
+    </div>
+  </div>
+</div>
+
+<div id="menu-tools" class="dipole-menu">
+  <div class="dipole-menu-panel" style="--dm-accent:rgba(110,160,220,0.8);">
+    <div class="dm-tooltip">
+      <div class="dm-dot" style="background:rgb(110,160,220)"></div>
+      <span class="dm-title">Tools &amp; Software</span>
+    </div>
+  </div>
+</div>
+
+<div id="menu-about" class="dipole-menu">
+  <div class="dipole-menu-panel" style="--dm-accent:rgba(110,185,140,0.8);">
+    <div class="dm-tooltip">
+      <div class="dm-dot" style="background:rgb(110,185,140)"></div>
+      <span class="dm-title">About Me</span>
+    </div>
+  </div>
+</div>
+
+<div id="menu-exp" class="dipole-menu">
+  <div class="dipole-menu-panel" style="--dm-accent:rgba(200,120,200,0.8);">
+    <div class="dm-tooltip">
+      <div class="dm-dot" style="background:rgb(200,120,200)"></div>
+      <span class="dm-title">Experience</span>
+    </div>
+  </div>
+</div>
+
+<!-- Content page -->
+<div id="page-panel">
+  <div id="page-header">
+    <span id="page-title">Page Title</span>
+    <span id="page-subtitle">Section</span>
+  </div>
+  <div id="page-body"></div>
+</div>
+
+<!-- Enter Portfolio button + hint stacked — lower centre of hero -->
+<div id="enter-btn">
+  <div id="hint">hover a dipole · click &amp; drag to rotate view</div>
+  <button onclick="enterPortfolio()">Enter Portfolio</button>
+</div>
+
+<!-- Scroll cue -->
+<div id="scroll-cue">
+  <span class="cue-label">scroll</span>
+  <div class="cue-arrow"></div>
+</div>
+
+</div><!-- /#hero-section -->
+
+<!-- ══════════════════════════════════════════════
+     ABOUT / MAIN PAGE SECTION
+══════════════════════════════════════════════ -->
+<section id="about-section">
+  <div class="about-inner">
+
+    <!-- Profile card -->
+    <div class="profile-card">
+      <div class="profile-left">
+        <div class="profile-photo-wrap">
+          <!-- Add your photo here if desired:
+          <img src="assets/profile.jpg" alt="Cal" style="width:100%;height:100%;object-fit:cover;">
+          -->
+          <div class="profile-photo-placeholder">
+            <span class="profile-initials">C</span>
+          </div>
+        </div>
+        <div class="social-icons">
+          <!-- Replace # with your real profile URLs -->
+          <a class="social-icon" href="#" title="LinkedIn" aria-label="LinkedIn">
+            <svg viewBox="0 0 24 24"><path d="M16 8a6 6 0 0 1 6 6v7h-4v-7a2 2 0 0 0-2-2 2 2 0 0 0-2 2v7h-4v-7a6 6 0 0 1 6-6zM2 9h4v12H2z"/><circle cx="4" cy="4" r="2"/></svg>
+          </a>
+          <a class="social-icon" href="#" title="GitHub" aria-label="GitHub">
+            <svg viewBox="0 0 24 24"><path d="M9 19c-5 1.5-5-2.5-7-3m14 6v-3.87a3.37 3.37 0 0 0-.94-2.61c3.14-.35 6.44-1.54 6.44-7A5.44 5.44 0 0 0 20 4.77 5.07 5.07 0 0 0 19.91 1S18.73.65 16 2.48a13.38 13.38 0 0 0-7 0C6.27.65 5.09 1 5.09 1A5.07 5.07 0 0 0 5 4.77a5.44 5.44 0 0 0-1.5 3.78c0 5.42 3.3 6.61 6.44 7A3.37 3.37 0 0 0 9 18.13V22"/></svg>
+          </a>
+          <a class="social-icon" href="#" title="YouTube" aria-label="YouTube">
+            <svg viewBox="0 0 24 24"><path d="M23.5 6.2a3 3 0 0 0-2.1-2.1C19.5 3.5 12 3.5 12 3.5s-7.5 0-9.4.6A3 3 0 0 0 .5 6.2 31 31 0 0 0 0 12a31 31 0 0 0 .5 5.8 3 3 0 0 0 2.1 2.1c1.9.6 9.4.6 9.4.6s7.5 0 9.4-.6a3 3 0 0 0 2.1-2.1A31 31 0 0 0 24 12a31 31 0 0 0-.5-5.8zM9.6 15.5v-7l6.2 3.5-6.2 3.5z"/></svg>
+          </a>
+        </div>
+      </div>
+
+      <div class="profile-right">
+        <div class="profile-name">Cal</div>
+        <div class="profile-tagline">Incoming B.S. Computer Science &amp; Engineering Student · UC Irvine</div>
+        <p class="profile-bio">I'm an incoming Computer Science &amp; Engineering student at UC Irvine with a strong interest in embedded systems, electronics, firmware, and physics-based engineering. I enjoy learning by building — especially when a project combines software, hardware, CAD, and real-world experimentation.</p>
+        <p class="profile-bio">My projects have taken me from Arduino control and electromagnetic simulation to CAD design, programming, rocketry, and autonomous systems. I'm particularly interested in developing toward embedded systems and electronics engineering.</p>
+
+        <div class="profile-edu-header">Education · 2026 →</div>
+        <ul class="profile-edu-list">
+          <li>University of California, Irvine — B.S. Computer Science &amp; Engineering</li>
+          <li>Incoming freshman, Fall 2026</li>
+          <li>Interested in embedded systems, electronics, firmware, and engineering simulation</li>
+          <li>Building an engineering portfolio through independent projects and student-team involvement</li>
+        </ul>
+      </div>
+    </div>
+
+    <!-- Stats row -->
+    <div class="stats-row">
+      <div class="stat-card">
+        <div class="stat-number">3+</div>
+        <div class="stat-label">Years Engineering Builds</div>
+        <span class="stat-accent" style="background:rgb(210,150,80)"></span>
+      </div>
+      <div class="stat-card">
+        <div class="stat-number">100M+</div>
+        <div class="stat-label">YouTube Views</div>
+        <span class="stat-accent" style="background:rgb(110,160,220)"></span>
+      </div>
+      <div class="stat-card">
+        <div class="stat-number">2026</div>
+        <div class="stat-label">UCI CSE Incoming</div>
+        <span class="stat-accent" style="background:rgb(200,120,200)"></span>
+      </div>
+      <div class="stat-card">
+        <div class="stat-number">∞</div>
+        <div class="stat-label">Curiosity</div>
+        <span class="stat-accent" style="background:rgb(110,185,140)"></span>
+      </div>
+    </div>
+
+    <!-- Bottom row: skills + interests -->
+    <div class="bottom-row">
+      <div class="info-card">
+        <div class="info-card-title">Technical Skills</div>
+        <div class="skills-tags">
+          <span class="skill-tag">C</span>
+          <span class="skill-tag">C++</span>
+          <span class="skill-tag">Java</span>
+          <span class="skill-tag">Python</span>
+          <span class="skill-tag">Arduino</span>
+          <span class="skill-tag">Git / GitHub</span>
+          <span class="skill-tag">Fusion 360</span>
+          <span class="skill-tag">ANSYS Maxwell</span>
+          <span class="skill-tag">OpenRocket</span>
+          <span class="skill-tag">CAD</span>
+          <span class="skill-tag">Embedded Systems</span>
+          <span class="skill-tag">Electronics</span>
+        </div>
+      </div>
+      <div class="info-card">
+        <div class="info-card-title">Areas of Interest</div>
+        <ul class="interest-list">
+          <li>Embedded Systems &amp; Firmware</li>
+          <li>Electronics Engineering</li>
+          <li>Electromagnetics &amp; Physics</li>
+          <li>CAD &amp; Hardware Design</li>
+          <li>Simulation &amp; Modeling</li>
+          <li>Robotics, Aerospace &amp; Control</li>
+        </ul>
+      </div>
+    </div>
+
+  </div>
+</section>
+
+<!-- ══════════════════════════════════════════════
+     CAREER TIMELINE SECTION
+══════════════════════════════════════════════ -->
+<section id="timeline-section">
+  <div class="timeline-inner">
+    <div class="timeline-heading">Journey &amp; Experience</div>
+    <div class="timeline-subheading">2022 – Present</div>
+
+    <div class="timeline-track">
+
+      <!-- 1 — left -->
+      <div class="tl-row left">
+        <div class="tl-card">
+          <div class="tl-date">2022 – 2026</div>
+          <div class="tl-title">High School · STEM &amp; Independent Engineering</div>
+          <div class="tl-org" style="color:rgb(110,160,220)">Education &amp; Self-Directed Learning</div>
+          <p class="tl-desc">Developed a foundation in mathematics, physics, computer science, and electronics while increasingly learning through hands-on projects and technical experimentation.</p>
+          <div class="tl-tags"><span class="tl-tag">Physics</span><span class="tl-tag">CS</span><span class="tl-tag">Electronics</span></div>
+        </div>
+        <div class="tl-node"><div class="tl-node-dot" style="color:rgb(110,160,220)"></div></div>
+        <div class="tl-spacer"></div>
+      </div>
+
+      <!-- 2 — right -->
+      <div class="tl-row right">
+        <div class="tl-spacer"></div>
+        <div class="tl-node"><div class="tl-node-dot" style="color:rgb(210,150,80)"></div></div>
+        <div class="tl-card">
+          <div class="tl-date">3+ Years</div>
+          <div class="tl-title">Electromagnetic Accelerator Project</div>
+          <div class="tl-org" style="color:rgb(210,150,80)">Independent Engineering Project</div>
+          <p class="tl-desc">Long-term exploration of electromagnetic acceleration, combining Arduino control, timing logic, Fusion 360 mechanical modeling, and ANSYS Maxwell electromagnetic simulation.</p>
+          <div class="tl-tags"><span class="tl-tag">Arduino</span><span class="tl-tag">ANSYS Maxwell</span><span class="tl-tag">Fusion 360</span><span class="tl-tag">Electromagnetics</span></div>
+        </div>
+      </div>
+
+      <!-- 3 — left -->
+      <div class="tl-row left">
+        <div class="tl-card">
+          <div class="tl-date">2025 – 2026</div>
+          <div class="tl-title">American Rocketry Challenge</div>
+          <div class="tl-org" style="color:rgb(200,120,200)">Team Project · Aerospace</div>
+          <p class="tl-desc">Worked with a six-person team on a student rocketry project, using OpenRocket to iterate on flight behavior and developing the vehicle around aerodynamic and stability considerations.</p>
+          <div class="tl-tags"><span class="tl-tag">OpenRocket</span><span class="tl-tag">Aerospace</span><span class="tl-tag">Teamwork</span></div>
+        </div>
+        <div class="tl-node"><div class="tl-node-dot" style="color:rgb(200,120,200)"></div></div>
+        <div class="tl-spacer"></div>
+      </div>
+
+      <!-- 4 — right -->
+      <div class="tl-row right">
+        <div class="tl-spacer"></div>
+        <div class="tl-node"><div class="tl-node-dot" style="color:rgb(110,185,140)"></div></div>
+        <div class="tl-card">
+          <div class="tl-date">2025 – 2026</div>
+          <div class="tl-title">Programming &amp; Computer Science Projects</div>
+          <div class="tl-org" style="color:rgb(110,185,140)">Coursework &amp; Independent Learning</div>
+          <p class="tl-desc">Built programming experience across C and Java, including data structures work, input validation, debugging, and algorithmic problem solving while preparing for a CSE degree.</p>
+          <div class="tl-tags"><span class="tl-tag">C</span><span class="tl-tag">Java</span><span class="tl-tag">Data Structures</span></div>
+        </div>
+      </div>
+
+      <!-- 5 — left -->
+      <div class="tl-row left">
+        <div class="tl-card">
+          <div class="tl-date">2026</div>
+          <div class="tl-title">Engineering Team Outreach</div>
+          <div class="tl-org" style="color:rgb(110,160,220)">UC Irvine · HyperXite / AER / Anteater Racing</div>
+          <p class="tl-desc">Started connecting with UCI engineering project teams before freshman year, including HyperXite, UCI AER, and Anteater Racing, with particular interest in hands-on electronics, embedded systems, and aerospace work.</p>
+          <div class="tl-tags"><span class="tl-tag">UCI</span><span class="tl-tag">Engineering Teams</span><span class="tl-tag">Networking</span></div>
+        </div>
+        <div class="tl-node"><div class="tl-node-dot" style="color:rgb(110,160,220)"></div></div>
+        <div class="tl-spacer"></div>
+      </div>
+
+      <!-- 6 — right -->
+      <div class="tl-row right">
+        <div class="tl-spacer"></div>
+        <div class="tl-node"><div class="tl-node-dot" style="color:rgb(210,150,80)"></div></div>
+        <div class="tl-card">
+          <div class="tl-date">2024 – 2026</div>
+          <div class="tl-title">Technical Content Creator</div>
+          <div class="tl-org" style="color:rgb(210,150,80)">YouTube</div>
+          <p class="tl-desc">Built and managed a large-scale YouTube channel, developing skills in short-form content, audience analytics, rapid iteration, and communicating ideas visually. The channel has reached 100M+ views.</p>
+          <div class="tl-tags"><span class="tl-tag">YouTube</span><span class="tl-tag">Analytics</span><span class="tl-tag">Content</span></div>
+        </div>
+      </div>
+
+      <!-- 7 — left -->
+      <div class="tl-row left">
+        <div class="tl-card">
+          <div class="tl-date">Fall 2026</div>
+          <div class="tl-title">Incoming CSE Student</div>
+          <div class="tl-org" style="color:rgb(110,185,140)">University of California, Irvine</div>
+          <p class="tl-desc">Beginning a B.S. in Computer Science &amp; Engineering and continuing to develop toward embedded systems, electronics, firmware, robotics, and engineering simulation.</p>
+          <div class="tl-tags"><span class="tl-tag">UCI</span><span class="tl-tag">CSE</span><span class="tl-tag">Embedded Systems</span></div>
+        </div>
+        <div class="tl-node"><div class="tl-node-dot" style="color:rgb(110,185,140)"></div></div>
+        <div class="tl-spacer"></div>
+      </div>
+
+      <!-- 8 — right -->
+      <div class="tl-row right">
+        <div class="tl-spacer"></div>
+        <div class="tl-node"><div class="tl-node-dot" style="color:rgb(200,210,255)"></div></div>
+        <div class="tl-card">
+          <div class="tl-date">Now</div>
+          <div class="tl-title">Seeking Hands-On Engineering Opportunities</div>
+          <div class="tl-org" style="color:rgb(200,120,200)">Incoming UCI Freshman</div>
+          <p class="tl-desc">Looking to contribute to student teams, research, and internships where I can grow in embedded firmware, electronics, simulation, and hardware development.</p>
+          <div class="tl-tags"><span class="tl-tag">Embedded</span><span class="tl-tag">Electronics</span><span class="tl-tag">Firmware</span></div>
+        </div>
+      </div>
+
+    </div>
+  </div>
+</section>
+
+<script>
+// ════════════════════════════════════════════════════
+// CONFIG
+// ════════════════════════════════════════════════════
+const DIPOLES = [
+  { id:'eng',   color:[210,150, 80], menuId:'menu-eng',   isHome:false, defaultPage:['Engineering Projects','Projects'] },
+  { id:'tools', color:[110,160,220], menuId:'menu-tools', isHome:false, defaultPage:['Tools & Software','Technical Stack'] },
+  { id:'home',  color:[200,210,255], menuId:null,         isHome:true,  defaultPage:null },
+  { id:'about', color:[110,185,140], menuId:'menu-about', isHome:false, defaultPage:['Background & Education','About Me'] },
+  { id:'exp',   color:[200,120,200], menuId:'menu-exp',   isHome:false, defaultPage:['Background & Education','Experience'] },
+];
+const HOME_IDX      = 2;
+const DIPOLE_R      = 24;
+const HOME_R        = 32;
+const DIPOLE_SPACING= 0.9;
+const DIPOLE_POS_X  = DIPOLES.map((_,i) => (i - (DIPOLES.length-1)/2) * DIPOLE_SPACING);
+
+// Pre-built rgb() strings for sphere drawing
+const DIPOLE_COLOR_STRS = DIPOLES.map(d=>`rgb(${d.color[0]},${d.color[1]},${d.color[2]})`);
+
+// ════════════════════════════════════════════════════
+// STATE
+// ════════════════════════════════════════════════════
+let pageOpen = false;
+let fieldAlpha = 1;
+let W, H, cx, scale;
+let cy_home = 0, cy_banner = 0;
+let cyTarget = 0, cySmooth = 0;
+let mouse = {x:-9999, y:-9999};
+let mouseMoved = false; // set true on mousemove, cleared after proximity update
+
+const fadeOverlay = document.getElementById('fade-overlay');
+let fadeActive = false;
+
+let dipoleState = DIPOLES.map((d, i) => ({
+  sx: 0, sy: 0,
+  r: i === HOME_IDX ? HOME_R : DIPOLE_R,
+  hovered: false,
+  menuVisible: false,
+}));
+
+let rotMat = identity3(), homeBase = identity3();
+let isDragging = false, dragRotStart = null;
+let returning = false, returnProgress = 0, returnFrom = null;
+let stars = [];
+let particles = [];
+let particleTimer = 0;
+let fieldLines3D = [];
+// Per-dipole hide timers — prevent single-frame gaps from closing menus
+const menuHideTimers = [null,null,null,null,null];
+
+// ── Dirty / cache tracking ───────────────────────────
+// Cache projected screen coords for field lines; only reproject when rotation
+// or cySmooth changes enough to be visible (saves >90% of per-frame math).
+let projCache = [];          // per-line: Float32Array of [sx,sy,depth, ...]
+let projDirty = true;        // set true when rotMat or cySmooth changes
+let lastProjRotMat = null;
+let lastProjCySmooth = -99999;
+const PROJ_CY_THRESH = 0.3;  // pixels: skip reprojection if cySmooth moved less than this
+
+// Precomputed per-line mouse-distance (updated every frame, cheap)
+let lineProximity = [];
+
+// ── Visibility / throttle ────────────────────────────
+let tabHidden = false;
+let canvasMasked = false; // true when canvas is fully covered by scroll mask
+let animationPaused = false; // true when a subpage is fully open (save CPU)
+let lastFrameTime = 0;
+// Target interval: ~16ms (60fps) when active, ~33ms (30fps) when low-activity
+const FRAME_MS_ACTIVE = 16;
+const FRAME_MS_IDLE   = 33;
+
+document.addEventListener('visibilitychange', ()=>{ tabHidden = document.hidden; });
+
+// ════════════════════════════════════════════════════
+// MATH
+// ════════════════════════════════════════════════════
+function identity3(){ return [1,0,0,0,1,0,0,0,1]; }
+
+// Fully unrolled 3×3 matrix multiply — no loop overhead
+function mulMat3(a,b){
+  return [
+    a[0]*b[0]+a[1]*b[3]+a[2]*b[6], a[0]*b[1]+a[1]*b[4]+a[2]*b[7], a[0]*b[2]+a[1]*b[5]+a[2]*b[8],
+    a[3]*b[0]+a[4]*b[3]+a[5]*b[6], a[3]*b[1]+a[4]*b[4]+a[5]*b[7], a[3]*b[2]+a[4]*b[5]+a[5]*b[8],
+    a[6]*b[0]+a[7]*b[3]+a[8]*b[6], a[6]*b[1]+a[7]*b[4]+a[8]*b[7], a[6]*b[2]+a[7]*b[5]+a[8]*b[8],
+  ];
+}
+function rotX(t){const c=Math.cos(t),s=Math.sin(t);return [1,0,0,0,c,-s,0,s,c];}
+function rotY(t){const c=Math.cos(t),s=Math.sin(t);return [c,0,s,0,1,0,-s,0,c];}
+
+// Gram-Schmidt orthonormalisation — all arithmetic inlined, zero array allocations
+function orthonorm(m){
+  // Extract columns as x,y,z vectors
+  let x0=m[0],x1=m[3],x2=m[6];
+  let y0=m[1],y1=m[4],y2=m[7];
+  let z0=m[2],z1=m[5],z2=m[8];
+  // Normalise x
+  let il=1/Math.sqrt(x0*x0+x1*x1+x2*x2);
+  x0*=il;x1*=il;x2*=il;
+  // y -= (y·x)x
+  let d=y0*x0+y1*x1+y2*x2;
+  y0-=d*x0;y1-=d*x1;y2-=d*x2;
+  il=1/Math.sqrt(y0*y0+y1*y1+y2*y2);
+  y0*=il;y1*=il;y2*=il;
+  // z -= (z·x)x + (z·y)y
+  let dx=z0*x0+z1*x1+z2*x2, dy=z0*y0+z1*y1+z2*y2;
+  z0-=dx*x0+dy*y0;z1-=dx*x1+dy*y1;z2-=dx*x2+dy*y2;
+  il=1/Math.sqrt(z0*z0+z1*z1+z2*z2);
+  z0*=il;z1*=il;z2*=il;
+  return [x0,y0,z0,x1,y1,z1,x2,y2,z2];
+}
+
+function lerpMat(a,b,t){
+  const r=new Array(9);
+  const u=1-t;
+  for(let i=0;i<9;i++) r[i]=a[i]*u+b[i]*t;
+  return orthonorm(r);
+}
+function easeInOut(t){return t<.5?2*t*t:1-Math.pow(-2*t+2,2)/2;}
+
+// Superposition field from all dipoles (particles hot path)
+function totalField(px,py,pz){
+  let bx=0,by=0,bz=0;
+  const dpx=DIPOLE_POS_X;
+  const yz2=py*py+pz*pz;
+  for(let i=0;i<5;i++){
+    const rx=px-dpx[i];
+    const r2=rx*rx+yz2;
+    if(r2<1e-8) continue;
+    const r=Math.sqrt(r2), r5=r2*r2*r;
+    const r2inv=1/r2;
+    bx+=(3*rx*rx*r2inv-1)/r5;
+    by+= 3*rx*py*r2inv/r5;
+    bz+= 3*rx*pz*r2inv/r5;
+  }
+  return {bx,by,bz};
+}
+
+// ════════════════════════════════════════════════════
+// FIELD LINE TRACING
+// ════════════════════════════════════════════════════
+function bakeColorIdx(x, y, z, fallbackDi){
+  let minDist2=Infinity, bestDi=fallbackDi;
+  for(let k=0;k<5;k++){
+    const rx=x-DIPOLE_POS_X[k];
+    const d2=rx*rx+y*y+z*z;
+    if(d2<minDist2){minDist2=d2;bestDi=k;}
+  }
+  return bestDi; // return index, not color array
+}
+
+function traceSuperLine(sx, sy, sz, fallbackDi){
+  const pts = [];
+  let x=sx, y=sy, z=sz;
+  const CORE_R2  = 0.0036; // 0.06²
+  const MAX_STEPS= 4000;
+  const STEP_BASE= 0.018;
+  const STEP_NEAR= 0.006;
+  const NEAR_R2  = 0.25;
+
+  for(let i=0; i<MAX_STEPS; i++){
+    if((i&1)===0) pts.push(x, y, z, bakeColorIdx(x, y, z, fallbackDi));
+
+    let bx=0, by=0, bz=0;
+    let minDist2=Infinity;
+    let hitCore=false;
+    const yz2=y*y+z*z;
+    for(let k=0; k<5; k++){
+      const rx=x-DIPOLE_POS_X[k];
+      const r2=rx*rx+yz2;
+      if(r2<minDist2) minDist2=r2;
+      if(r2<CORE_R2){hitCore=true;break;}
+      if(r2<1e-8) continue;
+      const r=Math.sqrt(r2), r5=r2*r2*r, r2inv=1/r2;
+      bx+=(3*rx*rx*r2inv-1)/r5;
+      by+= 3*rx*y*r2inv/r5;
+      bz+= 3*rx*z*r2inv/r5;
+    }
+    if(hitCore){
+      pts.push(x,y,z,bakeColorIdx(x,y,z,fallbackDi));
+      return pts;
+    }
+    const mag=Math.sqrt(bx*bx+by*by+bz*bz);
+    if(mag<1e-12) break;
+    const step=minDist2<NEAR_R2 ? STEP_NEAR : STEP_BASE;
+    const imag=step/mag;
+    x+=bx*imag; y+=by*imag; z+=bz*imag;
+  }
+  return pts;
+}
+
+let fieldLinesBuilt = false;
+function buildFieldLines(){
+  fieldLines3D = [];
+  projCache = [];
+  lineProximity = [];
+  fieldLinesBuilt = true;
+  projDirty = true;
+
+  const thetaInner = [10,20,30,42,55,68,82,98,112,125,138,150,160,170];
+  const thetaOuter = [32,44,56,68,80,92,104,116,128,140,152,164];
+  const phiDeg     = [0,45,90,135,180,225,270,315];
+  const SEED_R     = 0.07;
+  const D2R        = Math.PI/180;
+
+  // Precompute phi trig table
+  const phiCos = phiDeg.map(p=>Math.cos(p*D2R));
+  const phiSin = phiDeg.map(p=>Math.sin(p*D2R));
+
+  for(let di=0; di<DIPOLES.length; di++){
+    const dx     = DIPOLE_POS_X[di];
+    const thetas = (di===0||di===DIPOLES.length-1) ? thetaOuter : thetaInner;
+
+    for(const tDeg of thetas){
+      const t = tDeg*D2R;
+      const cosT = Math.cos(t), sinT = Math.sin(t);
+      const seedX = dx + SEED_R*(-cosT);
+      const seedRxy = SEED_R*sinT; // radial magnitude in y-z plane
+
+      for(let pi=0; pi<phiDeg.length; pi++){
+        const pts = traceSuperLine(seedX, seedRxy*phiCos[pi], seedRxy*phiSin[pi], di);
+        if(pts.length>16){
+          fieldLines3D.push({pts,diIdx:di});
+          projCache.push(null);
+          lineProximity.push(0);
+        }
+      }
+    }
+  }
+}
+
+// ════════════════════════════════════════════════════
+// PROJECTION CACHE — rebuild when rotMat / cySmooth changes
+// ════════════════════════════════════════════════════
+function rebuildProjCache(){
+  const m0=rotMat[0],m1=rotMat[1],m2=rotMat[2];
+  const m3=rotMat[3],m4=rotMat[4],m5=rotMat[5];
+  const m6=rotMat[6],m7=rotMat[7],m8=rotMat[8];
+  const FS=2.4*scale, CAM_Z=3.5;
+
+  for(let li=0;li<fieldLines3D.length;li++){
+    const {pts}=fieldLines3D[li];
+    const n=pts.length/4;
+    let buf=projCache[li];
+    if(!buf || buf.length!==n*3) buf=projCache[li]=new Float32Array(n*3);
+
+    for(let i=0,j=0;i<pts.length;i+=4,j+=3){
+      const wx=pts[i],wy=pts[i+1],wz=pts[i+2];
+      const rx=m0*wx+m1*wy+m2*wz;
+      const ry=m3*wx+m4*wy+m5*wz;
+      const rz=m6*wx+m7*wy+m8*wz;
+      const zp=rz+CAM_Z;
+      buf[j  ]=(rx/zp)*FS+cx;
+      buf[j+1]=(-ry/zp)*FS+cySmooth;
+      buf[j+2]=zp;
+    }
+  }
+  projDirty=false;
+  lastProjRotMat=[...rotMat];
+  lastProjCySmooth=cySmooth;
+}
+
+function checkProjDirty(){
+  if(projDirty) return true;
+  if(Math.abs(cySmooth-lastProjCySmooth)>PROJ_CY_THRESH) return true;
+  if(!lastProjRotMat) return true;
+  for(let i=0;i<9;i++) if(Math.abs(rotMat[i]-lastProjRotMat[i])>5e-5) return true;
+  return false;
+}
+
+// ════════════════════════════════════════════════════
+// STARS — reduced count, batch-drawn with single alpha per star
+// ════════════════════════════════════════════════════
+function initStars(){
+  stars=[];
+  for(let i=0;i<80;i++){
+    const th=Math.acos(2*Math.random()-1),ph=Math.random()*Math.PI*2,r=5+Math.random()*5;
+    stars.push({
+      ox:r*Math.sin(th)*Math.cos(ph),oy:r*Math.sin(th)*Math.sin(ph),oz:r*Math.cos(th),
+      size:.4+Math.random()*1.1,
+      base:.15+Math.random()*.4,    // base brightness
+      amp:.15+Math.random()*.25,    // twinkle amplitude
+      phase:Math.random()*Math.PI*2,// current phase (updated each frame)
+      dph:(.008+Math.random()*.018)*Math.PI*2, // phase delta per frame (~30fps)
+    });
+  }
+}
+
+function drawStars(alpha){
+  if(alpha<=0)return;
+  const m0=rotMat[0],m1=rotMat[1],m2=rotMat[2];
+  const m3=rotMat[3],m4=rotMat[4],m5=rotMat[5];
+  const m6=rotMat[6],m7=rotMat[7],m8=rotMat[8];
+  const FS=2.4*scale, CAM_Z=3.5, PI2=Math.PI*2;
+
+  for(const s of stars){
+    s.phase+=s.dph;
+    const rx=m0*s.ox+m1*s.oy+m2*s.oz;
+    const ry=m3*s.ox+m4*s.oy+m5*s.oz;
+    const rz=m6*s.ox+m7*s.oy+m8*s.oz;
+    const zp=rz+CAM_Z; if(zp<0.2)continue;
+    const sx=(rx/zp)*FS+cx;
+    const sy=(-ry/zp)*FS+cySmooth;
+    if(sx<-20||sx>W+20||sy<-20||sy>H+20)continue;
+    // Approximate sin with precomputed phase — fast enough for 80 stars
+    const sinApprox=Math.sin(s.phase); // still one sin but removed from args
+    const a=Math.max(0,s.base+sinApprox*s.amp)*Math.min(1,zp/3)*alpha;
+    if(a<0.01)continue;
+    ctx.globalAlpha=a;
+    ctx.fillStyle='#c8d7ff';
+    ctx.beginPath();ctx.arc(sx,sy,s.size,0,PI2);ctx.fill();
+  }
+  ctx.globalAlpha=1;
+}
+
+// ════════════════════════════════════════════════════
+// PARTICLES
+// ════════════════════════════════════════════════════
+const TRAIL_CAP = 18; // ring buffer size per particle
+
+function spawnParticle(){
+  const di=Math.floor(Math.random()*DIPOLES.length);
+  const dx=DIPOLE_POS_X[di];
+  const th=Math.acos(2*Math.random()-1),ph=Math.random()*Math.PI*2,r=1.8+Math.random()*1.2;
+  const sinTh=Math.sin(th);
+  // Ring buffer: flat Float32Array of 18×3 floats, head pointer
+  particles.push({
+    x:dx+r*sinTh*Math.cos(ph), y:r*sinTh*Math.sin(ph), z:r*Math.cos(th),
+    life:0, maxLife:240+Math.random()*120|0,
+    trail:new Float32Array(18*3), tHead:0, tLen:0,
+    sign:Math.random()<.5?1:-1,
+    speed:.005+Math.random()*.005, di,
+    cr:DIPOLES[di].color[0], cg:DIPOLES[di].color[1], cb:DIPOLES[di].color[2]
+  });
+}
+
+function drawParticles(alpha){
+  if(alpha<=0){particles.length=0;return;}
+  const m0=rotMat[0],m1=rotMat[1],m2=rotMat[2];
+  const m3=rotMat[3],m4=rotMat[4],m5=rotMat[5];
+  const m6=rotMat[6],m7=rotMat[7],m8=rotMat[8];
+  const FOV_SCALE=2.4*scale, CAM_Z=3.5;
+  const PI2=Math.PI*2;
+
+  // Remove dead particles (iterate backwards to avoid index shift)
+  for(let i=particles.length-1;i>=0;i--){
+    if(particles[i].life>=particles[i].maxLife) particles.splice(i,1);
+  }
+
+  for(const p of particles){
+    const {cr,cg,cb,trail}=p;
+    const tLen=p.tLen;
+    const fade=Math.min(1,p.life/30)*Math.min(1,(p.maxLife-p.life)/30)*alpha;
+    if(fade<0.01){ /* advance physics but skip draw */ }
+    else {
+      // Draw trail — single path per particle, one stroke call
+      if(tLen>1){
+        ctx.strokeStyle=`rgba(${cr},${cg},${cb},${fade*0.45})`;
+        ctx.lineWidth=1.2;
+        ctx.beginPath();
+        let inPath=false;
+        for(let ti=0;ti<tLen;ti++){
+          const bidx=((p.tHead - tLen + ti + TRAIL_CAP) % TRAIL_CAP)*3;
+          const wx=trail[bidx],wy=trail[bidx+1],wz=trail[bidx+2];
+          const rx=m0*wx+m1*wy+m2*wz;
+          const ry=m3*wx+m4*wy+m5*wz;
+          const rz=m6*wx+m7*wy+m8*wz;
+          const zp=rz+CAM_Z;
+          if(zp<0.2){inPath=false;continue;}
+          const sx=(rx/zp)*FOV_SCALE+cx;
+          const sy=(-ry/zp)*FOV_SCALE+cySmooth;
+          if(!inPath){ctx.moveTo(sx,sy);inPath=true;}
+          else         ctx.lineTo(sx,sy);
+        }
+        ctx.stroke();
+      }
+
+      // Draw head
+      {
+        const rx=m0*p.x+m1*p.y+m2*p.z;
+        const ry=m3*p.x+m4*p.y+m5*p.z;
+        const rz=m6*p.x+m7*p.y+m8*p.z;
+        const zp=rz+CAM_Z;
+        if(zp>0.2){
+          ctx.fillStyle=`rgba(${cr},${cg},${cb},${fade*.9})`;
+          ctx.beginPath();ctx.arc((rx/zp)*FOV_SCALE+cx,(-ry/zp)*FOV_SCALE+cySmooth,2,0,PI2);ctx.fill();
+        }
+      }
+    }
+
+    // Push current position into ring buffer
+    const idx=p.tHead*3;
+    trail[idx]=p.x; trail[idx+1]=p.y; trail[idx+2]=p.z;
+    p.tHead=(p.tHead+1)%TRAIL_CAP;
+    if(p.tLen<TRAIL_CAP) p.tLen++;
+
+    // Advance along field
+    const {bx,by,bz}=totalField(p.x,p.y,p.z);
+    const mag=Math.sqrt(bx*bx+by*by+bz*bz);
+    if(mag<1e-8){p.life=p.maxLife;continue;}
+    const step=p.sign*p.speed/mag;
+    p.x+=bx*step; p.y+=by*step; p.z+=bz*step;
+    p.life++;
+
+    // Kill if inside core or escaped
+    const yz2=p.y*p.y+p.z*p.z;
+    for(let k=0;k<5;k++){
+      const ddx=p.x-DIPOLE_POS_X[k];
+      if(ddx*ddx+yz2<0.0049){p.life=p.maxLife;break;} // 0.07²
+    }
+    if(p.x*p.x+yz2>36) p.life=p.maxLife;
+  }
+}
+
+// ════════════════════════════════════════════════════
+// FIELD LINE DRAWING — uses projection cache + batches by dipole color
+// ════════════════════════════════════════════════════
+function drawArrow(x,y,dx,dy,r,g,b,a){
+  if(a<.01)return;
+  // Compute rotation inline (no save/restore, no matrix stack)
+  const len=Math.sqrt(dx*dx+dy*dy); if(len<0.001)return;
+  const ux=dx/len, uy=dy/len, vx=-uy, vy=ux;
+  const s=4.5;
+  const tx=x-ux*s*.65, ty=y-uy*s*.65;
+  ctx.strokeStyle=`rgba(${r},${g},${b},${a})`;ctx.lineWidth=.6;
+  ctx.beginPath();
+  ctx.moveTo(x+ux*s, y+uy*s); ctx.lineTo(tx+vx*s*.48, ty+vy*s*.48);
+  ctx.moveTo(x+ux*s, y+uy*s); ctx.lineTo(tx-vx*s*.48, ty-vy*s*.48);
+  ctx.stroke();
+}
+
+// ── Batch buckets: 5 dipoles × 6 alpha buckets = 30 buckets total ──
+const ALPHA_BUCKETS  = 6;
+// batches[dipoleIdx][bucketIdx] = array of [x0,y0,x1,y1] segment endpoints
+const batches = Array.from({length:5}, ()=>Array.from({length:ALPHA_BUCKETS},()=>[]));
+// Pre-built strokeStyle strings for each dipole × bucket (30 strings, built once)
+const batchStyles = DIPOLES.map(d=>{
+  const alphas=[0.05,0.13,0.22,0.32,0.43,0.56];
+  return alphas.map(a=>`rgba(${d.color[0]},${d.color[1]},${d.color[2]},${a})`);
+});
+// Arrow accumulator
+const arrowList = [];
+
+function drawAllFieldLines(alpha){
+  if(alpha<=0) return;
+
+  if(checkProjDirty()) rebuildProjCache();
+
+  // Update mouse proximity — only when cursor has moved since last frame
+  if(mouseMoved){
+    mouseMoved=false;
+    for(let li=0;li<fieldLines3D.length;li++){
+      const buf=projCache[li]; if(!buf) continue;
+      let mn=Infinity;
+      const step3=Math.max(1,Math.floor(buf.length/24/3))*3;
+      for(let j=0;j<buf.length;j+=step3){
+        const ddx=buf[j]-mouse.x, ddy=buf[j+1]-mouse.y;
+        const d2=ddx*ddx+ddy*ddy;
+        if(d2<mn) mn=d2;
+      }
+      lineProximity[li]=Math.max(0,1-Math.sqrt(mn)/90);
+    }
+  }
+
+  // Clear all batch buckets
+  for(let d=0;d<5;d++) for(let b=0;b<ALPHA_BUCKETS;b++) batches[d][b].length=0;
+  arrowList.length=0;
+
+  // ── Pass 1: sort every segment into a bucket ──
+  const N=fieldLines3D.length;
+  for(let li=0;li<N;li++){
+    const {pts,diIdx}=fieldLines3D[li];
+    const buf=projCache[li]; if(!buf) continue;
+    if(buf.length<6) continue;
+
+    const pr=lineProximity[li];
+    const baseA=(0.28+pr*0.55)*alpha;
+
+    let prevSx=0, prevSy=0, hasPrev=false;
+    let arrowAcc2=0;
+    const ARROW_DIST2=3025; // 55²
+
+    for(let j=0,pi=0; j<buf.length; j+=3, pi+=4){
+      const depth=buf[j+2];
+      if(depth<0.2){hasPrev=false;continue;}
+      const sx=buf[j], sy=buf[j+1];
+      const depthF=Math.min(1,depth/2.4);
+      const a=baseA*depthF;
+
+      const cdi=pts[pi+3]|0;
+
+      if(hasPrev){
+        const bi=a<0.09?0:a<0.18?1:a<0.27?2:a<0.38?3:a<0.49?4:5;
+        batches[cdi][bi].push(prevSx,prevSy,sx,sy);
+
+        const sdx=sx-prevSx, sdy=sy-prevSy;
+        const sd2=sdx*sdx+sdy*sdy;
+        arrowAcc2+=sd2;
+        if(arrowAcc2>=ARROW_DIST2){
+          const col=DIPOLES[cdi].color;
+          arrowList.push(sx,sy,sdx,sdy,col[0],col[1],col[2],(0.12+pr*0.38)*depthF*alpha);
+          arrowAcc2=0;
+        }
+      }
+      prevSx=sx; prevSy=sy; hasPrev=true;
+    }
+  }
+
+  // ── Pass 2: flush each bucket with ONE stroke() call ──
+  ctx.lineWidth=0.9;
+  for(let d=0;d<5;d++){
+    for(let b=0;b<ALPHA_BUCKETS;b++){
+      const bkt=batches[d][b];
+      if(bkt.length===0) continue;
+      ctx.strokeStyle=batchStyles[d][b];
+      ctx.beginPath();
+      for(let k=0;k<bkt.length;k+=4){
+        ctx.moveTo(bkt[k],bkt[k+1]);
+        ctx.lineTo(bkt[k+2],bkt[k+3]);
+      }
+      ctx.stroke();
+    }
+  }
+
+  // ── Pass 3: draw arrows (already few, no change needed) ──
+  for(let k=0;k<arrowList.length;k+=8){
+    drawArrow(arrowList[k],arrowList[k+1],arrowList[k+2],arrowList[k+3],
+              arrowList[k+4],arrowList[k+5],arrowList[k+6],arrowList[k+7]);
+  }
+}
+
+function getDipoleTargetR(di){
+  if(pageOpen) return di===HOME_IDX?22:16;
+  const base=di===HOME_IDX?HOME_R:DIPOLE_R;
+  return base+(dipoleState[di].hovered?8:0);
+}
+
+// ════════════════════════════════════════════════════
+// HOVER MENU POSITIONING
+// ════════════════════════════════════════════════════
+function positionMenu(menuEl, scx, scy, r){
+  // offsetWidth/Height are fast reads; no querySelector needed (panel is first child)
+  const panel=menuEl.firstElementChild;
+  const mw=panel ? panel.offsetWidth||140 : 140;
+  const mh=panel ? panel.offsetHeight||36 : 36;
+  let mx=scx-mw/2;
+  mx=Math.max(10,Math.min(W-mw-10,mx));
+  let my=scy-r-6-mh;
+  if(my<10) my=scy+r+6;
+  menuEl.style.left=mx+'px';
+  menuEl.style.top =my+'px';
+}
+
+function getHoveredDipole(){
+  for(let i=0;i<DIPOLES.length;i++){
+    const ds=dipoleState[i];
+    const ddx=mouse.x-ds.sx,ddy=mouse.y-ds.sy;
+    if(ddx*ddx+ddy*ddy<(ds.r+18)*(ds.r+18))return i;
+  }
+  return -1;
+}
+
+// ════════════════════════════════════════════════════
+// NAVIGATION
+// ════════════════════════════════════════════════════
+
+// Cache frequently-toggled DOM elements
+const elPagePanel    = document.getElementById('page-panel');
+const elBannerStrip  = document.getElementById('banner-strip');
+const elBannerDipoles= document.getElementById('banner-dipoles');
+const elHomeHint     = document.getElementById('home-hint');
+const elHint         = document.getElementById('hint');
+const elScrollCue    = document.getElementById('scroll-cue');
+
+function hideAllTooltips(){
+  for(let i=0;i<DIPOLES.length;i++){
+    const m=DIPOLE_MENU_ELS[i];
+    if(m) m.classList.remove('visible');
+  }
+}
+
+// Generation counter — incremented on every navigation action.
+// A pending animationPaused=true timeout only fires if gen hasn't changed.
+let navGen = 0;
+
+function goHome(){
+  if(!pageOpen)return;
+  navGen++;
+  animationPaused=false;
+  fadeTransition(()=>{
+    pageOpen=false;
+    cyTarget=cy_home;
+    document.body.classList.remove('page-open');
+    // Reset scroll-driven state — position is 0 after unlock
+    canvasMask.style.opacity='0';
+    canvasMasked=false;
+    canvas.style.pointerEvents='auto';
+    bannerClickZone.style.pointerEvents='none';
+    backToTopBtn.classList.remove('visible');
+    elPagePanel.classList.remove('visible');
+    elBannerStrip.classList.remove('visible');
+    elBannerDipoles.classList.remove('visible');
+    elHomeHint.classList.remove('visible');
+    elHint.classList.remove('hidden');
+    elScrollCue.style.opacity='1';
+    enterBtnEl.style.opacity='1';
+    hideAllTooltips();
+  });
+}
+
+function openPage(title,section){
+  navGen++;
+  const myGen = navGen;
+  if(pageOpen){
+    animationPaused=false;
+    fadeTransition(()=>{
+      document.getElementById('page-title').textContent=title;
+      document.getElementById('page-subtitle').textContent=section;
+      hideAllTooltips();
+      injectContent(title);
+      setTimeout(()=>{ if(navGen===myGen) animationPaused=true; }, 1200);
+    });
+    return;
+  }
+  // Scroll to top first so the page panel sits flush, then lock scroll
+  window.scrollTo(0,0);
+  document.body.classList.add('page-open');
+  fadeTransition(()=>{
+    document.getElementById('page-title').textContent=title;
+    document.getElementById('page-subtitle').textContent=section;
+    pageOpen=true;
+    cyTarget=cy_banner;
+    elHint.classList.add('hidden');
+    elScrollCue.style.opacity='0';
+    elPagePanel.classList.add('visible');
+    elBannerStrip.classList.add('visible');
+    elBannerDipoles.classList.add('visible');
+    elHomeHint.classList.add('visible');
+    hideAllTooltips();
+    injectContent(title);
+    setTimeout(()=>{ if(navGen===myGen) animationPaused=true; }, 1200);
+  });
+}
+
+function fadeTransition(onMidpoint){
+  if(fadeActive)return;
+  fadeActive=true;
+  fadeOverlay.classList.add('fade-out');
+  setTimeout(()=>{
+    onMidpoint();
+    fadeOverlay.classList.remove('fade-out');
+    setTimeout(()=>{fadeActive=false;},320);
+  },300);
+}
+
+// ════════════════════════════════════════════════════
+// CONTENT
+// ════════════════════════════════════════════════════
+const PAGE_CONTENT={
+  'Engineering Projects':`<div class="content-block"><h3>Engineering Projects</h3><p>My engineering work is centered on learning by building: combining electronics, software, CAD, simulation, and experimentation.</p><span class="content-tag">Embedded Systems</span><span class="content-tag">Electronics</span><span class="content-tag">Electromagnetics</span><span class="content-tag">CAD</span><div class="content-divider"></div><h4>Two-Stage Electromagnetic Accelerator</h4><p>Long-term independent project exploring electromagnetic acceleration and controlled switching. The project combines Arduino-based control, Fusion 360 modeling, and ANSYS Maxwell simulation.</p><ul><li>Designed and iterated mechanical components in Fusion 360</li><li>Used ANSYS Maxwell to study electromagnetic behavior and coil geometry</li><li>Developed timing/control logic with Arduino</li><li>Used measurement and iteration to improve the system over multiple revisions</li></ul><div class="content-divider"></div><h4>American Rocketry Challenge</h4><p>Collaborated with a six-person team on a student rocketry project, using OpenRocket to simulate and refine the vehicle design.</p><ul><li>Flight simulation and stability analysis</li><li>Aerodynamic and fin-design iteration</li><li>Team-based engineering workflow</li></ul><div class="content-divider"></div><h4>Programming &amp; Data Structures</h4><p>Developed programming fundamentals through C and Java coursework and independent practice, including data structures, debugging, input handling, and algorithmic problem solving.</p></div>`,
+
+  'Tools & Software':`<div class="content-block"><h3>Tools &amp; Software</h3><p>A growing technical stack spanning programming, embedded development, mechanical CAD, electromagnetic simulation, and engineering design.</p><span class="content-tag">Programming</span><span class="content-tag">CAD</span><span class="content-tag">Simulation</span><span class="content-tag">Embedded</span><div class="content-divider"></div><h4>Programming</h4><ul><li>C — systems programming fundamentals and debugging</li><li>C++ — Arduino and embedded projects</li><li>Java — object-oriented programming and data structures</li><li>Python — scripting, analysis, and general-purpose programming</li><li>Git / GitHub — version control and project organization</li></ul><div class="content-divider"></div><h4>Engineering Tools</h4><ul><li>Fusion 360 — mechanical CAD and design iteration</li><li>ANSYS Maxwell — electromagnetic simulation</li><li>OpenRocket — rocket flight and stability simulation</li><li>Arduino — embedded control and prototyping</li></ul></div>`,
+
+  'About Me':`<div class="content-block"><h3>About Me</h3><p>I'm an incoming Computer Science &amp; Engineering student at the University of California, Irvine. My interests sit at the intersection of software and physical systems, especially embedded firmware, electronics, electromagnetics, and simulation.</p><span class="content-tag">UCI CSE</span><span class="content-tag">Embedded Systems</span><span class="content-tag">Electronics</span><div class="content-divider"></div><h4>What I Like Building</h4><ul><li>Hardware controlled by software</li><li>Embedded systems and firmware</li><li>Electromagnetic and physics-based simulations</li><li>CAD-driven mechanical systems</li><li>Robotics and aerospace projects</li></ul><div class="content-divider"></div><h4>Beyond Engineering</h4><p>I also run a YouTube channel that has reached 100M+ views. Building content has taught me to iterate quickly, understand analytics, and communicate ideas in a way that people actually engage with.</p><div class="content-divider"></div><h4>Education</h4><p>B.S. Computer Science &amp; Engineering — University of California, Irvine · Incoming freshman, Fall 2026.</p></div>`,
+
+  'Experience':`<div class="content-block"><h3>Experience &amp; Involvement</h3><p>My experience so far is primarily project-based, with a strong emphasis on self-directed engineering and preparing for hands-on university opportunities.</p><span class="content-tag">Projects</span><span class="content-tag">Teamwork</span><span class="content-tag">Content Creation</span><div class="content-divider"></div><h4>Independent Engineering</h4><p>Spent 3+ years developing an electromagnetic accelerator project and exploring electronics, Arduino control, CAD, and ANSYS Maxwell simulation.</p><div class="content-divider"></div><h4>American Rocketry Challenge</h4><p>Worked with a six-person team on a student rocketry project, contributing to simulation and aerodynamic design using OpenRocket.</p><div class="content-divider"></div><h4>UCI Engineering Team Outreach</h4><p>Before starting at UCI, began reaching out to HyperXite, UCI AER, and Anteater Racing to learn about opportunities for incoming freshmen and find a path into hands-on engineering teams. These are opportunities I am exploring, not roles I have already held.</p><div class="content-divider"></div><h4>YouTube Content Creation</h4><p>Built a YouTube channel with 100M+ views, developing practical skills in audience analytics, rapid iteration, visual communication, and content strategy.</p></div>`,
+
+  'Contact':`<div class="content-block"><h3>Contact</h3><p>I'm interested in engineering internships, UCI student teams, research opportunities, and projects involving embedded systems, electronics, firmware, or simulation.</p><span class="content-tag">Open to Opportunities</span><div class="content-divider"></div><h4>Email</h4><p>YOUR_EMAIL_HERE</p><div class="content-divider"></div><h4>LinkedIn</h4><p>YOUR_LINKEDIN_HERE</p><div class="content-divider"></div><h4>GitHub</h4><p>YOUR_GITHUB_HERE</p></div>`
+};
+
+// ════════════════════════════════════════════════════
+// REVEAL — IntersectionObserver for subpage content
+// ════════════════════════════════════════════════════
+let revealObserver=null;
+function initReveal(){
+  if(revealObserver) revealObserver.disconnect();
+  revealObserver=new IntersectionObserver((entries)=>{
+    entries.forEach((e,i)=>{
+      if(e.isIntersecting){
+        const el=e.target;
+        el.style.transition=`opacity .5s ease ${i*0.03}s, transform .5s ease ${i*0.03}s`;
+        el.style.opacity='1'; el.style.transform='translateY(0)';
+        revealObserver.unobserve(el);
+      }
+    });
+  },{root:document.getElementById('page-body'),rootMargin:'0px 0px -20px 0px',threshold:0.05});
+  document.querySelectorAll('.reveal').forEach(el=>revealObserver.observe(el));
+}
+
+function injectContent(title){
+  const body=document.getElementById('page-body');
+  const html=PAGE_CONTENT[title];
+  if(html){
+    const wrapper=document.createElement('div');
+    wrapper.innerHTML=html;
+    wrapper.querySelectorAll('h3,h4,p,ul,.content-divider,.content-tag').forEach(el=>{
+      el.classList.add('reveal');
+      el.style.opacity='0'; el.style.transform='translateY(22px)';
+    });
+    body.innerHTML='';
+    body.appendChild(wrapper);
+  } else {
+    body.innerHTML=`<p class="placeholder-text">Content coming soon.</p>`;
+  }
+  body.scrollTop=0;
+  // Delay reveal until panel fade-in is well underway
+  setTimeout(()=>requestAnimationFrame(initReveal), 200);
+}
+
+// ════════════════════════════════════════════════════
+// CANVAS
+// ════════════════════════════════════════════════════
+const canvas=document.getElementById('c');
+const ctx=canvas.getContext('2d',{alpha:false}); // opaque canvas — faster compositing
+
+// ════════════════════════════════════════════════════
+// EVENTS
+// ════════════════════════════════════════════════════
+canvas.addEventListener('contextmenu',e=>e.preventDefault());
+
+// ── Drag / click state ──────────────────────────────────────────────────────
+// Left-click drag rotates. Click vs drag is distinguished by total movement.
+// Navigation fires on mouseup only if movement stayed under DRAG_THRESHOLD.
+const DRAG_THRESHOLD = 5; // px — below this = click, above = drag
+let mouseDownPos   = {x:0, y:0};   // where button went down
+let hasDragged     = false;         // did we exceed threshold?
+let downOnDipoleI  = -1;           // which dipole (if any) was under cursor at mousedown
+
+canvas.addEventListener('mousedown', e=>{
+  if(e.button!==0) return; // left button only
+  if(pageOpen){
+    // In page mode, only the home sphere is interactive on canvas
+    const ds=dipoleState[HOME_IDX];
+    const ddx=e.clientX-ds.sx, ddy=e.clientY-ds.sy;
+    if(ddx*ddx+ddy*ddy<(ds.r+18)*(ds.r+18)){
+      downOnDipoleI=HOME_IDX;
+    } else {
+      downOnDipoleI=-1;
+    }
+    return; // no rotation in page mode
+  }
+  // Record press position and which dipole (if any) is under cursor
+  mouseDownPos={x:e.clientX, y:e.clientY};
+  hasDragged=false;
+  downOnDipoleI=-1;
+  for(let i=0;i<DIPOLES.length;i++){
+    const ds=dipoleState[i];
+    const ddx=e.clientX-ds.sx, ddy=e.clientY-ds.sy;
+    if(ddx*ddx+ddy*ddy<(ds.r+18)*(ds.r+18)){ downOnDipoleI=i; break; }
+  }
+  // Begin drag tracking — rotation will activate once threshold is exceeded
+  isDragging=true; returning=false;
+  dragRotStart=[...rotMat];
+  projDirty=true;
+});
+
+window.addEventListener('mouseup', e=>{
+  if(e.button!==0) return;
+
+  if(pageOpen){
+    // Only home sphere click works in page mode
+    if(!hasDragged && downOnDipoleI===HOME_IDX) goHome();
+    downOnDipoleI=-1;
+    return;
+  }
+
+  const wasDrag = hasDragged;
+  isDragging=false;
+  canvas.style.cursor='default';
+
+  if(wasDrag){
+    // Rotation drag ended — start snap-back
+    returning=true; returnProgress=0; returnFrom=[...rotMat];
+  } else {
+    // Pure click — navigate if a dipole was under cursor at press AND release
+    if(downOnDipoleI>=0 && !DIPOLES[downOnDipoleI].isHome){
+      // Confirm release is still near the same dipole
+      const ds=dipoleState[downOnDipoleI];
+      const ddx=e.clientX-ds.sx, ddy=e.clientY-ds.sy;
+      if(ddx*ddx+ddy*ddy<(ds.r+18)*(ds.r+18)){
+        const pg=DIPOLES[downOnDipoleI].defaultPage;
+        if(pg) openPage(pg[0],pg[1]);
+      }
+    }
+  }
+  downOnDipoleI=-1;
+  hasDragged=false;
+});
+
+window.addEventListener('mousemove', e=>{
+  mouse.x=e.clientX; mouse.y=e.clientY;
+  mouseMoved=true;
+
+  if(isDragging && !pageOpen){
+    const ddx=e.clientX-mouseDownPos.x, ddy=e.clientY-mouseDownPos.y;
+    if(!hasDragged && ddx*ddx+ddy*ddy > DRAG_THRESHOLD*DRAG_THRESHOLD){
+      hasDragged=true;
+      canvas.style.cursor='grabbing';
+    }
+    if(hasDragged){
+      const rx=e.clientX-mouseDownPos.x, ry=e.clientY-mouseDownPos.y;
+      rotMat=mulMat3(mulMat3(rotX(ry*.007),rotY(rx*.007)),dragRotStart);
+      projDirty=true;
+    }
+  }
+
+  // Cursor feedback
+  if(pageOpen){
+    const ds=dipoleState[HOME_IDX];
+    const ddx=e.clientX-ds.sx, ddy=e.clientY-ds.sy;
+    canvas.style.cursor=ddx*ddx+ddy*ddy<(ds.r+18)*(ds.r+18)?'pointer':'default';
+  } else if(!isDragging || !hasDragged){
+    let onDipole=false;
+    for(let i=0;i<DIPOLES.length;i++){
+      if(DIPOLES[i].isHome) continue;
+      const ds=dipoleState[i];
+      const ddx=e.clientX-ds.sx, ddy=e.clientY-ds.sy;
+      if(ddx*ddx+ddy*ddy<(ds.r+18)*(ds.r+18)){onDipole=true;break;}
+    }
+    canvas.style.cursor=onDipole?'pointer':'default';
+  }
+
+  if(!pageOpen) updateCanvasMenusFromMouse();
+});
+
+// Pre-cache menu DOM elements — avoids getElementById on every mousemove
+const DIPOLE_MENU_ELS = DIPOLES.map(d=> d.menuId ? document.getElementById(d.menuId) : null);
+
+// Called on every mousemove (not just frames) so tooltips react instantly
+function updateCanvasMenusFromMouse(){
+  const hoveredDi = getHoveredDipole();
+  for(let i=0;i<DIPOLES.length;i++){
+    const menuEl = DIPOLE_MENU_ELS[i];
+    if(!menuEl) continue;
+    const ds = dipoleState[i];
+    const shouldShow = (hoveredDi===i);
+    if(shouldShow && !ds.menuVisible){
+      clearTimeout(menuHideTimers[i]);
+      menuHideTimers[i]=null;
+      ds.menuVisible=true;
+      menuEl.classList.add('visible');
+      positionMenu(menuEl,ds.sx,ds.sy,ds.r);
+    } else if(!shouldShow && ds.menuVisible && !menuHideTimers[i]){
+      menuHideTimers[i]=setTimeout(()=>{
+        menuHideTimers[i]=null;
+        ds.menuVisible=false;
+        menuEl.classList.remove('visible');
+      }, 60);
+    } else if(shouldShow && menuHideTimers[i]){
+      clearTimeout(menuHideTimers[i]);
+      menuHideTimers[i]=null;
+    }
+    if(shouldShow||ds.menuVisible) positionMenu(menuEl,ds.sx,ds.sy,ds.r);
+  }
+}
+
+// ════════════════════════════════════════════════════
+// MAIN LOOP — with frame throttle + visibility skip
+// ════════════════════════════════════════════════════
+const RETURN_FRAMES=60;
+
+function loop(now){
+  requestAnimationFrame(loop);
+
+  // Skip entirely if tab hidden
+  if(tabHidden) return;
+
+  // Skip if canvas fully masked by scroll (user is looking at about section)
+  if(canvasMasked) return;
+
+  // When subpage is open and settled, canvas is fully behind the panel + DOM banner.
+  // DOM banner dipoles handle hover/menus independently — no canvas work needed.
+  if(animationPaused) return;
+
+  // Frame rate throttle: run at ~60fps when animating, ~30fps when idle
+  const isAnimating = isDragging || returning ||
+    Math.abs(cyTarget-cySmooth)>0.3 ||
+    Math.abs(fieldAlpha-(pageOpen?0.18:1))>0.01 ||
+    particles.length>0;
+  const targetInterval = isAnimating ? FRAME_MS_ACTIVE : FRAME_MS_IDLE;
+  if(now - lastFrameTime < targetInterval - 1) return;
+  lastFrameTime = now;
+
+  // Smooth cySmooth toward cyTarget
+  const prevCy = cySmooth;
+  cySmooth += (cyTarget - cySmooth) * 0.12;
+  if(Math.abs(cySmooth - prevCy) > PROJ_CY_THRESH) projDirty = true;
+
+  // Rotation return (only when home)
+  if(returning&&!isDragging&&!pageOpen){
+    returnProgress=Math.min(1,returnProgress+1/RETURN_FRAMES);
+    rotMat=lerpMat(returnFrom,homeBase,easeInOut(returnProgress));
+    if(returnProgress>=1){returning=false;rotMat=[...homeBase];}
+    projDirty=true;
+  }
+
+  fieldAlpha+=((pageOpen?0.18:1)-fieldAlpha)*0.08;
+
+  const hoveredDi=getHoveredDipole();
+  const FS=2.4*scale;
+  for(let i=0;i<DIPOLES.length;i++){
+    const ds=dipoleState[i];
+    // Project dipole world-x position directly — wy=wz=0
+    const wx=DIPOLE_POS_X[i];
+    const rz=rotMat[6]*wx;
+    const zp=rz+3.5;
+    ds.sx=(rotMat[0]*wx/zp)*FS+cx;
+    ds.sy=(-rotMat[3]*wx/zp)*FS+cySmooth;
+
+    ds.hovered=(hoveredDi===i);
+
+    const targetR=getDipoleTargetR(i);
+    ds.r+=(targetR-ds.r)*0.12;
+
+    // Keep tooltip position synced as sphere moves
+    if(ds.menuVisible){
+      const menuEl=DIPOLE_MENU_ELS[i];
+      if(menuEl) positionMenu(menuEl,ds.sx,ds.sy,ds.r);
+    }
+  }
+
+  // Clear and draw
+  ctx.fillStyle='#04040a';ctx.fillRect(0,0,W,H);
+  drawStars(fieldAlpha);
+  drawAllFieldLines(fieldAlpha);
+  drawParticles(fieldAlpha);
+
+  // Draw all 5 spheres (inlined)
+  for(let i=0;i<DIPOLES.length;i++){
+    const ds=dipoleState[i];
+    ctx.fillStyle=DIPOLE_COLOR_STRS[i];
+    ctx.beginPath();ctx.arc(ds.sx,ds.sy,ds.r,0,Math.PI*2);ctx.fill();
+  }
+
+  // Spawn particles (only when home, reduced cap)
+  if(!pageOpen){
+    particleTimer++;
+    if(particleTimer>35){ // slower spawn rate
+      particleTimer=0+(Math.random()*10|0);
+      if(particles.length<12) spawnParticle();
+    }
+  }
+}
+
+// ════════════════════════════════════════════════════
+// RESIZE — debounced, field lines rebuilt only when scale changes
+// ════════════════════════════════════════════════════
+let resizeTimer=null;
+let lastScale=0;
+function resize(){
+  const dpr=window.devicePixelRatio||1;
+  const cssW=window.innerWidth,cssH=window.innerHeight;
+  canvas.width=Math.round(cssW*dpr);canvas.height=Math.round(cssH*dpr);
+  canvas.style.width=cssW+'px';canvas.style.height=cssH+'px';
+  ctx.setTransform(dpr,0,0,dpr,0,0);
+  W=cssW;H=cssH;cx=W/2;
+  scale=Math.min(W,H)*0.30;
+
+  cy_banner = -80;  // push canvas dipoles above viewport when in page mode
+  cy_home   = H/2;
+
+  cyTarget = pageOpen ? cy_banner : cy_home;
+  if(!cySmooth) cySmooth = cyTarget;
+
+  elPagePanel.style.top = '130px';
+
+  if(Math.abs(scale-lastScale)>2||!fieldLinesBuilt){
+    lastScale=scale;
+    buildFieldLines();
+  } else {
+    projDirty=true; // scale same but may need re-projection if cx/cy changed
+  }
+  initStars();
+}
+function resizeDebounced(){
+  clearTimeout(resizeTimer);
+  resizeTimer=setTimeout(resize,120);
+}
+
+let dprMQ=null;
+function watchDPR(){
+  if(dprMQ)dprMQ.removeEventListener('change',onDPR);
+  const dpr=window.devicePixelRatio||1;
+  dprMQ=window.matchMedia(`(resolution: ${dpr}dppx)`);
+  dprMQ.addEventListener('change',onDPR);
+}
+function onDPR(){resize();watchDPR();}
+resize(); // initial — runs synchronously once
+watchDPR();
+window.addEventListener('resize',resizeDebounced);
+requestAnimationFrame(loop);
+
+// ════════════════════════════════════════════════════
+// SCROLL INTERACTIONS
+// ════════════════════════════════════════════════════
+
+const canvasMask      = document.getElementById('canvas-mask');
+const bannerClickZone = document.getElementById('banner-click-zone');
+const enterBtnEl      = document.getElementById('enter-btn');
+const backToTopBtn    = document.getElementById('back-to-top');
+
+function getScrollTarget(){ return window.innerHeight - 120; }
+
+function enterPortfolio(){ smoothScrollTo(getScrollTarget(), 900); }
+
+let scrollAnim = null;
+function smoothScrollTo(targetY, duration){
+  if(scrollAnim) cancelAnimationFrame(scrollAnim);
+  const startY    = window.scrollY;
+  const dist      = targetY - startY;
+  if(Math.abs(dist) < 1) return;
+  const startTime = performance.now();
+  function step(now){
+    const t    = Math.min(1, (now - startTime) / duration);
+    const ease = t < 0.5 ? 4*t*t*t : 1 - Math.pow(-2*t+2,3)/2;
+    window.scrollTo(0, startY + dist * ease);
+    if(t < 1) scrollAnim = requestAnimationFrame(step);
+    else       scrollAnim = null;
+  }
+  scrollAnim = requestAnimationFrame(step);
+}
+
+function onScroll(){
+  if(pageOpen) return; // body is scroll-locked in page mode; nothing to do
+
+  const scrollY           = window.scrollY;
+  const fullScrollTarget  = window.innerHeight - 120;
+  const progress          = Math.min(1, Math.max(0, scrollY / fullScrollTarget));
+
+  canvasMask.style.opacity  = Math.min(1, progress * 1.15);
+  enterBtnEl.style.opacity  = Math.max(0, 1 - progress * 3);
+  elScrollCue.style.opacity = Math.max(0, 1 - progress * 4);
+
+  // Show back-to-top once fully into the portfolio section
+  if(progress >= 0.98){
+    backToTopBtn.classList.add('visible');
+  } else {
+    backToTopBtn.classList.remove('visible');
+  }
+
+  // Stop rendering when canvas is fully covered
+  canvasMasked = (progress >= 0.98);
+
+  if(progress > 0.1){
+    bannerClickZone.style.pointerEvents = 'auto';
+    canvas.style.pointerEvents = 'none';
+  } else {
+    bannerClickZone.style.pointerEvents = 'none';
+    canvas.style.pointerEvents = 'auto';
+  }
+}
+
+window.addEventListener('scroll', onScroll, { passive: true });
+
+bannerClickZone.addEventListener('click', ()=>{
+  if(pageOpen) return;
+  smoothScrollTo(0, 1400);
+});
+
+onScroll();
+
+// ════════════════════════════════════════════════════
+// DOM BANNER DIPOLES — click to navigate, fully CSS/DOM
+// These are independent of the canvas and work even when animationPaused.
+// ════════════════════════════════════════════════════
+(function(){
+  const BD_MAP = [
+    { id:'bd-eng',   isHome:false, defaultPage:['Engineering Projects','Projects'] },
+    { id:'bd-tools', isHome:false, defaultPage:['Tools & Software','Technical Stack'] },
+    { id:'bd-home',  isHome:true,  defaultPage:null },
+    { id:'bd-about', isHome:false, defaultPage:['Background & Education','About Me'] },
+    { id:'bd-exp',   isHome:false, defaultPage:['Background & Education','Experience'] },
+  ];
+
+  BD_MAP.forEach(({id, isHome, defaultPage}) => {
+    const sphereEl = document.getElementById(id);
+    if(!sphereEl) return;
+
+    if(isHome){
+      sphereEl.addEventListener('click', ()=>{ if(pageOpen) goHome(); });
+      return;
+    }
+
+    sphereEl.addEventListener('click', ()=>{
+      if(defaultPage) openPage(defaultPage[0], defaultPage[1]);
+    });
+  });
+})();
+</script>
+</body>
+</html>
