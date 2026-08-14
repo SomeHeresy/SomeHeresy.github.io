@@ -1,2 +1,2 @@
-# calvinyang.github.io
-calvinyang.github.io/portfolio
+# SomeHeresy.github.io
+SomeHeresy.github.io/portfolio
