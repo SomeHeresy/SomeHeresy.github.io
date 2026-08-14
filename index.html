@@ -145,6 +145,32 @@ canvas { display:block; position:fixed; inset:0; z-index:0; }
 .experience-date { font:10px 'Courier New',monospace; color:#9aa0ad; letter-spacing:.8px; margin-bottom:10px; }
 .inline-link { color:#4f6178; text-decoration:none; border-bottom:1px solid rgba(79,97,120,.25); }
 .inline-link:hover { border-bottom-color:#4f6178; }
+
+.video-grid {
+  display: grid;
+  grid-template-columns: repeat(2, minmax(0, 1fr));
+  gap: 24px;
+  width: 100%;
+}
+.video-card { min-width: 0; }
+.video-wrap {
+  position: relative;
+  width: 100%;
+  aspect-ratio: 16 / 9;
+  overflow: hidden;
+  border-radius: 12px;
+  background: rgba(255,255,255,0.04);
+}
+.video-wrap iframe {
+  width: 100%;
+  height: 100%;
+  border: 0;
+  display: block;
+}
+@media (max-width: 800px) {
+  .video-grid { grid-template-columns: 1fr; }
+}
+
 @media(max-width:700px){
   .project-grid, .tool-grid, .media-grid, .experience-grid { grid-template-columns:1fr; }
 }
@@ -1679,6 +1705,24 @@ const PAGE_CONTENT={
         <div class="media-item evidence-card">
           <img class="evidence-image" src="assets/coilgun/version1/v1-testing.png" alt="Version 1 testing with speed measurement device">
           <div class="media-caption"><strong>V1 — Testing</strong><br>Testing the Version 1 setup with the speed measurement device.</div>
+        </div>
+      </div>
+
+      <div class="content-divider"></div>
+      <h4>Video Documentation</h4>
+      <p class="project-meta">Version 1 assembly and experimental documentation.</p>
+      <div class="video-grid">
+        <div class="video-card">
+          <div class="video-wrap">
+            <iframe src="https://www.youtube.com/embed/IkUltp9UVZM" title="Electromagnetic Accelerator V1 — Full Assembly" frameborder="0" allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture" allowfullscreen></iframe>
+          </div>
+          <div class="media-caption"><strong>V1 — Full Assembly</strong><br>Complete assembly showcase of the Version 1 prototype.</div>
+        </div>
+        <div class="video-card">
+          <div class="video-wrap">
+            <iframe src="https://www.youtube.com/embed/uUH7DI3qa30" title="Electromagnetic Accelerator V1 — Experimental Documentation" frameborder="0" allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture" allowfullscreen></iframe>
+          </div>
+          <div class="media-caption"><strong>V1 — Experimental Documentation</strong><br>Video documentation of Version 1 testing at different operating conditions.</div>
         </div>
       </div>
 
