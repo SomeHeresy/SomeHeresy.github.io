@@ -110,6 +110,41 @@ canvas { display:block; position:fixed; inset:0; z-index:0; }
 .interest-list li { font-size:13.5px; color:#3a3d45; font-family:'Georgia',serif; line-height:1.7; padding:4px 0 4px 18px; position:relative; }
 .interest-list li::before { content:'→'; position:absolute; left:0; color:#bbb; font-size:12px; }
 
+
+/* ── Recruiter-friendly project/evidence content ── */
+.project-grid { display:grid; grid-template-columns:repeat(auto-fit,minmax(320px,1fr)); gap:18px; margin-top:20px; width:100%; }
+.project-card { background:#fff; border:1px solid rgba(0,0,0,0.07); border-radius:14px; padding:20px; box-shadow:0 2px 14px rgba(0,0,0,0.045); }
+.project-card h4 { margin-top:0; margin-bottom:7px; color:#24262d; font-size:13px; letter-spacing:1.1px; }
+.project-card .project-meta { font:10px 'Courier New',monospace; color:#9298a8; letter-spacing:1px; text-transform:uppercase; margin-bottom:11px; }
+.project-card p { margin-bottom:10px; }
+.content-tags { display:flex; flex-wrap:wrap; gap:6px; margin-top:8px; }
+.content-tag { display:inline-block; font:10px 'Courier New',monospace; color:#5d6472; background:#f1f3f7; border:1px solid #dfe3ea; border-radius:5px; padding:4px 8px; margin:3px 4px 3px 0; letter-spacing:.4px; }
+.project-result { margin-top:13px; padding:10px 12px; border-left:3px solid rgba(210,150,80,.75); background:#faf7f1; border-radius:0 7px 7px 0; font-size:12.5px; color:#3d4048; }
+.project-result strong { color:#202229; }
+.project-evidence { margin-top:22px; padding-top:18px; border-top:1px solid rgba(0,0,0,.08); }
+.project-evidence h5 { font:700 10px 'Courier New',monospace; color:#7a8090; text-transform:uppercase; letter-spacing:1.5px; margin:0 0 10px; }
+.media-grid { display:grid; grid-template-columns:repeat(auto-fit,minmax(280px,1fr)); gap:12px; margin:10px 0 4px; width:100%; }
+.media-item { min-height:150px; border-radius:10px; overflow:hidden; border:1px solid rgba(0,0,0,.07); background:#f4f5f7; position:relative; }
+.media-item img { width:100%; height:100%; min-height:150px; object-fit:cover; display:block; }
+.media-item video { width:100%; height:100%; min-height:220px; display:block; background:#11131a; }
+.media-placeholder { min-height:150px; display:flex; align-items:center; justify-content:center; text-align:center; padding:18px; color:#9aa0ad; font:10px 'Courier New',monospace; letter-spacing:.8px; text-transform:uppercase; line-height:1.7; }
+.video-wrap { margin-top:10px; }
+.video-wrap .media-placeholder { min-height:220px; }
+.tool-grid { display:grid; grid-template-columns:repeat(auto-fit,minmax(260px,1fr)); gap:14px; margin-top:18px; width:100%; }
+.tool-card { background:#fff; border:1px solid rgba(0,0,0,.07); border-radius:12px; padding:15px; }
+.tool-card h4 { margin:0 0 7px; }
+.tool-card p { margin:0; font-size:12.5px; line-height:1.7; }
+.experience-card { padding:18px 0; border-bottom:1px solid rgba(0,0,0,.08); }
+.experience-card:last-child { border-bottom:0; }
+.experience-role { font:700 11px 'Courier New',monospace; color:#7a8090; text-transform:uppercase; letter-spacing:1.2px; margin-bottom:6px; }
+.experience-org { font-size:16px; font-weight:700; color:#22242a; margin-bottom:3px; }
+.experience-date { font:10px 'Courier New',monospace; color:#9aa0ad; letter-spacing:.8px; margin-bottom:10px; }
+.inline-link { color:#4f6178; text-decoration:none; border-bottom:1px solid rgba(79,97,120,.25); }
+.inline-link:hover { border-bottom-color:#4f6178; }
+@media(max-width:700px){
+  .project-grid, .tool-grid, .media-grid, .experience-grid { grid-template-columns:1fr; }
+}
+
 @media(max-width:700px){
   .profile-card { flex-direction:column; align-items:center; padding:32px 22px; gap:28px; }
   .profile-right { text-align:center; }
@@ -195,14 +230,14 @@ canvas { display:block; position:fixed; inset:0; z-index:0; }
 #page-title    { font-size:16px; font-weight:700; color:#1a1c22; font-family:'Georgia',serif; letter-spacing:0.3px; }
 #page-subtitle { font-size:11px; color:#9096a8; font-family:'Courier New',monospace; letter-spacing:1.5px; text-transform:uppercase; }
 #page-body {
-  flex:1; padding:28px 32px; overflow-y:auto;
+  flex:1; padding:28px clamp(22px, 3vw, 52px); overflow-y:auto;
   scrollbar-width:thin; scrollbar-color:rgba(0,0,0,0.12) transparent;
 }
 #page-body::-webkit-scrollbar { width:4px; }
 #page-body::-webkit-scrollbar-thumb { background:rgba(0,0,0,0.12); border-radius:2px; }
 
 .placeholder-text { font-size:13px; color:#aaa; font-family:'Georgia',serif; line-height:1.9; text-align:center; padding-top:48px; }
-.content-block { max-width:720px; }
+.content-block { width:100%; max-width:none; margin:0 auto; }
 .content-block h3 { font-size:17px; font-weight:700; letter-spacing:0.2px; color:#18191e; font-family:'Georgia',serif; margin:0 0 12px; padding-bottom:10px; border-bottom: 1px solid rgba(0,0,0,0.08); }
 .content-block h4 { font-size:11px; font-weight:700; color:#7a8090; font-family:'Courier New',monospace; margin:26px 0 8px; text-transform:uppercase; letter-spacing:1.5px; }
 .content-block p { font-size:14px; color:#3a3d45; font-family:'Georgia',serif; line-height:1.9; margin-bottom:14px; }
@@ -634,8 +669,8 @@ body.page-open {
 <div id="banner-strip"></div>
 <!-- DOM dipole layer — visible in page mode, sits above banner, fully interactive -->
 <div id="banner-dipoles">
-  <div class="bd-sphere" id="bd-eng"   style="background:rgb(210,150,80)"  data-di="0"><div class="bd-dot"></div>Engineering</div>
-  <div class="bd-sphere" id="bd-tools" style="background:rgb(110,160,220)" data-di="1"><div class="bd-dot"></div>Tools</div>
+  <div class="bd-sphere" id="bd-eng"   style="background:rgb(210,150,80)"  data-di="0"><div class="bd-dot"></div>Projects</div>
+  <div class="bd-sphere" id="bd-tools" style="background:rgb(110,160,220)" data-di="1"><div class="bd-dot"></div>Skills &amp; Tools</div>
   <div class="bd-sphere home-sphere" id="bd-home" style="background:rgb(200,210,255)" data-di="2"><div class="bd-dot"></div>Home</div>
   <div class="bd-sphere" id="bd-about" style="background:rgb(110,185,140)" data-di="3"><div class="bd-dot"></div>About Me</div>
   <div class="bd-sphere" id="bd-exp"   style="background:rgb(200,120,200)" data-di="4"><div class="bd-dot"></div>Experience</div>
@@ -649,7 +684,7 @@ body.page-open {
   <div class="dipole-menu-panel" style="--dm-accent:rgba(210,150,80,0.8);">
     <div class="dm-tooltip">
       <div class="dm-dot" style="background:rgb(210,150,80)"></div>
-      <span class="dm-title">Engineering</span>
+      <span class="dm-title">Projects</span>
     </div>
   </div>
 </div>
@@ -658,7 +693,7 @@ body.page-open {
   <div class="dipole-menu-panel" style="--dm-accent:rgba(110,160,220,0.8);">
     <div class="dm-tooltip">
       <div class="dm-dot" style="background:rgb(110,160,220)"></div>
-      <span class="dm-title">Tools &amp; Software</span>
+      <span class="dm-title">Skills &amp; Tools</span>
     </div>
   </div>
 </div>
@@ -933,11 +968,11 @@ body.page-open {
 // CONFIG
 // ════════════════════════════════════════════════════
 const DIPOLES = [
-  { id:'eng',   color:[210,150, 80], menuId:'menu-eng',   isHome:false, defaultPage:['Engineering Projects','Projects'] },
-  { id:'tools', color:[110,160,220], menuId:'menu-tools', isHome:false, defaultPage:['Tools & Software','Technical Stack'] },
+  { id:'eng',   color:[210,150, 80], menuId:'menu-eng',   isHome:false, defaultPage:['Projects','Selected Work'] },
+  { id:'tools', color:[110,160,220], menuId:'menu-tools', isHome:false, defaultPage:['Skills & Tools','Technical Stack'] },
   { id:'home',  color:[200,210,255], menuId:null,         isHome:true,  defaultPage:null },
   { id:'about', color:[110,185,140], menuId:'menu-about', isHome:false, defaultPage:['Background & Education','About Me'] },
-  { id:'exp',   color:[200,120,200], menuId:'menu-exp',   isHome:false, defaultPage:['Background & Education','Experience'] },
+  { id:'exp',   color:[200,120,200], menuId:'menu-exp',   isHome:false, defaultPage:['Experience','Engineering & Leadership'] },
 ];
 const HOME_IDX      = 2;
 const DIPOLE_R      = 24;
@@ -1587,15 +1622,132 @@ function fadeTransition(onMidpoint){
 // CONTENT
 // ════════════════════════════════════════════════════
 const PAGE_CONTENT={
-  'Engineering Projects':`<div class="content-block"><h3>Engineering Projects</h3><p>My engineering work is centered on learning by building: combining electronics, software, CAD, simulation, and experimentation.</p><span class="content-tag">Embedded Systems</span><span class="content-tag">Electronics</span><span class="content-tag">Electromagnetics</span><span class="content-tag">CAD</span><div class="content-divider"></div><h4>Two-Stage Electromagnetic Accelerator</h4><p>Long-term independent project exploring electromagnetic acceleration and controlled switching. The project combines Arduino-based control, Fusion 360 modeling, and ANSYS Maxwell simulation.</p><ul><li>Designed and iterated mechanical components in Fusion 360</li><li>Used ANSYS Maxwell to study electromagnetic behavior and coil geometry</li><li>Developed timing/control logic with Arduino</li><li>Used measurement and iteration to improve the system over multiple revisions</li></ul><div class="content-divider"></div><h4>American Rocketry Challenge</h4><p>Collaborated with a six-person team on a student rocketry project, using OpenRocket to simulate and refine the vehicle design.</p><ul><li>Flight simulation and stability analysis</li><li>Aerodynamic and fin-design iteration</li><li>Team-based engineering workflow</li></ul><div class="content-divider"></div><h4>Programming &amp; Data Structures</h4><p>Developed programming fundamentals through C and Java coursework and independent practice, including data structures, debugging, input handling, and algorithmic problem solving.</p></div>`,
+  'Projects':`<div class="content-block">
+    <h3>Projects</h3>
+    <p>Selected engineering projects demonstrating hands-on work across embedded systems, electronics, CAD, simulation, and physical prototyping. Each project includes technical details and space for supporting photos, simulations, and videos.</p>
+    <div class="content-tags">
+      <span class="content-tag">Embedded Systems</span><span class="content-tag">Electronics</span><span class="content-tag">CAD</span><span class="content-tag">Simulation</span><span class="content-tag">Prototyping</span>
+    </div>
 
-  'Tools & Software':`<div class="content-block"><h3>Tools &amp; Software</h3><p>A growing technical stack spanning programming, embedded development, mechanical CAD, electromagnetic simulation, and engineering design.</p><span class="content-tag">Programming</span><span class="content-tag">CAD</span><span class="content-tag">Simulation</span><span class="content-tag">Embedded</span><div class="content-divider"></div><h4>Programming</h4><ul><li>C — systems programming fundamentals and debugging</li><li>C++ — Arduino and embedded projects</li><li>Java — object-oriented programming and data structures</li><li>Python — scripting, analysis, and general-purpose programming</li><li>Git / GitHub — version control and project organization</li></ul><div class="content-divider"></div><h4>Engineering Tools</h4><ul><li>Fusion 360 — mechanical CAD and design iteration</li><li>ANSYS Maxwell — electromagnetic simulation</li><li>OpenRocket — rocket flight and stability simulation</li><li>Arduino — embedded control and prototyping</li></ul></div>`,
+    <div class="project-grid">
+      <article class="project-card">
+        <h4>Electromagnetic Accelerator</h4>
+        <div class="project-meta">Independent R&amp;D · May 2022 – Present</div>
+        <p>Designed and built a two-stage electromagnetic accelerator, combining electromagnetic simulation, mechanical CAD, embedded control, fabrication, and iterative testing.</p>
+        <ul><li>Used ANSYS Maxwell 2D to study magnetic fields and optimize coil timing.</li><li>Designed mechanical components in Fusion 360 and fabricated parts through 3D printing.</li><li>Developed Arduino-based stage-control logic for sequential coil activation.</li></ul>
+        <div class="project-result"><strong>V3 Result:</strong> approximately <strong>16 m/s</strong> projectile velocity with a 55.45 g projectile.</div>
+        <div class="content-tags"><span class="content-tag">ANSYS Maxwell</span><span class="content-tag">Fusion 360</span><span class="content-tag">Arduino</span><span class="content-tag">C/C++</span></div>
+      </article>
 
-  'About Me':`<div class="content-block"><h3>About Me</h3><p>I'm an incoming Computer Science &amp; Engineering student at the University of California, Irvine. My interests sit at the intersection of software and physical systems, especially embedded firmware, electronics, electromagnetics, and simulation.</p><span class="content-tag">UCI CSE</span><span class="content-tag">Embedded Systems</span><span class="content-tag">Electronics</span><div class="content-divider"></div><h4>What I Like Building</h4><ul><li>Hardware controlled by software</li><li>Embedded systems and firmware</li><li>Electromagnetic and physics-based simulations</li><li>CAD-driven mechanical systems</li><li>Robotics and aerospace projects</li></ul><div class="content-divider"></div><h4>Beyond Engineering</h4><p>I also run a YouTube channel that has reached 100M+ views. Building content has taught me to iterate quickly, understand analytics, and communicate ideas in a way that people actually engage with.</p><div class="content-divider"></div><h4>Education</h4><p>B.S. Computer Science &amp; Engineering — University of California, Irvine · Incoming freshman, Fall 2026.</p></div>`,
+      <article class="project-card">
+        <h4>American Rocketry Challenge</h4>
+        <div class="project-meta">R&amp;D &amp; Simulation Lead · Nov 2025 – Mar 2026</div>
+        <p>Worked on a student rocketry team, using OpenRocket simulation to evaluate flight performance and iterate on the vehicle design.</p>
+        <ul><li>Simulated flight performance and refined the design through iterative analysis.</li><li>Collaborated with a 7-member engineering team on a 25.6 in competition rocket.</li><li>Completed two qualification flights with an official score of 139.8 total.</li></ul>
+        <div class="content-tags"><span class="content-tag">OpenRocket</span><span class="content-tag">Simulation</span><span class="content-tag">Aerodynamics</span><span class="content-tag">Teamwork</span></div>
+      </article>
 
-  'Experience':`<div class="content-block"><h3>Experience &amp; Involvement</h3><p>My experience so far is primarily project-based, with a strong emphasis on self-directed engineering and preparing for hands-on university opportunities.</p><span class="content-tag">Projects</span><span class="content-tag">Teamwork</span><span class="content-tag">Content Creation</span><div class="content-divider"></div><h4>Independent Engineering</h4><p>Spent 3+ years developing an electromagnetic accelerator project and exploring electronics, Arduino control, CAD, and ANSYS Maxwell simulation.</p><div class="content-divider"></div><h4>American Rocketry Challenge</h4><p>Worked with a six-person team on a student rocketry project, contributing to simulation and aerodynamic design using OpenRocket.</p><div class="content-divider"></div><h4>UCI Engineering Team Outreach</h4><p>Before starting at UCI, began reaching out to HyperXite, UCI AER, and Anteater Racing to learn about opportunities for incoming freshmen and find a path into hands-on engineering teams. These are opportunities I am exploring, not roles I have already held.</p><div class="content-divider"></div><h4>YouTube Content Creation</h4><p>Built a YouTube channel with 100M+ views, developing practical skills in audience analytics, rapid iteration, visual communication, and content strategy.</p></div>`,
+      <article class="project-card">
+        <h4>Arduino Real-Time Sensor Monitoring System</h4>
+        <div class="project-meta">Embedded Project · Jun 2026 – Jul 2026</div>
+        <p>Built an Arduino Uno R3-based sensor monitoring system integrating an ultrasonic distance sensor and temperature/humidity sensor with an OLED display.</p>
+        <ul><li>Developed C/C++ firmware for real-time sensor acquisition and display output.</li><li>Refreshed the OLED display at approximately <strong>50 ms</strong> intervals.</li><li>Assembled and tested the system on a breadboard.</li></ul>
+        <div class="content-tags"><span class="content-tag">Arduino Uno R3</span><span class="content-tag">C/C++</span><span class="content-tag">I²C</span><span class="content-tag">Sensors</span></div>
+      </article>
+    </div>
 
-  'Contact':`<div class="content-block"><h3>Contact</h3><p>I'm interested in engineering internships, UCI student teams, research opportunities, and projects involving embedded systems, electronics, firmware, or simulation.</p><span class="content-tag">Open to Opportunities</span><div class="content-divider"></div><h4>Email</h4><p>YOUR_EMAIL_HERE</p><div class="content-divider"></div><h4>LinkedIn</h4><p>YOUR_LINKEDIN_HERE</p><div class="content-divider"></div><h4>GitHub</h4><p>YOUR_GITHUB_HERE</p></div>`
+    <div class="project-evidence">
+      <h5>Project Evidence · Electromagnetic Accelerator</h5>
+      <p>Placeholders below for photos and screenshots</p>
+      <div class="media-grid">
+        <div class="media-item"><img src="assets/coilgun/main.jpg" alt="Electromagnetic accelerator project" onerror="this.style.display='none';this.nextElementSibling.style.display='flex';"><div class="media-placeholder">Add: assets/coilgun/main.jpg<br>Physical project photo</div></div>
+        <div class="media-item"><img src="assets/coilgun/cad.jpg" alt="Coilgun Fusion 360 CAD" onerror="this.style.display='none';this.nextElementSibling.style.display='flex';"><div class="media-placeholder">Version1 does not have cad model<br>Fusion 360 CAD screenshot N/A</div></div>
+        <div class="media-item"><img src="assets/coilgun/simulation.jpg" alt="ANSYS Maxwell simulation" onerror="this.style.display='none';this.nextElementSibling.style.display='flex';"><div class="media-placeholder">Version1 does not have simulation<br>ANSYS Maxwell screenshot N/A</div></div>
+        <div class="media-item"><img src="assets/coilgun/testing.jpg" alt="Project testing documentation" onerror="this.style.display='none';this.nextElementSibling.style.display='flex';"><div class="media-placeholder">Add: assets/coilgun/testing.jpg<br>Testing / documentation photo</div></div>
+      </div>
+      <div class="video-wrap media-item">
+        <video controls preload="metadata" onloadedmetadata="this.style.display='block';this.nextElementSibling.style.display='none';" onerror="this.style.display='none';this.nextElementSibling.style.display='flex';"><source src="assets/coilgun/demo.mp4" type="video/mp4"></video>
+        <div class="media-placeholder">Optional: add assets/coilgun/demo.mp4<br>MP4 demonstration video</div>
+      </div>
+    </div>
+
+    <div class="project-evidence">
+      <h5>Project Evidence · American Rocketry Challenge</h5>
+      <p>Add photos and simulation screenshots to <code>assets/ARC_rocketry/</code>.</p>
+      <div class="media-grid">
+        <div class="media-item"><img src="assets/ARC_rocketry/main.jpg" alt="ARC rocket" onerror="this.style.display='none';this.nextElementSibling.style.display='flex';"><div class="media-placeholder">Add: assets/ARC_rocketry/main.jpg<br>Rocket / team photo</div></div>
+        <div class="media-item"><img src="assets/ARC_rocketry/openrocket.jpg" alt="OpenRocket simulation" onerror="this.style.display='none';this.nextElementSibling.style.display='flex';"><div class="media-placeholder">Add: assets/ARC_rocketry/openrocket.jpg<br>OpenRocket simulation</div></div>
+      </div>
+      <div class="video-wrap media-item">
+        <video controls preload="metadata" onloadedmetadata="this.style.display='block';this.nextElementSibling.style.display='none';" onerror="this.style.display='none';this.nextElementSibling.style.display='flex';"><source src="assets/ARC_rocketry/flight.mp4" type="video/mp4"></video>
+        <div class="media-placeholder">Optional: add assets/ARC_rocketry/flight.mp4<br>Flight / competition video</div>
+      </div>
+    </div>
+
+    <div class="project-evidence">
+      <h5>Project Evidence · Arduino Sensor System</h5>
+      <p>Add photos to <code>assets/arduino/</code> and an optional demonstration video if you have one.</p>
+      <div class="media-grid">
+        <div class="media-item"><img src="assets/arduino/main.jpg" alt="Arduino sensor monitoring system" onerror="this.style.display='none';this.nextElementSibling.style.display='flex';"><div class="media-placeholder">Add: assets/arduino/main.jpg<br>Complete system photo</div></div>
+        <div class="media-item"><img src="assets/arduino/wiring.jpg" alt="Arduino breadboard wiring" onerror="this.style.display='none';this.nextElementSibling.style.display='flex';"><div class="media-placeholder">Add: assets/arduino/wiring.jpg<br>Breadboard / wiring photo</div></div>
+      </div>
+    </div>
+
+    <div class="project-evidence">
+      <h5>Project Evidence · Gaudi Technology</h5>
+      <p>Add CAD and fabrication documentation to <code>assets/gaudi/</code>.</p>
+      <div class="media-grid">
+        <div class="media-item"><img src="assets/gaudi/main.jpg" alt="Gaudi Technology project" onerror="this.style.display='none';this.nextElementSibling.style.display='flex';"><div class="media-placeholder">Add: assets/gaudi/main.jpg<br>Project / prototype photo</div></div>
+        <div class="media-item"><img src="assets/gaudi/cad.jpg" alt="Gaudi Technology Fusion 360 CAD" onerror="this.style.display='none';this.nextElementSibling.style.display='flex';"><div class="media-placeholder">Add: assets/gaudi/cad.jpg<br>Fusion 360 CAD screenshot</div></div>
+      </div>
+    </div>
+  </div>`,
+
+  'Skills & Tools':`<div class="content-block">
+    <h3>Skills &amp; Tools</h3>
+    <p>A practical technical stack built through independent projects, team engineering work, and embedded prototyping.</p>
+    <div class="tool-grid">
+      <div class="tool-card"><h4>Programming</h4><p>C/C++ · Java · Python</p></div>
+      <div class="tool-card"><h4>Embedded</h4><p>Arduino · Microcontroller Prototyping · Sensor Integration · I²C</p></div>
+      <div class="tool-card"><h4>Engineering</h4><p>Circuit Analysis · Electromagnetics · CAD · 3D Printing · Fabrication</p></div>
+      <div class="tool-card"><h4>Simulation &amp; CAD</h4><p>ANSYS Maxwell · Fusion 360 · OpenRocket</p></div>
+      <div class="tool-card"><h4>Development</h4><p>VS Code · Git · GitHub · Hardware Debugging</p></div>
+    </div>
+    <div class="content-divider"></div>
+    <h4>Where I Use Them</h4>
+    <ul><li><strong>ANSYS Maxwell</strong> — electromagnetic field simulation for the accelerator project.</li><li><strong>Fusion 360</strong> — mechanical CAD and design iteration for the accelerator and Gaudi work.</li><li><strong>OpenRocket</strong> — flight simulation and design iteration for ARC.</li><li><strong>Arduino / C/C++</strong> — embedded control and real-time sensor monitoring.</li><li><strong>Git / GitHub</strong> — version control and portfolio/project documentation.</li></ul>
+  </div>`,
+
+  'About Me':`<div class="content-block">
+    <h3>About Me</h3>
+    <p>I'm an incoming Computer Science &amp; Engineering student at the University of California, Irvine with 3+ years of hands-on experience in embedded systems, electronics, CAD, and electromagnetic simulation. I'm particularly interested in embedded firmware and electronics engineering.</p>
+    <div class="content-tags"><span class="content-tag">UCI CSE</span><span class="content-tag">Embedded Systems</span><span class="content-tag">Firmware</span><span class="content-tag">Electronics</span></div>
+    <div class="content-divider"></div>
+    <h4>Education</h4>
+    <p><strong>University of California, Irvine</strong><br>B.S. Computer Science &amp; Engineering · Incoming freshman, Fall 2026</p>
+    <div class="content-divider"></div>
+    <h4>What I Like Building</h4>
+    <ul><li>Hardware controlled by software</li><li>Embedded systems and firmware</li><li>Electromagnetic and physics-based simulations</li><li>CAD-driven mechanical systems</li><li>Robotics and aerospace projects</li></ul>
+    <div class="content-divider"></div>
+    <h4>Beyond Engineering</h4>
+    <p>I also run a YouTube channel with <strong>45,000+ subscribers and 140M+ total views</strong>, giving me experience in rapid iteration, analytics, visual communication, and independent project execution.</p>
+    <div class="content-divider"></div>
+    <h4>Links</h4>
+    <p><a class="inline-link" href="https://github.com/SomeHeresy" target="_blank" rel="noopener">GitHub</a> · <a class="inline-link" href="https://www.youtube.com/@SomeHeresyGaming" target="_blank" rel="noopener">YouTube</a></p>
+  </div>`,
+
+  'Experience':`<div class="content-block">
+    <h3>Experience</h3>
+    <p>Hands-on engineering, team, and independent R&amp;D experience across CAD, simulation, embedded systems, and technical project development.</p>
+    <div class="experience-grid">
+    <div class="experience-card"><div class="experience-org">Gaudi Technology</div><div class="experience-role">Master of Engineering Capstone Project Assistant</div><div class="experience-date">Jan 2025 – Jun 2025 · Irvine, CA</div><ul><li>Revised 3D CAD models in Fusion 360 for printable concrete structures.</li><li>Assisted with fabrication and preparation of concrete molds used for ASTM material strength testing.</li><li>Collaborated with 4 MoE student researchers during prototype development and testing.</li></ul><div class="content-tags"><span class="content-tag">Fusion 360</span><span class="content-tag">CAD</span><span class="content-tag">Fabrication</span></div></div>
+    <div class="experience-card"><div class="experience-org">American Rocketry Challenge</div><div class="experience-role">R&amp;D and Simulation Lead</div><div class="experience-date">Nov 2025 – Mar 2026 · Irvine, CA</div><ul><li>Simulated flight performance and increased flight precision by 23.2% using OpenRocket.</li><li>Collaborated with a 7-member engineering team to design and build a 25.6 in competition rocket.</li><li>Completed two competition qualification flights, achieving an official score of 139.8 total.</li></ul><div class="content-tags"><span class="content-tag">OpenRocket</span><span class="content-tag">Simulation</span><span class="content-tag">Teamwork</span></div></div>
+    <div class="experience-card"><div class="experience-org">Independent Engineering R&amp;D</div><div class="experience-role">Electromagnetic Accelerator Project</div><div class="experience-date">May 2022 – Present</div><ul><li>Developed a long-term two-stage electromagnetic accelerator project combining simulation, CAD, embedded control, fabrication, and testing.</li><li>Iterated on electromagnetic and mechanical design using ANSYS Maxwell, Fusion 360, and Arduino.</li></ul><div class="content-tags"><span class="content-tag">Electromagnetics</span><span class="content-tag">Embedded</span><span class="content-tag">CAD</span></div></div>
+    <div class="experience-card"><div class="experience-org">YouTube Content Creation</div><div class="experience-role">Independent Creator</div><div class="experience-date">Ongoing</div><ul><li>Built and grew a YouTube channel to 45,000+ subscribers and 140M+ total views.</li><li>Developed practical skills in audience analytics, rapid iteration, visual communication, and content strategy.</li></ul><div class="content-tags"><span class="content-tag">Analytics</span><span class="content-tag">Communication</span><span class="content-tag">Independent Work</span></div></div>
+    </div>
+  </div>`,
+
+  'Contact':`<div class="content-block"><h3>Contact</h3><p>I'm interested in engineering internships, UCI student teams, research opportunities, and projects involving embedded systems, electronics, firmware, or simulation.</p><span class="content-tag">Open to Opportunities</span><div class="content-divider"></div><h4>Email</h4><p>calviny7@uci.edu</p><div class="content-divider"></div><h4>GitHub</h4><p><a class="inline-link" href="https://github.com/SomeHeresy" target="_blank" rel="noopener">github.com/SomeHeresy</a></p><div class="content-divider"></div><h4>YouTube</h4><p><a class="inline-link" href="https://www.youtube.com/@SomeHeresyGaming" target="_blank" rel="noopener">youtube.com/@SomeHeresyGaming</a></p></div>`
 };
 
 // ════════════════════════════════════════════════════
@@ -1995,11 +2147,11 @@ onScroll();
 // ════════════════════════════════════════════════════
 (function(){
   const BD_MAP = [
-    { id:'bd-eng',   isHome:false, defaultPage:['Engineering Projects','Projects'] },
-    { id:'bd-tools', isHome:false, defaultPage:['Tools & Software','Technical Stack'] },
+    { id:'bd-eng',   isHome:false, defaultPage:['Projects','Selected Work'] },
+    { id:'bd-tools', isHome:false, defaultPage:['Skills & Tools','Technical Stack'] },
     { id:'bd-home',  isHome:true,  defaultPage:null },
     { id:'bd-about', isHome:false, defaultPage:['Background & Education','About Me'] },
-    { id:'bd-exp',   isHome:false, defaultPage:['Background & Education','Experience'] },
+    { id:'bd-exp',   isHome:false, defaultPage:['Experience','Engineering & Leadership'] },
   ];
 
   BD_MAP.forEach(({id, isHome, defaultPage}) => {
