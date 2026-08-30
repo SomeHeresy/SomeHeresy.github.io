@@ -3,7 +3,17 @@
 <head>
 <meta charset="UTF-8"/>
 <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
-  <meta name="description" content="Cal — Computer Science & Engineering student portfolio featuring embedded systems, electronics, CAD, simulation, and engineering projects."/>
+  <meta name="description" content="Calvin Yang is a Computer Science & Engineering student building embedded systems, electronics, firmware, CAD, and simulation projects."/>
+  <meta property="og:type" content="website"/>
+  <meta property="og:title" content="Calvin Yang | Computer Science & Engineering Portfolio"/>
+  <meta property="og:description" content="Embedded systems, electronics, firmware, CAD, simulation, and hands-on engineering projects."/>
+  <meta property="og:url" content="https://someheresy.github.io/"/>
+  <meta property="og:image" content="https://someheresy.github.io/assets/portfolio-social-preview.png"/>
+  <meta name="twitter:card" content="summary_large_image"/>
+  <meta name="twitter:title" content="Calvin Yang | Computer Science & Engineering Portfolio"/>
+  <meta name="twitter:description" content="Embedded systems, electronics, firmware, CAD, simulation, and hands-on engineering projects."/>
+  <meta name="twitter:image" content="https://someheresy.github.io/assets/portfolio-social-preview.png"/>
+  <link rel="canonical" href="https://someheresy.github.io/"/>
 <title>Calvin Yang | CSE Student & Engineering Portfolio</title>
 <style>
 * { margin:0; padding:0; box-sizing:border-box; }
@@ -812,7 +822,8 @@ body:not(.page-open) #enter-btn{
   font:14px/1.7 'Courier New',monospace;
   letter-spacing:1.5px;
 }
-#home-explore{
+#home-explore,
+#home-about{
   pointer-events:auto;
   display:inline-flex;
   align-items:center;
@@ -828,7 +839,8 @@ body:not(.page-open) #enter-btn{
   cursor:pointer;
   transition:background .2s ease,transform .2s ease,border-color .2s ease;
 }
-#home-explore:hover{
+#home-explore:hover,
+#home-about:hover{
   background:rgba(255,255,255,.15);
   border-color:rgba(235,240,255,.55);
   transform:translateY(-2px);
@@ -896,7 +908,7 @@ body:not(.page-open) #enter-btn{
 
 /* Respect reduced-motion preferences. */
 @media (prefers-reduced-motion:reduce){
-  #home-explore,.site-nav-links button,.bd-sphere{transition:none}
+  #home-explore,#home-about,.site-nav-links button,.bd-sphere{transition:none}
 }
 
 </style>
@@ -941,7 +953,8 @@ button, a { -webkit-tap-highlight-color: transparent; }
   line-height: 1.75;
   letter-spacing: 1.1px;
 }
-#home-explore {
+#home-explore,
+#home-about {
   min-height: 48px;
   font-size: 14px;
 }
@@ -1221,11 +1234,46 @@ canvas { pointer-events: none; }
   .project-card { padding: 20px; }
   .stats-row { grid-template-columns: 1fr 1fr; }
 }
+
+/* Recruiter-review copy: clearer first-screen actions and expandable evidence. */
+.home-actions { display:flex; flex-direction:column; align-items:flex-start; gap:8px; pointer-events:auto; }
+.home-primary-actions,.home-link-actions { display:flex; flex-wrap:wrap; align-items:center; gap:12px; }
+#home-about {
+  background:transparent;
+  border-color:rgba(225,230,255,.25);
+  color:rgba(235,238,255,.82);
+}
+#home-about:hover,#home-about:focus-visible {
+  background:rgba(255,255,255,.08);
+  border-color:rgba(235,240,255,.48);
+  color:#fff;
+}
+.home-secondary-link {
+  display:inline-flex; align-items:center; min-height:46px; padding:12px 4px;
+  color:rgba(235,238,255,.78); font:12px 'Courier New',monospace;
+  letter-spacing:1.5px; text-decoration:none; border-bottom:1px solid rgba(235,238,255,.28);
+}
+.home-secondary-link:hover,.home-secondary-link:focus-visible { color:#fff; border-bottom-color:#fff; }
+#skip-to-content:focus { transform:translateY(0) !important; }
+.project-evidence > summary {
+  cursor:pointer; list-style:none; padding:16px 18px; margin:24px 0 18px;
+  border:1px solid rgba(40,45,65,.13); border-radius:12px; background:#fff;
+  color:#242733; font:700 12px 'Courier New',monospace; letter-spacing:1.2px;
+}
+.project-evidence > summary::-webkit-details-marker { display:none; }
+.project-evidence > summary::after { content:'＋'; float:right; color:#777d8f; }
+.project-evidence[open] > summary::after { content:'−'; }
+.profile-name,.timeline-heading { margin:0; }
+@media (max-width:700px){
+  .home-actions{gap:7px}
+  .home-primary-actions,.home-link-actions{gap:9px}
+  .home-secondary-link{font-size:10px}
+}
 </style>
 
 </head>
 <body>
-<a id="skip-to-content" href="#page-panel" style="position:fixed;left:12px;top:12px;z-index:1000;transform:translateY(-160%);padding:10px 14px;background:#fff;color:#111;border-radius:8px;text-decoration:none;font:600 14px Arial,sans-serif;box-shadow:0 4px 18px rgba(0,0,0,.2);transition:transform .15s ease;">Skip to portfolio content</a>
+<a id="skip-to-content" href="#about-section" style="position:fixed;left:12px;top:12px;z-index:1000;transform:translateY(-160%);padding:10px 14px;background:#fff;color:#111;border-radius:8px;text-decoration:none;font:600 14px Arial,sans-serif;box-shadow:0 4px 18px rgba(0,0,0,.2);transition:transform .15s ease;">Skip to portfolio content</a>
 
 
 <!-- Conventional navigation layer: keeps the experimental visual navigation,
@@ -1264,11 +1312,23 @@ canvas { pointer-events: none; }
 
 <div id="home-intro" aria-label="Portfolio introduction">
   <div class="home-kicker">CALVIN YANG · CSE STUDENT & ENGINEERING PORTFOLIO</div>
-  <h1>Build some cool stuff :D</h1>
-  <p>Portfolio Currently Under Development. Full Release In September.</p>
-  <button id="home-explore" type="button" onclick="enterPortfolio()">
-    <span>EXPLORE PORTFOLIO</span><span class="home-explore-arrow">↓</span>
-  </button>
+  <h1>Building embedded systems and electromechanical prototypes.</h1>
+  <p>Computer Science &amp; Engineering student combining firmware, electronics, CAD, simulation, and hands-on testing to turn ambitious ideas into working hardware.</p>
+  <div class="home-actions">
+    <div class="home-primary-actions">
+      <button id="home-explore" type="button" onclick="openPage('Projects','Selected Work')">
+        <span>VIEW PROJECTS</span><span class="home-explore-arrow">→</span>
+      </button>
+      <button id="home-about" type="button" onclick="enterPortfolio()" aria-label="Scroll to Calvin's profile and background">
+        <span>MEET CALVIN</span><span class="home-explore-arrow">↓</span>
+      </button>
+    </div>
+    <div class="home-link-actions">
+      <a class="home-secondary-link" href="mailto:calviny7@uci.edu">EMAIL ME</a>
+      <a class="home-secondary-link" href="https://github.com/SomeHeresy" target="_blank" rel="noopener">GITHUB</a>
+      <a class="home-secondary-link" href="https://www.linkedin.com/in/calvinyang07/" target="_blank" rel="noopener">LINKEDIN</a>
+    </div>
+  </div>
   <div class="home-interaction-hint">Click a node to explore</div>
 </div>
 
@@ -1356,20 +1416,20 @@ canvas { pointer-events: none; }
         </div>
         <div class="social-icons">
           <!-- Replace # with your real profile URLs -->
-          <a class="social-icon" href="https://www.linkedin.com/in/calvinyang07/" target="_blank" title="LinkedIn" aria-label="LinkedIn">
+          <a class="social-icon" href="https://www.linkedin.com/in/calvinyang07/" target="_blank" rel="noopener" title="LinkedIn" aria-label="LinkedIn">
             <svg viewBox="0 0 24 24"><path d="M16 8a6 6 0 0 1 6 6v7h-4v-7a2 2 0 0 0-2-2 2 2 0 0 0-2 2v7h-4v-7a6 6 0 0 1 6-6zM2 9h4v12H2z"/><circle cx="4" cy="4" r="2"/></svg>
           </a>
-          <a class="social-icon" href="https://github.com/SomeHeresy" target="_blank" title="GitHub" aria-label="GitHub">
+          <a class="social-icon" href="https://github.com/SomeHeresy" target="_blank" rel="noopener" title="GitHub" aria-label="GitHub">
             <svg viewBox="0 0 24 24"><path d="M9 19c-5 1.5-5-2.5-7-3m14 6v-3.87a3.37 3.37 0 0 0-.94-2.61c3.14-.35 6.44-1.54 6.44-7A5.44 5.44 0 0 0 20 4.77 5.07 5.07 0 0 0 19.91 1S18.73.65 16 2.48a13.38 13.38 0 0 0-7 0C6.27.65 5.09 1 5.09 1A5.07 5.07 0 0 0 5 4.77a5.44 5.44 0 0 0-1.5 3.78c0 5.42 3.3 6.61 6.44 7A3.37 3.37 0 0 0 9 18.13V22"/></svg>
           </a>
-          <a class="social-icon" href="https://www.youtube.com/@SomeHeresyGaming" target="_blank" title="YouTube" aria-label="YouTube">
+          <a class="social-icon" href="https://www.youtube.com/@SomeHeresyGaming" target="_blank" rel="noopener" title="YouTube" aria-label="YouTube">
             <svg viewBox="0 0 24 24"><path d="M23.5 6.2a3 3 0 0 0-2.1-2.1C19.5 3.5 12 3.5 12 3.5s-7.5 0-9.4.6A3 3 0 0 0 .5 6.2 31 31 0 0 0 0 12a31 31 0 0 0 .5 5.8 3 3 0 0 0 2.1 2.1c1.9.6 9.4.6 9.4.6s7.5 0 9.4-.6a3 3 0 0 0 2.1-2.1A31 31 0 0 0 24 12a31 31 0 0 0-.5-5.8zM9.6 15.5v-7l6.2 3.5-6.2 3.5z"/></svg>
           </a>
         </div>
       </div>
 
       <div class="profile-right">
-        <div class="profile-name">Calvin Yang</div>
+        <h2 class="profile-name">Calvin Yang</h2>
         <div class="profile-tagline">B.S. Computer Science &amp; Engineering Student · UC Irvine</div>
         <p class="profile-bio">I'm an incoming Computer Science &amp; Engineering student at UC Irvine with a strong interest in embedded systems, electronics, firmware, and physics-based engineering. I enjoy learning by building — especially when a project combines software, hardware, CAD, and real-world experimentation.</p>
         <p class="profile-bio">My projects have taken me from Arduino control and electromagnetic simulation to CAD design, programming, rocketry, and autonomous systems. I'm particularly interested in developing toward embedded systems and electronics engineering.</p>
@@ -1441,7 +1501,7 @@ canvas { pointer-events: none; }
 ══════════════════════════════════════════════ -->
 <section id="timeline-section">
   <div class="timeline-inner">
-    <div class="timeline-heading">Journey &amp; Experience</div>
+    <h2 class="timeline-heading">Journey &amp; Experience</h2>
     <div class="timeline-subheading">2022 – Present</div>
 
     <div class="timeline-track">
@@ -1532,12 +1592,19 @@ canvas { pointer-events: none; }
 // ════════════════════════════════════════════════════
 // CONFIG
 // ════════════════════════════════════════════════════
+const PAGE_CONFIG = {
+  'Projects': { section:'Selected Work', slug:'projects' },
+  'Experience': { section:'Engineering & Leadership', slug:'experience' },
+  'Skills & Tools': { section:'Technical Stack', slug:'skills' },
+  'About Me': { section:'Background & Education', slug:'about' },
+  'Contact': { section:'Get in Touch', slug:'contact' }
+};
 const DIPOLES = [
-  { id:'eng',   color:[210,150, 80], menuId:'menu-eng',   isHome:false, defaultPage:['Projects','Selected Work'] },
-  { id:'tools', color:[110,160,220], menuId:'menu-tools', isHome:false, defaultPage:['Skills & Tools','Technical Stack'] },
+  { id:'eng',   color:[210,150, 80], menuId:'menu-eng',   isHome:false, defaultPage:['Projects',PAGE_CONFIG['Projects'].section] },
+  { id:'tools', color:[110,160,220], menuId:'menu-tools', isHome:false, defaultPage:['Skills & Tools',PAGE_CONFIG['Skills & Tools'].section] },
   { id:'home',  color:[200,210,255], menuId:null,         isHome:true,  defaultPage:null },
-  { id:'about', color:[110,185,140], menuId:'menu-about', isHome:false, defaultPage:['Background & Education','About Me'] },
-  { id:'exp',   color:[200,120,200], menuId:'menu-exp',   isHome:false, defaultPage:['Experience','Engineering & Leadership'] },
+  { id:'about', color:[110,185,140], menuId:'menu-about', isHome:false, defaultPage:['About Me',PAGE_CONFIG['About Me'].section] },
+  { id:'exp',   color:[200,120,200], menuId:'menu-exp',   isHome:false, defaultPage:['Experience',PAGE_CONFIG['Experience'].section] },
 ];
 const HOME_IDX      = 2;
 const DIPOLE_R      = 24;
@@ -2110,7 +2177,12 @@ function hideAllTooltips(){
 let navGen = 0;
 
 function goHome(){
-  if(!pageOpen)return;
+  if(!pageOpen){
+    smoothScrollTo(0,700);
+    if(location.hash) history.pushState({page:'Home'},'',location.pathname+location.search);
+    if(typeof window.setPortfolioLocation === 'function') window.setPortfolioLocation('Home');
+    return;
+  }
   navGen++;
   animationPaused=false;
   fadeTransition(()=>{
@@ -2128,11 +2200,16 @@ function goHome(){
     elBannerStrip.classList.remove('visible');
     elScrollCue.style.opacity='1';
     hideAllTooltips();
+    if(location.hash) history.pushState({page:'Home'},'',location.pathname+location.search);
   });
 }
 
 function openPage(title,section){
   navGen++;
+  const route=PAGE_CONFIG[title];
+  if(route && location.hash !== '#'+route.slug){
+    history.pushState({page:title},'',location.pathname+location.search+'#'+route.slug);
+  }
   const myGen = navGen;
   if(pageOpen){
     animationPaused=false;
@@ -2184,8 +2261,8 @@ function fadeTransition(onMidpoint){
 // ════════════════════════════════════════════════════
 const PAGE_CONTENT={
   'Projects':`<div class="content-block">
-    <h3>Projects</h3>
-    <p>Selected engineering projects demonstrating hands-on work across embedded systems, electronics, CAD, simulation, and physical prototyping. Each project includes technical details and space for supporting photos, simulations, and videos.</p>
+    <h3>Selected Projects</h3>
+    <p>Hands-on engineering work across embedded systems, electronics, CAD, simulation, and physical prototyping. Start with the results below, then expand the technical documentation for the full build history.</p>
     <div class="content-tags">
       <span class="content-tag">Embedded Systems</span><span class="content-tag">Electronics</span><span class="content-tag">CAD</span><span class="content-tag">Simulation</span><span class="content-tag">Prototyping</span>
     </div>
@@ -2194,22 +2271,23 @@ const PAGE_CONTENT={
       <article class="project-card">
         <h4>Electromagnetic Accelerator</h4>
         <div class="project-meta">Independent R&amp;D · May 2022 – Present</div>
-        <p>Designed and built a two-stage electromagnetic accelerator, combining electromagnetic simulation, mechanical CAD, embedded control, fabrication, and iterative testing.</p>
+        <p><strong>What I built:</strong> a two-stage electromagnetic accelerator combining electromagnetic simulation, mechanical CAD, embedded control, fabrication, and iterative testing.</p>
         <ul><li>Used ANSYS Maxwell 2D to study magnetic fields and optimize coil timing.</li><li>Designed mechanical components in Fusion 360 and fabricated parts through 3D printing.</li><li>Developed Arduino-based stage-control logic for sequential coil activation.</li></ul>
-        <div class="project-result"><strong>V3 Result:</strong> approximately <strong>16 m/s</strong> projectile velocity with a 54.63 g projectile.</div>
+        <div class="project-result"><strong>Measured outcome:</strong> approximately <strong>16 m/s</strong> projectile velocity with a <strong>54.63 g</strong> projectile.</div>
         <div class="content-tags"><span class="content-tag">ANSYS Maxwell</span><span class="content-tag">Fusion 360</span><span class="content-tag">Arduino</span><span class="content-tag">C/C++</span></div>
       </article>
 
       <article class="project-card">
         <h4>Arduino Real-Time Sensor Monitoring System</h4>
         <div class="project-meta">Embedded Project · Jun 2026 – Jul 2026</div>
-        <p>Built an Arduino Uno R3-based sensor monitoring system integrating an ultrasonic distance sensor and temperature/humidity sensor with an OLED display.</p>
+        <p><strong>What I built:</strong> an Arduino Uno R3 sensor monitor integrating ultrasonic distance and temperature/humidity sensing with an OLED display.</p>
         <ul><li>Developed C/C++ firmware for real-time sensor acquisition and display output.</li><li>Refreshed the OLED display at approximately <strong>50 ms</strong> intervals.</li><li>Assembled and tested the system on a breadboard.</li></ul>
         <div class="content-tags"><span class="content-tag">Arduino Uno R3</span><span class="content-tag">C/C++</span><span class="content-tag">I²C</span><span class="content-tag">Sensors</span></div>
       </article>
     </div>
 
-    <div class="project-evidence">
+    <details class="project-evidence">
+      <summary>View full electromagnetic accelerator documentation</summary>
       <h5>Project Evidence · Electromagnetic Accelerator</h5>
       <p>Documentation from the three-stage development of the project. Version 1 and Version 2 focused on physical prototyping and experimental iteration, while Version 3 introduced CAD, electromagnetic simulation, and more precise embedded timing control.</p>
 
@@ -2250,8 +2328,8 @@ const PAGE_CONTENT={
       </div>
 
       <div class="content-divider"></div>
-      <h4>Versions 2</h4>
-      <p>Preparing for the two stage design</p>
+      <h4>Version 2 · Two-Stage Preparation</h4>
+      <p>Prepared the system architecture and test setup for a two-stage design.</p>
       <div class="media-grid">
         <div class="media-item evidence-card">
           <img class="evidence-image" src="assets/coilgun/version2/v2 circuit example.png" alt="Version 2 circuit setup">
@@ -2288,8 +2366,8 @@ const PAGE_CONTENT={
       </div>
 
       <div class="content-divider"></div>
-      <h4>Versions 3</h4>
-      <p>Fully functional two stage design</p>
+      <h4>Version 3 · Functional Two-Stage Design</h4>
+      <p>Completed a functional two-stage design with simulation-informed timing.</p>
       <div class="media-grid">
         <div class="media-item evidence-card">
           <img class="evidence-image" src="assets/coilgun/version3/v3 main setup.PNG" alt="Version 3 main setup">
@@ -2297,13 +2375,13 @@ const PAGE_CONTENT={
         </div>
         <div class="media-item evidence-card">
           <img class="evidence-image" src="assets/coilgun/version3/v3 main part.png" alt="Version 3 launcher setup">
-          <div class="media-caption"><strong>V3 — Launcher</strong><br>The two stages are closely connected and are timed precisely using arduino and simulated data from ANSYS Maxwell.</div>
+          <div class="media-caption"><strong>V3 — Launcher</strong><br>The two stages are closely connected and timed using Arduino control and simulated data from ANSYS Maxwell.</div>
         </div>
       </div>
 
       <div class="content-divider"></div>
-      <h4>Versions 3 Files</h4>
-      <p>Simulations and CAD Models</p>
+      <h4>Version 3 Files</h4>
+      <p>Simulation and CAD models</p>
       <div class="media-grid">
         <div class="media-item evidence-card">
           <img class="evidence-image" src="assets/coilgun/version3/sim main.png" alt="Version 3 main setup">
@@ -2321,7 +2399,7 @@ const PAGE_CONTENT={
   
       <div class="content-divider"></div>
       <h4>V3 Video Documentation</h4>
-      <p class="project-meta">Version 3 Documentations.</p>
+      <p class="project-meta">Version 3 documentation</p>
       <div class="video-grid">
         <div class="video-card">
           <div class="video-wrap">
@@ -2342,16 +2420,7 @@ const PAGE_CONTENT={
           <div class="media-caption"><strong>V3 — Failure Example</strong><br>Example of failed experiment.</div>
         </div>
       </div>
-    </div> 
-
-    <div class="project-evidence">
-      <h5>Project Evidence · Arduino Sensor System</h5>
-      <p>Evidence uploading in process.</p>
-      <div class="media-grid">
-        <div class="media-item"><img src="assets/arduino/main.jpg" alt="Arduino sensor monitoring system" onerror="this.style.display='none';this.nextElementSibling.style.display='flex';"><div class="media-placeholder">Add: assets/arduino/main.jpg<br>Complete system photo</div></div>
-        <div class="media-item"><img src="assets/arduino/wiring.jpg" alt="Arduino breadboard wiring" onerror="this.style.display='none';this.nextElementSibling.style.display='flex';"><div class="media-placeholder">Add: assets/arduino/wiring.jpg<br>Breadboard / wiring photo</div></div>
-      </div>
-    </div>
+    </details>
   </div>`,
 
   'Skills & Tools':`<div class="content-block">
@@ -2371,20 +2440,20 @@ const PAGE_CONTENT={
 
   'About Me':`<div class="content-block">
     <h3>About Me</h3>
-    <p>I'm an incoming Computer Science &amp; Engineering student at the University of California, Irvine with 3+ years of hands-on experience in embedded systems, electronics, CAD, and electromagnetic simulation. I'm particularly interested in embedded firmware and electronics engineering.</p>
+    <p>I'm an incoming Computer Science &amp; Engineering student at the University of California, Irvine with 4+ years of hands-on engineering builds involving embedded systems, electronics, CAD, and electromagnetic simulation. I'm particularly interested in embedded firmware and electronics engineering.</p>
     <div class="content-tags"><span class="content-tag">UCI CSE</span><span class="content-tag">Embedded Systems</span><span class="content-tag">Firmware</span><span class="content-tag">Electronics</span></div>
     <div class="content-divider"></div>
     <h4>Education</h4>
     <p><strong>University of California, Irvine</strong><br>B.S. Computer Science &amp; Engineering · Incoming freshman, Fall 2026</p>
     <div class="content-divider"></div>
     <h4>What I Like Building</h4>
-    <ul><li>Cool looking stuff</li><li>Things that sounds like it's from science-fiction :D</li><li>Electromagnetic related gadgets</li><li>CAD models</li><li>Robotics and aerospace projects</li></ul>
+    <ul><li>Visually compelling prototypes</li><li>Things that sound like they came from science fiction :D</li><li>Electromagnetic gadgets</li><li>CAD models</li><li>Robotics and aerospace projects</li></ul>
     <div class="content-divider"></div>
     <h4>Beyond Engineering</h4>
     <p>I also run a YouTube channel with <strong>50,000+ subscribers and 150M+ total views</strong>, giving me experience in rapid iteration, analytics, visual communication, and independent project execution.</p>
     <div class="content-divider"></div>
     <h4>Links</h4>
-    <p><a class="inline-link" href="https://github.com/SomeHeresy" target="_blank" rel="noopener">GitHub</a> · <a class="inline-link" href="https://www.youtube.com/@SomeHeresyGaming" target="_blank" rel="noopener">YouTube</a></p>
+    <p><a class="inline-link" href="https://github.com/SomeHeresy" target="_blank" rel="noopener">GitHub</a> · <a class="inline-link" href="https://www.linkedin.com/in/calvinyang07/" target="_blank" rel="noopener">LinkedIn</a> · <a class="inline-link" href="https://www.youtube.com/@SomeHeresyGaming" target="_blank" rel="noopener">YouTube</a></p>
   </div>`,
 
   'Experience':`<div class="content-block">
@@ -2400,11 +2469,11 @@ const PAGE_CONTENT={
       <div class="content-tags"><span class="content-tag">OpenRocket</span><span class="content-tag">Simulation</span><span class="content-tag">Teamwork</span></div>
       <div class="project-evidence">
         <h5>Project Evidence · American Rocketry Challenge</h5>
-        <p>Some photos and videos of the rocket.</p>
+         <p>Selected build evidence from the team's competition rocket and qualification-flight preparation.</p>
 
         <div class="media-grid">
           <div class="media-item evidence-card">
-            <img class="evidence-image" src="assets/ARC Project/rocket body.png" alt="Version 3 main setup">
+            <img class="evidence-image" src="assets/ARC Project/rocket body.png" alt="American Rocketry Challenge competition rocket">
             <div class="media-caption"><strong>The Rocket</strong></div>
           </div>
         </div>
@@ -2412,13 +2481,13 @@ const PAGE_CONTENT={
         <div class="video-grid">
           <div class="video-card">
             <div class="video-wrap">
-              <iframe src="https://www.youtube.com/embed/N5_v7aXseQs" frameborder="0" allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture" allowfullscreen></iframe>
+              <iframe src="https://www.youtube.com/embed/N5_v7aXseQs" title="American Rocketry Challenge launch" frameborder="0" allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture" allowfullscreen></iframe>
             </div>
             <div class="media-caption"><strong>Rocket Launch</strong></div>
           </div>
           <div class="video-card">
             <div class="video-wrap">
-              <iframe src="https://www.youtube.com/embed/GN1G7JiqXjM" frameborder="0" allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture" allowfullscreen></iframe>
+              <iframe src="https://www.youtube.com/embed/GN1G7JiqXjM" title="American Rocketry Challenge launch setup" frameborder="0" allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture" allowfullscreen></iframe>
             </div>
             <div class="media-caption"><strong>Rocket Launch Setup</strong></div>
           </div>
@@ -2431,7 +2500,7 @@ const PAGE_CONTENT={
     </div>
   </div>`,
 
-  'Contact':`<div class="content-block"><h3>Contact</h3><p>I'm interested in engineering internships, UCI student teams, research opportunities, and projects involving embedded systems, electronics, firmware, or simulation.</p><span class="content-tag">Open to Opportunities</span><div class="content-divider"></div><h4>Email</h4><p>calviny7@uci.edu</p><div class="content-divider"></div><h4>GitHub</h4><p><a class="inline-link" href="https://github.com/SomeHeresy" target="_blank" rel="noopener">github.com/SomeHeresy</a></p><div class="content-divider"></div><h4>YouTube</h4><p><a class="inline-link" href="https://www.youtube.com/@SomeHeresyGaming" target="_blank" rel="noopener">youtube.com/@SomeHeresyGaming</a></p></div>`
+  'Contact':`<div class="content-block"><h3>Contact</h3><p>I'm open to engineering internships, UCI student teams, research opportunities, and projects involving embedded systems, electronics, firmware, or simulation.</p><span class="content-tag">Open to Opportunities</span><div class="content-divider"></div><h4>Email</h4><p><a class="inline-link" href="mailto:calviny7@uci.edu">calviny7@uci.edu</a></p><div class="content-divider"></div><h4>Professional Links</h4><p><a class="inline-link" href="https://www.linkedin.com/in/calvinyang07/" target="_blank" rel="noopener">LinkedIn</a> · <a class="inline-link" href="https://github.com/SomeHeresy" target="_blank" rel="noopener">GitHub</a> · <a class="inline-link" href="https://www.youtube.com/@SomeHeresyGaming" target="_blank" rel="noopener">YouTube</a></p></div>`
 };
 
 // ════════════════════════════════════════════════════
@@ -2459,6 +2528,11 @@ function injectContent(title){
   if(html){
     const wrapper=document.createElement('div');
     wrapper.innerHTML=html;
+    wrapper.querySelectorAll('img').forEach(img=>{
+      img.loading='lazy';
+      img.decoding='async';
+    });
+    wrapper.querySelectorAll('iframe').forEach(frame=>{ frame.loading='lazy'; });
     wrapper.querySelectorAll('h3,h4,p,ul,.content-divider,.content-tag').forEach(el=>{
       el.classList.add('reveal');
       el.style.opacity='0'; el.style.transform='translateY(22px)';
@@ -2844,13 +2918,12 @@ onScroll();
   const currentEl = document.getElementById('location-current');
   const navButtons = document.querySelectorAll('[data-nav-page]');
 
-  const sections = {
-    'Projects': 'Selected Work',
-    'Experience': 'Engineering & Leadership',
-    'Skills & Tools': 'Technical Stack',
-    'About Me': 'Background & Education',
-    'Contact': 'Get in Touch'
-  };
+  const sections = Object.fromEntries(
+    Object.entries(PAGE_CONFIG).map(([page,config])=>[page,config.section])
+  );
+  const pagesBySlug = Object.fromEntries(
+    Object.entries(PAGE_CONFIG).map(([page,config])=>[config.slug,page])
+  );
 
   function normalizePage(name){
     return name === 'Skills' ? 'Skills & Tools' :
@@ -2892,7 +2965,17 @@ onScroll();
   });
 
   window.setPortfolioLocation = updateNav;
-  updateNav('');
+  function openRouteFromLocation(){
+    const page=pagesBySlug[location.hash.slice(1).toLowerCase()];
+    if(page && typeof window.openPage === 'function'){
+      window.openPage(page,sections[page]);
+    }else if(typeof window.goHome === 'function'){
+      window.goHome();
+    }
+  }
+  window.addEventListener('popstate',openRouteFromLocation);
+  if(location.hash) openRouteFromLocation();
+  else updateNav('Home');
 })();
 </script>
 
