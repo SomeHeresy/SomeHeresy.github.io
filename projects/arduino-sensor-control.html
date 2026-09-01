@@ -1,0 +1,277 @@
+<!doctype html>
+<html lang="en">
+<head>
+  <meta charset="utf-8"><meta name="viewport" content="width=device-width,initial-scale=1">
+  <meta name="description" content="An Arduino Uno R3 sensor and control system by Calvin Yang, integrating distance, temperature and humidity sensing with a 50 ms OLED interface.">
+  <meta name="theme-color" content="#070b0d"><link rel="stylesheet" href="../portfolio.css?v=5">
+  <title>Arduino Sensor &amp; Control System | Calvin Yang</title>
+</head>
+<body class="detail-page" id="top">
+  <a class="skip-link" href="#case-study">Skip to case study</a><div class="scroll-progress" aria-hidden="true"></div>
+  <nav class="site-nav" aria-label="Primary navigation"><div class="nav-inner"><a class="brand" href="../index.html" aria-label="Calvin Yang, home"><span class="brand-mark" aria-hidden="true"></span><span>Calvin Yang</span></a><button class="menu-button" type="button" aria-expanded="false" aria-controls="nav-links">Menu</button><div class="nav-links" id="nav-links"><a href="../index.html#projects">Projects</a><a href="../index.html#experience">Experience</a><a href="../index.html#resume">Resume</a><a href="../index.html#about">About</a><a class="nav-contact" href="mailto:calviny7@uci.edu">Contact</a></div></div></nav>
+  <main class="detail-main" id="case-study">
+    <header class="detail-hero reveal"><a class="back-link" href="../index.html#projects"><span aria-hidden="true">←</span> All projects</a><p class="project-kicker">Embedded build · Project 03</p><h1>Arduino Sensor &amp; Control System</h1><p class="detail-lede">A real-time embedded monitor integrating ultrasonic distance sensing, temperature and humidity input, and an OLED display through C/C++ firmware and I²C communication.</p><div class="detail-tags"><span>Arduino Uno R3</span><span>C/C++</span><span>I²C</span><span>Sensors</span><span>OLED</span></div></header>
+
+    <div class="detail-visual diagram reveal">
+      <div class="circuit-wrap">
+        <svg class="circuit" viewBox="0 0 960 470" role="img" aria-labelledby="ckt-t ckt-d" preserveAspectRatio="xMidYMid meet">
+          <title id="ckt-t">Wiring diagram of the Arduino sensor and control system</title>
+          <desc id="ckt-d">An Arduino Uno R3 sits between a 5 volt rail and a ground rail. An HC-SR04 ultrasonic sensor takes 5 volts and ground and returns trigger and echo lines to digital pins 9 and 10. A DHT22 temperature and humidity sensor takes 5 volts and ground and returns a data line to digital pin 2. An SSD1306 OLED display takes 5 volts and ground and connects over I squared C, with SDA on analog pin 4 and SCL on analog pin 5.</desc>
+
+          <!-- ---------- power rails ---------- -->
+          <path class="wire n-5v"  data-net="5v"  d="M46,66 H868"/>
+          <path class="wire n-gnd" data-net="gnd" d="M46,414 H868"/>
+          <text class="rail-label" data-net="5v"  x="876" y="71"  fill="#edba72">+5V</text>
+          <text class="rail-label" data-net="gnd" x="876" y="419" fill="#9aa9a7">GND</text>
+
+          <!-- ---------- HC-SR04 nets ---------- -->
+          <path class="wire n-5v"  data-net="5v"   d="M124,134 V66"/>
+          <!-- the kink is a wire hop: this crosses the DHT power leg, it does not join it -->
+          <path class="wire n-gnd" data-net="gnd"  d="M86,212 H66 V282 q-7,8 0,16 V414"/>
+          <path class="wire n-sig" data-net="trig" d="M262,164 H312 V196 H352"/>
+          <path class="wire n-sig" data-net="echo" d="M262,204 H330 V224 H352"/>
+
+          <!-- ---------- DHT22 nets ---------- -->
+          <path class="wire n-5v"  data-net="5v"   d="M86,290 H48 V66"/>
+          <path class="wire n-sig" data-net="data" d="M262,296 H312 V282 H352"/>
+          <path class="wire n-gnd" data-net="gnd"  d="M226,360 V414"/>
+
+          <!-- ---------- Arduino power ---------- -->
+          <path class="wire n-5v"  data-net="5v"  d="M420,150 V66"/>
+          <path class="wire n-gnd" data-net="gnd" d="M470,326 V414"/>
+
+          <!-- ---------- OLED nets ---------- -->
+          <path class="wire n-5v"  data-net="5v"  d="M714,158 V66"/>
+          <path class="wire n-gnd" data-net="gnd" d="M802,294 V414"/>
+          <path class="wire n-sig" data-net="i2c" d="M572,204 H676"/>
+          <path class="wire n-sig" data-net="i2c" d="M572,232 H676"/>
+          <path class="wire n-sig" data-net="i2c" d="M612,204 V232" opacity=".5"/>
+          <text class="port-label" data-net="i2c" x="612" y="252" text-anchor="middle">I²C</text>
+
+          <!-- ---------- junction nodes ---------- -->
+          <g class="nodes">
+            <circle class="node node-5v"   data-net="5v"   cx="124" cy="66"  r="3.4"/>
+            <circle class="node node-5v"   data-net="5v"   cx="48"  cy="66"  r="3.4"/>
+            <circle class="node node-5v"   data-net="5v"   cx="420" cy="66"  r="3.4"/>
+            <circle class="node node-5v"   data-net="5v"   cx="714" cy="66"  r="3.4"/>
+            <circle class="node node-gnd"  data-net="gnd"  cx="66"  cy="414" r="3.4"/>
+            <circle class="node node-gnd"  data-net="gnd"  cx="226" cy="414" r="3.4"/>
+            <circle class="node node-gnd"  data-net="gnd"  cx="470" cy="414" r="3.4"/>
+            <circle class="node node-gnd"  data-net="gnd"  cx="802" cy="414" r="3.4"/>
+            <circle class="node node-sig"  data-net="trig" cx="352" cy="196" r="3.4"/>
+            <circle class="node node-sig"  data-net="echo" cx="352" cy="224" r="3.4"/>
+            <circle class="node node-sig"  data-net="data" cx="352" cy="282" r="3.4"/>
+            <circle class="node node-sig"  data-net="i2c"  cx="572" cy="204" r="3.4"/>
+            <circle class="node node-sig"  data-net="i2c"  cx="572" cy="232" r="3.4"/>
+            <circle class="node node-sig"  data-net="i2c"  cx="676" cy="204" r="3.4"/>
+            <circle class="node node-sig"  data-net="i2c"  cx="676" cy="232" r="3.4"/>
+            <circle class="node node-sig"  data-net="trig" cx="262" cy="164" r="3.4"/>
+            <circle class="node node-sig"  data-net="echo" cx="262" cy="204" r="3.4"/>
+            <circle class="node node-sig"  data-net="data" cx="262" cy="296" r="3.4"/>
+          </g>
+
+          <!-- ---------- pin labels ---------- -->
+          <text class="pin-label" data-net="5v"   x="132" y="126">VCC</text>
+          <text class="pin-label" data-net="gnd"  x="80"  y="205" text-anchor="end">GND</text>
+          <text class="pin-label" data-net="trig" x="270" y="157">TRIG</text>
+          <text class="pin-label" data-net="echo" x="270" y="197">ECHO</text>
+          <text class="pin-label" data-net="5v"   x="80"  y="283" text-anchor="end">VCC</text>
+          <text class="pin-label" data-net="data" x="270" y="289">DATA</text>
+          <text class="pin-label" data-net="gnd"  x="234" y="382">GND</text>
+          <text class="pin-label" data-net="5v"   x="722" y="150">VCC</text>
+          <text class="pin-label" data-net="gnd"  x="810" y="314">GND</text>
+          <text class="pin-label" data-net="i2c"  x="668" y="197" text-anchor="end">SDA</text>
+          <text class="pin-label" data-net="i2c"  x="668" y="225" text-anchor="end">SCL</text>
+
+          <!-- ---------- HC-SR04 ---------- -->
+          <g class="part" data-net="5v gnd trig echo" tabindex="0" role="group" aria-label="HC-SR04 ultrasonic distance sensor">
+            <rect class="part-box" x="86" y="134" width="176" height="100"/>
+            <circle class="chip" cx="126" cy="212" r="15"/>
+            <circle class="chip" cx="222" cy="212" r="15"/>
+            <text class="part-name" x="104" y="170">HC-SR04</text>
+            <text class="part-sub"  x="104" y="190">ULTRASONIC · DISTANCE</text>
+            <rect class="hit" x="86" y="134" width="176" height="100"/>
+          </g>
+
+          <!-- ---------- DHT22 ---------- -->
+          <g class="part" data-net="5v gnd data" tabindex="0" role="group" aria-label="DHT22 temperature and humidity sensor">
+            <rect class="part-box" x="86" y="266" width="176" height="94"/>
+            <rect class="chip" x="196" y="296" width="52" height="46" rx="3"/>
+            <text class="part-name" x="104" y="302">DHT22</text>
+            <text class="part-sub"  x="104" y="322">TEMP + HUMIDITY</text>
+            <rect class="hit" x="86" y="266" width="176" height="94"/>
+          </g>
+
+          <!-- ---------- Arduino Uno R3 ----------
+               D9 / D10 / D2 / A4 / A5 below are the conventional defaults for
+               these parts. Edit the five port labels if the build uses others. -->
+          <g class="part" data-net="5v gnd trig echo data i2c" tabindex="0" role="group" aria-label="Arduino Uno R3 microcontroller board">
+            <rect class="part-box" x="352" y="150" width="220" height="176"/>
+            <text class="part-name" x="462" y="200" text-anchor="middle">ARDUINO UNO R3</text>
+            <text class="part-sub"  x="462" y="222" text-anchor="middle">C/C++ LOOP</text>
+            <rect class="chip" x="410" y="244" width="104" height="42" rx="3"/>
+            <text class="part-sub" x="462" y="270" text-anchor="middle">ATmega328P</text>
+            <text class="port-label" data-net="trig" x="344" y="190" text-anchor="end">D9</text>
+            <text class="port-label" data-net="echo" x="344" y="218" text-anchor="end">D10</text>
+            <text class="port-label" data-net="data" x="344" y="276" text-anchor="end">D2</text>
+            <text class="port-label" data-net="i2c" x="580" y="198">A4</text>
+            <text class="port-label" data-net="i2c" x="580" y="226">A5</text>
+            <text class="port-label" data-net="5v" x="428" y="112">5V</text>
+            <text class="port-label" data-net="gnd" x="478" y="360">GND</text>
+            <rect class="hit" x="352" y="150" width="220" height="176"/>
+          </g>
+
+          <!-- ---------- SSD1306 OLED ---------- -->
+          <g class="part" data-net="5v gnd i2c" tabindex="0" role="group" aria-label="SSD1306 OLED display, 128 by 64, over I squared C">
+            <rect class="part-box" x="676" y="158" width="182" height="136"/>
+            <text class="part-name" x="694" y="184">SSD1306</text>
+            <rect class="screen" x="694" y="196" width="146" height="72" rx="2"/>
+            <text class="screen-line" x="706" y="218">DIST  42.3 cm</text>
+            <text class="screen-line" x="706" y="238">TEMP  22.4 C</text>
+            <text class="screen-line" x="706" y="258">HUM   48 %</text>
+            <text class="part-sub" x="694" y="286">OLED 128×64 · 50 ms</text>
+            <rect class="hit" x="676" y="158" width="182" height="136"/>
+          </g>
+        </svg>
+        <ul class="circuit-legend">
+          <li><i class="k-5v"></i> 5 V rail</li>
+          <li><i class="k-gnd"></i> Ground</li>
+          <li><i class="k-sig"></i> Signal</li>
+        </ul>
+        <p class="circuit-hint">Hover a component to isolate the nets it sits on.</p>
+      </div>
+    </div>
+
+    <div class="detail-layout">
+      <aside class="project-meta reveal" aria-label="Project metadata">
+        <div><span class="detail-label">Role</span><strong>Firmware &amp; hardware</strong></div>
+        <div><span class="detail-label">Timeline</span><strong>Jun–Jul 2026</strong></div>
+        <div><span class="detail-label">Project type</span><strong>Individual</strong></div>
+        <div><span class="detail-label">Controller</span><strong>Arduino Uno R3</strong></div>
+        <!-- When the firmware repo is published: swap href to the repo URL, put
+             SomeHeresy/<repo> in the <strong>, and delete the <em> line. -->
+        <a class="repo-link" href="https://github.com/SomeHeresy" target="_blank" rel="noopener noreferrer">
+          <svg viewBox="0 0 16 16" aria-hidden="true"><path d="M8 0C3.58 0 0 3.58 0 8c0 3.54 2.29 6.53 5.47 7.59.4.07.55-.17.55-.38 0-.19-.01-.82-.01-1.49-2.01.37-2.53-.49-2.69-.94-.09-.23-.48-.94-.82-1.13-.28-.15-.68-.52-.01-.53.63-.01 1.08.58 1.23.82.72 1.21 1.87.87 2.33.66.07-.52.28-.87.51-1.07-1.78-.2-3.64-.89-3.64-3.95 0-.87.31-1.59.82-2.15-.08-.2-.36-1.02.08-2.12 0 0 .67-.21 2.2.82.64-.18 1.32-.27 2-.27.68 0 1.36.09 2 .27 1.53-1.04 2.2-.82 2.2-.82.44 1.1.16 1.92.08 2.12.51.56.82 1.27.82 2.15 0 3.07-1.87 3.75-3.65 3.95.29.25.54.73.54 1.48 0 1.07-.01 1.93-.01 2.2 0 .21.15.46.55.38A8.01 8.01 0 0 0 16 8c0-4.42-3.58-8-8-8z"/></svg>
+          <span><small>Source code</small><strong>SomeHeresy</strong></span>
+          <span class="repo-go" aria-hidden="true">↗</span>
+          <em>Firmware repo not published yet</em>
+        </a>
+      </aside>
+      <div class="detail-content">
+        <section class="reveal"><span class="section-number">01</span><span class="section-label">Overview</span><h2>Multiple inputs, one readable loop.</h2><p>The project combines distance and environmental sensing with a compact visual output. I assembled the circuit and developed firmware that continuously collected measurements and refreshed the OLED interface.</p><div class="metric-grid"><div><strong>50 ms</strong><span>Display refresh</span></div><div><strong>2 inputs</strong><span>Sensor types</span></div><div><strong>I²C</strong><span>Display communication</span></div></div></section>
+
+        <section class="reveal"><span class="section-number">02</span><span class="section-label">The challenge</span><h2>Coordinate sensing without losing clarity.</h2><p>The system needed to read sensors with different purposes and update a small display frequently enough to feel real-time. Firmware structure, wiring, and interface readability all affected whether the result was useful.</p><ul><li>Integrate an ultrasonic distance sensor with a temperature and humidity sensor.</li><li>Collect and organize measurements in the C/C++ acquisition loop.</li><li>Use I²C communication to drive the OLED display.</li><li>Refresh the interface at approximately 50 ms intervals.</li></ul></section>
+
+        <section class="reveal"><span class="section-number">03</span><span class="section-label">Wiring</span><h2>Two rails, three peripherals.</h2><p>Both sensors and the display share the 5 V and ground rails off the board. What separates them is how they talk: the ultrasonic sensor needs two dedicated digital lines because distance is measured as the round-trip time between a trigger pulse and an echo, the DHT22 answers on a single data line, and the display sits on the I²C bus alongside anything else that speaks it.</p>
+          <div class="circuit-wrap circuit-inline">
+            <svg class="circuit" viewBox="0 0 960 470" role="img" aria-label="The same wiring diagram, repeated for reference: 5 volt and ground rails feeding an HC-SR04, a DHT22, an Arduino Uno R3, and an SSD1306 OLED display." preserveAspectRatio="xMidYMid meet">
+              <path class="wire n-5v"  data-net="5v"  d="M46,66 H868"/>
+              <path class="wire n-gnd" data-net="gnd" d="M46,414 H868"/>
+              <text class="rail-label" data-net="5v"  x="876" y="71"  fill="#edba72">+5V</text>
+              <text class="rail-label" data-net="gnd" x="876" y="419" fill="#9aa9a7">GND</text>
+              <path class="wire n-5v"  data-net="5v"   d="M124,134 V66"/>
+              <path class="wire n-gnd" data-net="gnd"  d="M86,212 H66 V282 q-7,8 0,16 V414"/>
+              <path class="wire n-sig" data-net="trig" d="M262,164 H312 V196 H352"/>
+              <path class="wire n-sig" data-net="echo" d="M262,204 H330 V224 H352"/>
+              <path class="wire n-5v"  data-net="5v"   d="M86,290 H48 V66"/>
+              <path class="wire n-sig" data-net="data" d="M262,296 H312 V282 H352"/>
+              <path class="wire n-gnd" data-net="gnd"  d="M226,360 V414"/>
+              <path class="wire n-5v"  data-net="5v"  d="M420,150 V66"/>
+              <path class="wire n-gnd" data-net="gnd" d="M470,326 V414"/>
+              <path class="wire n-5v"  data-net="5v"  d="M714,158 V66"/>
+              <path class="wire n-gnd" data-net="gnd" d="M802,294 V414"/>
+              <path class="wire n-sig" data-net="i2c" d="M572,204 H676"/>
+              <path class="wire n-sig" data-net="i2c" d="M572,232 H676"/>
+              <path class="wire n-sig" data-net="i2c" d="M612,204 V232" opacity=".5"/>
+              <text class="port-label" data-net="i2c" x="612" y="252" text-anchor="middle">I²C</text>
+              <g class="nodes">
+                <circle class="node node-5v"  data-net="5v"   cx="124" cy="66"  r="3.4"/>
+                <circle class="node node-5v"  data-net="5v"   cx="48"  cy="66"  r="3.4"/>
+                <circle class="node node-5v"  data-net="5v"   cx="420" cy="66"  r="3.4"/>
+                <circle class="node node-5v"  data-net="5v"   cx="714" cy="66"  r="3.4"/>
+                <circle class="node node-gnd" data-net="gnd"  cx="66"  cy="414" r="3.4"/>
+                <circle class="node node-gnd" data-net="gnd"  cx="226" cy="414" r="3.4"/>
+                <circle class="node node-gnd" data-net="gnd"  cx="470" cy="414" r="3.4"/>
+                <circle class="node node-gnd" data-net="gnd"  cx="802" cy="414" r="3.4"/>
+                <circle class="node node-sig" data-net="trig" cx="352" cy="196" r="3.4"/>
+                <circle class="node node-sig" data-net="echo" cx="352" cy="224" r="3.4"/>
+                <circle class="node node-sig" data-net="data" cx="352" cy="282" r="3.4"/>
+                <circle class="node node-sig" data-net="i2c"  cx="572" cy="204" r="3.4"/>
+                <circle class="node node-sig" data-net="i2c"  cx="572" cy="232" r="3.4"/>
+                <circle class="node node-sig" data-net="i2c"  cx="676" cy="204" r="3.4"/>
+                <circle class="node node-sig" data-net="i2c"  cx="676" cy="232" r="3.4"/>
+                <circle class="node node-sig" data-net="trig" cx="262" cy="164" r="3.4"/>
+                <circle class="node node-sig" data-net="echo" cx="262" cy="204" r="3.4"/>
+                <circle class="node node-sig" data-net="data" cx="262" cy="296" r="3.4"/>
+              </g>
+              <text class="pin-label" data-net="5v"   x="132" y="126">VCC</text>
+              <text class="pin-label" data-net="gnd"  x="80"  y="205" text-anchor="end">GND</text>
+              <text class="pin-label" data-net="trig" x="270" y="157">TRIG</text>
+              <text class="pin-label" data-net="echo" x="270" y="197">ECHO</text>
+              <text class="pin-label" data-net="5v"   x="80"  y="283" text-anchor="end">VCC</text>
+              <text class="pin-label" data-net="data" x="270" y="289">DATA</text>
+              <text class="pin-label" data-net="gnd"  x="234" y="382">GND</text>
+              <text class="pin-label" data-net="5v"   x="722" y="150">VCC</text>
+              <text class="pin-label" data-net="gnd"  x="810" y="314">GND</text>
+              <text class="pin-label" data-net="i2c"  x="668" y="197" text-anchor="end">SDA</text>
+              <text class="pin-label" data-net="i2c"  x="668" y="225" text-anchor="end">SCL</text>
+              <g class="part" data-net="5v gnd trig echo" tabindex="0" role="group" aria-label="HC-SR04 ultrasonic distance sensor">
+                <rect class="part-box" x="86" y="134" width="176" height="100"/>
+                <circle class="chip" cx="126" cy="212" r="15"/><circle class="chip" cx="222" cy="212" r="15"/>
+                <text class="part-name" x="104" y="170">HC-SR04</text>
+                <text class="part-sub"  x="104" y="190">ULTRASONIC · DISTANCE</text>
+                <rect class="hit" x="86" y="134" width="176" height="100"/>
+              </g>
+              <g class="part" data-net="5v gnd data" tabindex="0" role="group" aria-label="DHT22 temperature and humidity sensor">
+                <rect class="part-box" x="86" y="266" width="176" height="94"/>
+                <rect class="chip" x="196" y="296" width="52" height="46" rx="3"/>
+                <text class="part-name" x="104" y="302">DHT22</text>
+                <text class="part-sub"  x="104" y="322">TEMP + HUMIDITY</text>
+                <rect class="hit" x="86" y="266" width="176" height="94"/>
+              </g>
+              <g class="part" data-net="5v gnd trig echo data i2c" tabindex="0" role="group" aria-label="Arduino Uno R3 microcontroller board">
+                <rect class="part-box" x="352" y="150" width="220" height="176"/>
+                <text class="part-name" x="462" y="200" text-anchor="middle">ARDUINO UNO R3</text>
+                <text class="part-sub"  x="462" y="222" text-anchor="middle">C/C++ LOOP</text>
+                <rect class="chip" x="410" y="244" width="104" height="42" rx="3"/>
+                <text class="part-sub" x="462" y="270" text-anchor="middle">ATmega328P</text>
+                <text class="port-label" data-net="trig" x="344" y="190" text-anchor="end">D9</text>
+                <text class="port-label" data-net="echo" x="344" y="218" text-anchor="end">D10</text>
+                <text class="port-label" data-net="data" x="344" y="276" text-anchor="end">D2</text>
+                <text class="port-label" data-net="i2c" x="580" y="198">A4</text>
+                <text class="port-label" data-net="i2c" x="580" y="226">A5</text>
+                <text class="port-label" data-net="5v" x="428" y="112">5V</text>
+                <text class="port-label" data-net="gnd" x="478" y="360">GND</text>
+                <rect class="hit" x="352" y="150" width="220" height="176"/>
+              </g>
+              <g class="part" data-net="5v gnd i2c" tabindex="0" role="group" aria-label="SSD1306 OLED display over I squared C">
+                <rect class="part-box" x="676" y="158" width="182" height="136"/>
+                <text class="part-name" x="694" y="184">SSD1306</text>
+                <rect class="screen" x="694" y="196" width="146" height="72" rx="2"/>
+                <text class="screen-line" x="706" y="218">DIST  42.3 cm</text>
+                <text class="screen-line" x="706" y="238">TEMP  22.4 C</text>
+                <text class="screen-line" x="706" y="258">HUM   48 %</text>
+                <text class="part-sub" x="694" y="286">OLED 128×64 · 50 ms</text>
+                <rect class="hit" x="676" y="158" width="182" height="136"/>
+              </g>
+            </svg>
+          </div>
+          <h3>Firmware loop</h3><p>The controller reads both sensor sources, formats their values for a compact interface, and sends the display update through I²C. The approximately 50 ms refresh interval keeps the output responsive while preserving a straightforward acquisition loop.</p>
+        </section>
+
+        <section class="reveal"><span class="section-number">04</span><span class="section-label">Outcome</span><h2>A complete embedded interaction.</h2><p>The finished breadboard system produced a continuously refreshed monitor with working sensor acquisition and OLED output. It strengthened my understanding of how firmware behavior, peripheral communication, hardware wiring, and interface decisions come together in a small embedded system.</p></section>
+
+        <a class="next-project reveal" href="electromagnetic-accelerator.html"><div><span>Back to project 01</span><h2>Electromagnetic Accelerator</h2></div><b>→</b></a>
+
+        <div class="detail-actions reveal">
+          <a class="button button-primary button-back" href="../index.html#projects"><span aria-hidden="true">←</span> All projects</a>
+          <a class="button" href="../index.html#resume">Read my resume <span aria-hidden="true">↗</span></a>
+          <a class="button" href="mailto:calviny7@uci.edu">Get in touch <span aria-hidden="true">↗</span></a>
+        </div>
+      </div>
+    </div>
+  </main>
+  <footer class="contact"><div class="contact-inner"><div class="footer-line"><span>Calvin Yang / Engineering Portfolio</span><a href="mailto:calviny7@uci.edu">calviny7@uci.edu ↗</a></div></div></footer>
+  <script src="../portfolio.js?v=5"></script>
+</body>
+</html>
