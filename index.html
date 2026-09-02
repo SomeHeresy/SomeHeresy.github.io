@@ -168,7 +168,7 @@
         </a>
         <a class="project-card reveal" href="projects/arduino-sensor-control.html" aria-label="View Arduino Sensor and Control System case study">
           <div class="card-media card-circuit-media">
-            <svg class="circuit circuit-mini" viewBox="0 0 560 350" role="img" aria-label="Wiring diagram: an HC-SR04 ultrasonic sensor and a DHT22 temperature and humidity sensor feed an Arduino Uno R3, which drives an SSD1306 OLED display over I squared C, all across a shared 5 volt and ground rail." preserveAspectRatio="xMidYMid meet">
+            <svg class="circuit circuit-mini" viewBox="0 0 560 350" role="img" aria-label="Wiring diagram: an HC-SR04 ultrasonic sensor and a DHT11 temperature and humidity sensor feed an Arduino Uno R3, which drives an SSD1306 OLED display over I squared C, all across a shared 5 volt and ground rail." preserveAspectRatio="xMidYMid meet">
               <path class="wire n-5v"  d="M26,42 H508"/>
               <path class="wire n-gnd" d="M26,312 H508"/>
               <text class="rail-label" x="514" y="47"  fill="#edba72">5V</text>
@@ -213,7 +213,7 @@
               <g>
                 <rect class="part-box" x="50" y="172" width="114" height="54"/>
                 <rect class="chip" x="122" y="190" width="32" height="28" rx="2"/>
-                <text class="part-name" x="62" y="198">DHT22</text>
+                <text class="part-name" x="62" y="198">DHT11</text>
               </g>
               <g>
                 <rect class="part-box" x="216" y="96" width="132" height="126"/>
@@ -227,7 +227,7 @@
                 <rect class="screen" x="406" y="120" width="90" height="52" rx="2"/>
                 <text class="screen-line" x="414" y="140">DIST 42.3</text>
                 <text class="screen-line" x="414" y="160">TEMP 22.4</text>
-                <text class="part-sub" x="406" y="192">OLED · 50 ms</text>
+                <text class="part-sub" x="406" y="192">OLED · 100 ms</text>
               </g>
             </svg>
             <span class="view-project">View project <span aria-hidden="true">↗</span></span>
@@ -235,8 +235,8 @@
           <div class="card-body">
             <div class="tag-row"><span>Arduino</span><span>C/C++</span><span>I²C</span></div>
             <h3>Arduino Sensor &amp; Control System</h3>
-            <p>An Uno R3 reading an ultrasonic distance sensor and a temperature/humidity sensor, redrawing both over I²C to an OLED every 50 ms. Small build, but it’s where the timing side of embedded work stopped being abstract — the loop has to stay honest while the display keeps up.</p>
-            <dl class="card-results"><div><dt>Controller</dt><dd>Uno R3</dd></div><div><dt>Refresh</dt><dd>50 ms</dd></div></dl>
+            <p>An Uno R3 reading an ultrasonic distance sensor and a temperature/humidity sensor, redrawing both over I²C to an OLED every 100 ms. Small build, but it’s where the timing side of embedded work stopped being abstract — the loop has to stay honest while the display keeps up.</p>
+            <dl class="card-results"><div><dt>Controller</dt><dd>Uno R3</dd></div><div><dt>Refresh</dt><dd>100 ms</dd></div></dl>
           </div>
         </a>
       </div>
@@ -333,7 +333,7 @@
                 <p class="resume-where">Individual project</p>
                 <ul>
                   <li>Built a real-time sensor monitoring system using an Arduino Uno R3, integrating an ultrasonic distance sensor and temperature/humidity sensor with an OLED display.</li>
-                  <li>Developed C/C++ firmware to collect sensor measurements and refresh the OLED display at 50 ms intervals.</li>
+                  <li>Developed C/C++ firmware to collect sensor measurements and refresh the OLED display at 100 ms intervals.</li>
                   <li>Implemented I²C communication between the Arduino, sensors, and OLED display.</li>
                 </ul>
               </div>

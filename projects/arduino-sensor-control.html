@@ -2,7 +2,7 @@
 <html lang="en">
 <head>
   <meta charset="utf-8"><meta name="viewport" content="width=device-width,initial-scale=1">
-  <meta name="description" content="An Arduino Uno R3 sensor and control system by Calvin Yang, integrating distance, temperature and humidity sensing with a 50 ms OLED interface.">
+  <meta name="description" content="An Arduino Uno R3 sensor and control system by Calvin Yang, integrating distance, temperature and humidity sensing with a 100 ms OLED interface.">
   <meta name="theme-color" content="#070b0d"><link rel="stylesheet" href="../portfolio.css?v=6">
   <title>Arduino Sensor &amp; Control System | Calvin Yang</title>
 </head>
@@ -16,7 +16,7 @@
       <div class="circuit-wrap">
         <svg class="circuit" viewBox="0 0 960 470" role="img" aria-labelledby="ckt-t ckt-d" preserveAspectRatio="xMidYMid meet">
           <title id="ckt-t">Wiring diagram of the Arduino sensor and control system</title>
-          <desc id="ckt-d">An Arduino Uno R3 sits between a 5 volt rail and a ground rail. An HC-SR04 ultrasonic sensor takes 5 volts and ground and returns trigger and echo lines to digital pins 9 and 10. A DHT22 temperature and humidity sensor takes 5 volts and ground and returns a data line to digital pin 2. An SSD1306 OLED display takes 5 volts and ground and connects over I squared C, with SDA on analog pin 4 and SCL on analog pin 5.</desc>
+          <desc id="ckt-d">An Arduino Uno R3 sits between a 5 volt rail and a ground rail. An HC-SR04 ultrasonic sensor takes 5 volts and ground and returns trigger and echo lines to digital pins 9 and 10. A DHT11 temperature and humidity sensor takes 5 volts and ground and returns a data line to digital pin 8. An SSD1306 OLED display takes 5 volts and ground and connects over I squared C, with SDA on analog pin 4 and SCL on analog pin 5.</desc>
 
           <!-- ---------- power rails ---------- -->
           <path class="wire n-5v"  data-net="5v"  d="M46,66 H868"/>
@@ -31,7 +31,7 @@
           <path class="wire n-sig" data-net="trig" d="M262,164 H312 V196 H352"/>
           <path class="wire n-sig" data-net="echo" d="M262,204 H330 V224 H352"/>
 
-          <!-- ---------- DHT22 nets ---------- -->
+          <!-- ---------- DHT11 nets ---------- -->
           <path class="wire n-5v"  data-net="5v"   d="M86,290 H48 V66"/>
           <path class="wire n-sig" data-net="data" d="M262,296 H312 V282 H352"/>
           <path class="wire n-gnd" data-net="gnd"  d="M226,360 V414"/>
@@ -93,11 +93,11 @@
             <rect class="hit" x="86" y="134" width="176" height="100"/>
           </g>
 
-          <!-- ---------- DHT22 ---------- -->
-          <g class="part" data-net="5v gnd data" tabindex="0" role="group" aria-label="DHT22 temperature and humidity sensor">
+          <!-- ---------- DHT11 ---------- -->
+          <g class="part" data-net="5v gnd data" tabindex="0" role="group" aria-label="DHT11 temperature and humidity sensor">
             <rect class="part-box" x="86" y="266" width="176" height="94"/>
             <rect class="chip" x="196" y="296" width="52" height="46" rx="3"/>
-            <text class="part-name" x="104" y="302">DHT22</text>
+            <text class="part-name" x="104" y="302">DHT11</text>
             <text class="part-sub"  x="104" y="322">TEMP + HUMIDITY</text>
             <rect class="hit" x="86" y="266" width="176" height="94"/>
           </g>
@@ -113,7 +113,7 @@
             <text class="part-sub" x="462" y="270" text-anchor="middle">ATmega328P</text>
             <text class="port-label" data-net="trig" x="344" y="190" text-anchor="end">D9</text>
             <text class="port-label" data-net="echo" x="344" y="218" text-anchor="end">D10</text>
-            <text class="port-label" data-net="data" x="344" y="276" text-anchor="end">D2</text>
+            <text class="port-label" data-net="data" x="344" y="276" text-anchor="end">D8</text>
             <text class="port-label" data-net="i2c" x="580" y="198">A4</text>
             <text class="port-label" data-net="i2c" x="580" y="226">A5</text>
             <text class="port-label" data-net="5v" x="428" y="112">5V</text>
@@ -129,7 +129,7 @@
             <text class="screen-line" x="706" y="218">DIST  42.3 cm</text>
             <text class="screen-line" x="706" y="238">TEMP  22.4 C</text>
             <text class="screen-line" x="706" y="258">HUM   48 %</text>
-            <text class="part-sub" x="694" y="286">OLED 128×64 · 50 ms</text>
+            <text class="part-sub" x="694" y="286">OLED 128×64 · 100 ms</text>
             <rect class="hit" x="676" y="158" width="182" height="136"/>
           </g>
         </svg>
@@ -158,13 +158,13 @@
         </a>
       </aside>
       <div class="detail-content">
-        <section class="reveal"><span class="section-number">01</span><span class="section-label">Overview</span><h2>Multiple inputs, one readable loop.</h2><p>The project combines distance and environmental sensing with a compact visual output. I assembled the circuit and developed firmware that continuously collected measurements and refreshed the OLED interface.</p><div class="metric-grid"><div><strong>50 ms</strong><span>Display refresh</span></div><div><strong>2 inputs</strong><span>Sensor types</span></div><div><strong>I²C</strong><span>Display communication</span></div></div></section>
+        <section class="reveal"><span class="section-number">01</span><span class="section-label">Overview</span><h2>Multiple inputs, one readable loop.</h2><p>The project combines distance and environmental sensing with a compact visual output. I assembled the circuit and developed firmware that continuously collected measurements and refreshed the OLED interface.</p><div class="metric-grid"><div><strong>100 ms</strong><span>Display refresh</span></div><div><strong>2 inputs</strong><span>Sensor types</span></div><div><strong>I²C</strong><span>Display communication</span></div></div></section>
 
-        <section class="reveal"><span class="section-number">02</span><span class="section-label">The challenge</span><h2>Coordinate sensing without losing clarity.</h2><p>The system needed to read sensors with different purposes and update a small display frequently enough to feel real-time. Firmware structure, wiring, and interface readability all affected whether the result was useful.</p><ul><li>Integrate an ultrasonic distance sensor with a temperature and humidity sensor.</li><li>Collect and organize measurements in the C/C++ acquisition loop.</li><li>Use I²C communication to drive the OLED display.</li><li>Refresh the interface at approximately 50 ms intervals.</li></ul></section>
+        <section class="reveal"><span class="section-number">02</span><span class="section-label">The challenge</span><h2>Coordinate sensing without losing clarity.</h2><p>The system needed to read sensors with different purposes and update a small display frequently enough to feel real-time. Firmware structure, wiring, and interface readability all affected whether the result was useful.</p><ul><li>Integrate an ultrasonic distance sensor with a temperature and humidity sensor.</li><li>Collect and organize measurements in the C/C++ acquisition loop.</li><li>Use I²C communication to drive the OLED display.</li><li>Refresh the interface at approximately 100 ms intervals.</li></ul></section>
 
-        <section class="reveal"><span class="section-number">03</span><span class="section-label">Wiring</span><h2>Two rails, three peripherals.</h2><p>Both sensors and the display share the 5 V and ground rails off the board. What separates them is how they talk: the ultrasonic sensor needs two dedicated digital lines because distance is measured as the round-trip time between a trigger pulse and an echo, the DHT22 answers on a single data line, and the display sits on the I²C bus alongside anything else that speaks it.</p>
+        <section class="reveal"><span class="section-number">03</span><span class="section-label">Wiring</span><h2>Two rails, three peripherals.</h2><p>Both sensors and the display share the 5 V and ground rails off the board. What separates them is how they talk: the ultrasonic sensor needs two dedicated digital lines because distance is measured as the round-trip time between a trigger pulse and an echo, the DHT11 answers on a single data line, and the display sits on the I²C bus alongside anything else that speaks it.</p>
           <div class="circuit-wrap circuit-inline">
-            <svg class="circuit" viewBox="0 0 960 470" role="img" aria-label="The same wiring diagram, repeated for reference: 5 volt and ground rails feeding an HC-SR04, a DHT22, an Arduino Uno R3, and an SSD1306 OLED display." preserveAspectRatio="xMidYMid meet">
+            <svg class="circuit" viewBox="0 0 960 470" role="img" aria-label="The same wiring diagram, repeated for reference: 5 volt and ground rails feeding an HC-SR04, a DHT11, an Arduino Uno R3, and an SSD1306 OLED display." preserveAspectRatio="xMidYMid meet">
               <path class="wire n-5v"  data-net="5v"  d="M46,66 H868"/>
               <path class="wire n-gnd" data-net="gnd" d="M46,414 H868"/>
               <text class="rail-label" data-net="5v"  x="876" y="71"  fill="#edba72">+5V</text>
@@ -222,10 +222,10 @@
                 <text class="part-sub"  x="104" y="190">ULTRASONIC · DISTANCE</text>
                 <rect class="hit" x="86" y="134" width="176" height="100"/>
               </g>
-              <g class="part" data-net="5v gnd data" tabindex="0" role="group" aria-label="DHT22 temperature and humidity sensor">
+              <g class="part" data-net="5v gnd data" tabindex="0" role="group" aria-label="DHT11 temperature and humidity sensor">
                 <rect class="part-box" x="86" y="266" width="176" height="94"/>
                 <rect class="chip" x="196" y="296" width="52" height="46" rx="3"/>
-                <text class="part-name" x="104" y="302">DHT22</text>
+                <text class="part-name" x="104" y="302">DHT11</text>
                 <text class="part-sub"  x="104" y="322">TEMP + HUMIDITY</text>
                 <rect class="hit" x="86" y="266" width="176" height="94"/>
               </g>
@@ -237,7 +237,7 @@
                 <text class="part-sub" x="462" y="270" text-anchor="middle">ATmega328P</text>
                 <text class="port-label" data-net="trig" x="344" y="190" text-anchor="end">D9</text>
                 <text class="port-label" data-net="echo" x="344" y="218" text-anchor="end">D10</text>
-                <text class="port-label" data-net="data" x="344" y="276" text-anchor="end">D2</text>
+                <text class="port-label" data-net="data" x="344" y="276" text-anchor="end">D8</text>
                 <text class="port-label" data-net="i2c" x="580" y="198">A4</text>
                 <text class="port-label" data-net="i2c" x="580" y="226">A5</text>
                 <text class="port-label" data-net="5v" x="428" y="112">5V</text>
@@ -251,15 +251,15 @@
                 <text class="screen-line" x="706" y="218">DIST  42.3 cm</text>
                 <text class="screen-line" x="706" y="238">TEMP  22.4 C</text>
                 <text class="screen-line" x="706" y="258">HUM   48 %</text>
-                <text class="part-sub" x="694" y="286">OLED 128×64 · 50 ms</text>
+                <text class="part-sub" x="694" y="286">OLED 128×64 · 100 ms</text>
                 <rect class="hit" x="676" y="158" width="182" height="136"/>
               </g>
             </svg>
           </div>
-          <h3>Firmware loop</h3><p>The controller reads both sensor sources, formats their values for a compact interface, and sends the display update through I²C. The approximately 50 ms refresh interval keeps the output responsive while preserving a straightforward acquisition loop.</p>
+          <h3>Firmware loop</h3><p>The controller reads both sensor sources, formats their values for a compact interface, and sends the display update through I²C. The approximately 100 ms refresh interval keeps the output responsive while preserving a straightforward acquisition loop.</p>
         </section>
 
-        <section class="reveal"><span class="section-number">04</span><span class="section-label">Outcome</span><h2>A complete embedded interaction.</h2><div class="gallery"><figure><img src="../assets/arduino/full-setup.jpg" alt="The assembled breadboard system: Arduino Uno R3 wired to the ultrasonic sensor, the temperature and humidity sensor, and the OLED display" loading="lazy"><figcaption>Full setup / Uno R3, both sensors and the display on one breadboard</figcaption></figure><figure><img src="../assets/arduino/oled-display.jpg" alt="Close-up of the OLED display showing live distance, temperature and humidity readings" loading="lazy"><figcaption>OLED output / Live readings, redrawn every 50 ms</figcaption></figure></div><p>The finished breadboard system produced a continuously refreshed monitor with working sensor acquisition and OLED output. It strengthened my understanding of how firmware behavior, peripheral communication, hardware wiring, and interface decisions come together in a small embedded system.</p></section>
+        <section class="reveal"><span class="section-number">04</span><span class="section-label">Outcome</span><h2>A complete embedded interaction.</h2><div class="gallery"><figure><img src="../assets/arduino/full-setup.jpg" alt="The assembled breadboard system: Arduino Uno R3 wired to the ultrasonic sensor, the temperature and humidity sensor, and the OLED display" loading="lazy"><figcaption>Full setup / Uno R3, both sensors and the display on one breadboard</figcaption></figure><figure><img src="../assets/arduino/oled-display.jpg" alt="Close-up of the OLED display showing live distance, temperature and humidity readings" loading="lazy"><figcaption>OLED output / Live readings, redrawn every 100 ms</figcaption></figure></div><p>The finished breadboard system produced a continuously refreshed monitor with working sensor acquisition and OLED output. It strengthened my understanding of how firmware behavior, peripheral communication, hardware wiring, and interface decisions come together in a small embedded system.</p></section>
 
         <a class="next-project reveal" href="electromagnetic-accelerator.html"><div><span>Back to project 01</span><h2>Electromagnetic Accelerator</h2></div><b>→</b></a>
 

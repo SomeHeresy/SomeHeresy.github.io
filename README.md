@@ -38,7 +38,7 @@ The site documents three engineering projects in depth, each with its own case-s
 |---|---|---|---|---|
 | [Electromagnetic Accelerator](https://someheresy.github.io/projects/electromagnetic-accelerator.html) | 2022 – present | ANSYS Maxwell 2D, Fusion 360, Arduino, 3D printing | ~16 m/s with a 54.63 g projectile | [Stage control](https://github.com/SomeHeresy/Electromagnetic-Accelerator) |
 | [American Rocketry Challenge](https://someheresy.github.io/projects/american-rocketry-challenge.html) | Nov 2025 – Mar 2026 | OpenRocket | 23.2% simulation accuracy gain, official score 139.8 | — |
-| [Arduino Sensor & Control System](https://someheresy.github.io/projects/arduino-sensor-control.html) | Jun – Jul 2026 | Arduino Uno R3, C/C++, I²C | Two sensor inputs on a 50 ms OLED refresh | [Firmware](https://github.com/SomeHeresy/2026-summer-projects/tree/main/Arduino/Advanced) |
+| [Arduino Sensor & Control System](https://someheresy.github.io/projects/arduino-sensor-control.html) | Jun – Jul 2026 | Arduino Uno R3, C/C++, I²C | Two sensor inputs on a 100 ms OLED refresh | [Firmware](https://github.com/SomeHeresy/2026-summer-projects/tree/main/Arduino/Advanced) |
 
 The coil gun case study is organised by physical build — V1 (2022, single stage), V2 (two-stage preparation and sensing experiments), V3 (functional two-stage, simulation-informed timing) — with photographs, simulation captures, and video from each.
 
