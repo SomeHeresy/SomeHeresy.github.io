@@ -3,7 +3,7 @@
 <head>
   <meta charset="utf-8"><meta name="viewport" content="width=device-width,initial-scale=1">
   <meta name="description" content="A three-version electromagnetic accelerator case study by Calvin Yang, combining ANSYS Maxwell simulation, Arduino control, Fusion 360 CAD, and physical testing.">
-  <meta name="theme-color" content="#070b0d"><link rel="stylesheet" href="../portfolio.css?v=5">
+  <meta name="theme-color" content="#070b0d"><link rel="stylesheet" href="../portfolio.css?v=6">
   <title>Electromagnetic Accelerator | Calvin Yang</title>
 </head>
 <body class="detail-page" id="top">
@@ -16,43 +16,115 @@
       <aside class="project-meta reveal" aria-label="Project metadata"><div><span class="detail-label">Role</span><strong>Designer & builder</strong></div><div><span class="detail-label">Timeline</span><strong>Jun 2022–Present</strong></div><div><span class="detail-label">Project type</span><strong>Individual</strong></div><div><span class="detail-label">Focus</span><strong>Embedded electromechanics</strong></div>
         <!-- When the repo is published: swap href to the repo URL, put
              SomeHeresy/<repo> in the <strong>, and delete the <em> line. -->
-        <a class="repo-link" href="https://github.com/SomeHeresy" target="_blank" rel="noopener noreferrer">
+        <a class="repo-link" href="https://github.com/SomeHeresy/Electromagnetic-Accelerator" target="_blank" rel="noopener noreferrer">
           <svg viewBox="0 0 16 16" aria-hidden="true"><path d="M8 0C3.58 0 0 3.58 0 8c0 3.54 2.29 6.53 5.47 7.59.4.07.55-.17.55-.38 0-.19-.01-.82-.01-1.49-2.01.37-2.53-.49-2.69-.94-.09-.23-.48-.94-.82-1.13-.28-.15-.68-.52-.01-.53.63-.01 1.08.58 1.23.82.72 1.21 1.87.87 2.33.66.07-.52.28-.87.51-1.07-1.78-.2-3.64-.89-3.64-3.95 0-.87.31-1.59.82-2.15-.08-.2-.36-1.02.08-2.12 0 0 .67-.21 2.2.82.64-.18 1.32-.27 2-.27.68 0 1.36.09 2 .27 1.53-1.04 2.2-.82 2.2-.82.44 1.1.16 1.92.08 2.12.51.56.82 1.27.82 2.15 0 3.07-1.87 3.75-3.65 3.95.29.25.54.73.54 1.48 0 1.07-.01 1.93-.01 2.2 0 .21.15.46.55.38A8.01 8.01 0 0 0 16 8c0-4.42-3.58-8-8-8z"/></svg>
-          <span><small>Source code</small><strong>SomeHeresy</strong></span>
+          <span><small>Source code</small><strong>Electromagnetic-Accelerator</strong></span>
           <span class="repo-go" aria-hidden="true">&#8599;</span>
-          <em>Control code repo not published yet</em>
         </a>      </aside>
       <div class="detail-content">
         <section class="reveal"><span class="section-number">01</span><span class="section-label">Overview</span><h2>Three versions, one expanding test loop.</h2><p>The project began as an experiment in electromagnetic acceleration and grew into a system-level build connecting circuit behavior, coil geometry, timing logic, mechanical repeatability, and measured physical performance.</p><div class="metric-grid"><div><strong>~16 m/s</strong><span>Measured velocity</span></div><div><strong>54.63 g</strong><span>Projectile mass</span></div><div><strong>2 stages</strong><span>Sequential coils</span></div></div></section>
         <section class="reveal"><span class="section-number">02</span><span class="section-label">The challenge</span><h2>Control the sequence, not just the circuit.</h2><p>A multi-stage accelerator only works when each coil energizes at the useful part of the projectile’s motion. The central challenge was coordinating sequential electromagnetic stages while turning a loose experimental setup into a mechanically repeatable system.</p><ul><li>Model the magnetic system and evaluate coil-timing behavior.</li><li>Create stage-control logic that could translate simulated timing into physical activation.</li><li>Design supports and launcher geometry that kept the two-stage assembly aligned.</li><li>Measure the result and preserve failed tests as engineering evidence.</li></ul></section>
         <section class="reveal"><span class="section-number">03</span><span class="section-label">Engineering process</span><h2>Simulation, CAD, firmware, then the bench.</h2><h3>Electromagnetic simulation</h3><p>I used ANSYS Maxwell 2D to study the electromagnetic field and support coil-timing optimization. The simulation became a design input for the embedded sequence rather than a standalone visualization.</p><h3>Mechanical design and fabrication</h3><p>I modeled support components in Fusion 360 and fabricated parts through 3D printing, improving the physical alignment and repeatability of the launcher.</p><h3>Embedded control</h3><p>Arduino stage-control logic coordinated sequential coil activation. The final documented build used four 400 V, 330 μF capacitors and a two-stage arrangement.</p></section>
-        <section class="reveal"><span class="section-number">04</span><span class="section-label">Iteration record</span><h2>The failures stay in the record.</h2><p>Each version answered a different question: whether the basic test loop worked, which sensing and circuit approaches were useful, and how simulation, CAD, and timing could connect in the final system.</p><div class="gallery"><figure><img src="../assets/coilgun/version1/v1-main.png" alt="Version 1 electromagnetic accelerator setup" loading="lazy"><figcaption>V1 / Initial high-voltage prototype and test setup</figcaption></figure><figure><img src="../assets/coilgun/version1/v1-550v-speed.png" alt="Version 1 speed measurement result" loading="lazy"><figcaption>V1 / Early velocity measurement</figcaption></figure><figure><img src="../assets/coilgun/version2/v2 circuit example.png" alt="Version 2 circuit setup" loading="lazy"><figcaption>V2 / Circuit and sensing experiments</figcaption></figure><figure><img src="../assets/coilgun/version3/v3 main part.png" alt="Version 3 two-stage launcher" loading="lazy"><figcaption>V3 / Functional two-stage launcher assembly</figcaption></figure><figure class="contain"><img src="../assets/coilgun/version3/sim main.png" alt="ANSYS Maxwell model for the accelerator" loading="lazy"><figcaption>V3 / ANSYS Maxwell field model</figcaption></figure><figure class="contain"><img src="../assets/coilgun/version3/coil support.png" alt="Fusion 360 coil support model" loading="lazy"><figcaption>V3 / Fusion 360 coil support</figcaption></figure></div><div class="video-grid">
-            <div class="video-card" data-yt="c915JSnlCdU">
-              <button class="video-trigger" type="button" aria-label="Play: V3 setup showcase">
-                <span class="video-frame"><img src="https://i.ytimg.com/vi/c915JSnlCdU/maxresdefault.jpg" alt="" loading="lazy" onerror="this.src='https://i.ytimg.com/vi/c915JSnlCdU/hqdefault.jpg'"><span class="video-play" aria-hidden="true"></span></span>
-              </button>
-              <div class="video-meta"><strong>V3 setup showcase</strong><span class="video-cta">Watch here</span></div>
+        <section class="reveal"><span class="section-number">04</span><span class="section-label">Iteration record</span><h2>Three versions, four years.</h2><p>Versions 1 and 2 were physical prototyping and experimental iteration. Version 3 is where CAD, electromagnetic simulation, and precise embedded timing entered the build. The failed tests stay in the record — they are where most of the learning actually happened.</p>
+
+          <div class="version-block">
+            <div class="version-head">
+              <div><span class="version-tag">Version 1</span><h3>Early prototype</h3></div>
+              <span class="version-note">2022 · 550 V · single stage</span>
             </div>
-            <div class="video-card" data-yt="-FK0ZTuaGw4">
-              <button class="video-trigger" type="button" aria-label="Play: V3 test fires">
-                <span class="video-frame"><img src="https://i.ytimg.com/vi/-FK0ZTuaGw4/maxresdefault.jpg" alt="" loading="lazy" onerror="this.src='https://i.ytimg.com/vi/-FK0ZTuaGw4/hqdefault.jpg'"><span class="video-play" aria-hidden="true"></span></span>
-              </button>
-              <div class="video-meta"><strong>V3 test fires</strong><span class="video-cta">Watch here</span></div>
+            <p>The first question was the simplest one: does the loop work at all? Charge a bank, fire a single coil, and measure whatever comes out the other end.</p>
+            <div class="gallery">
+              <figure class="wide"><img src="../assets/coilgun/version1/v1-main.png" alt="Version 1 prototype and bench test setup" loading="lazy"><figcaption>V1 — Overall setup / Overview of the Version 1 prototype and test setup</figcaption></figure>
+              <figure><img src="../assets/coilgun/version1/v1-550v-speed.png" alt="Speed detector readout from a Version 1 test" loading="lazy"><figcaption>V1 — Speed measurement / Speed detector showing the measured result</figcaption></figure>
+              <figure><img src="../assets/coilgun/version1/v1-testing.png" alt="Version 1 under test with the speed measurement device" loading="lazy"><figcaption>V1 — Testing / Running the setup with the speed measurement device</figcaption></figure>
             </div>
-            <div class="video-card" data-yt="FxNtk2qnkXo">
-              <button class="video-trigger" type="button" aria-label="Play: V3 failure example">
-                <span class="video-frame"><img src="https://i.ytimg.com/vi/FxNtk2qnkXo/maxresdefault.jpg" alt="" loading="lazy" onerror="this.src='https://i.ytimg.com/vi/FxNtk2qnkXo/hqdefault.jpg'"><span class="video-play" aria-hidden="true"></span></span>
-              </button>
-              <div class="video-meta"><strong>V3 failure example</strong><span class="video-cta">Watch here</span></div>
-            </div>
-            <div class="video-card" data-yt="TVuPhosdz58">
-              <button class="video-trigger" type="button" aria-label="Play: V2 sensor experiment">
-                <span class="video-frame"><img src="https://i.ytimg.com/vi/TVuPhosdz58/maxresdefault.jpg" alt="" loading="lazy" onerror="this.src='https://i.ytimg.com/vi/TVuPhosdz58/hqdefault.jpg'"><span class="video-play" aria-hidden="true"></span></span>
-              </button>
-              <div class="video-meta"><strong>V2 sensor experiment</strong><span class="video-cta">Watch here</span></div>
+            <div class="video-grid">
+              <div class="video-card" data-yt="IkUltp9UVZM">
+                <button class="video-trigger" type="button" aria-label="Play: V1 — Full assembly">
+                  <span class="video-frame"><img src="https://i.ytimg.com/vi/IkUltp9UVZM/maxresdefault.jpg" alt="" loading="lazy" onerror="this.src='https://i.ytimg.com/vi/IkUltp9UVZM/hqdefault.jpg'"><span class="video-play" aria-hidden="true"></span></span>
+                </button>
+                <div class="video-meta"><strong>V1 — Full assembly</strong><span class="video-cta">Watch here</span></div>
+              </div>
+              <div class="video-card" data-yt="uUH7DI3qa30">
+                <button class="video-trigger" type="button" aria-label="Play: V1 — Experimental documentation">
+                  <span class="video-frame"><img src="https://i.ytimg.com/vi/uUH7DI3qa30/maxresdefault.jpg" alt="" loading="lazy" onerror="this.src='https://i.ytimg.com/vi/uUH7DI3qa30/hqdefault.jpg'"><span class="video-play" aria-hidden="true"></span></span>
+                </button>
+                <div class="video-meta"><strong>V1 — Experimental documentation</strong><span class="video-cta">Watch here</span></div>
+              </div>
             </div>
           </div>
-          <p class="video-note">Videos play on this page. Full channel: <a href="https://www.youtube.com/@SomeHeresyGaming" target="_blank" rel="noopener noreferrer">@SomeHeresyGaming &#8599;</a></p></section>
+
+          <div class="version-block">
+            <div class="version-head">
+              <div><span class="version-tag">Version 2</span><h3>Two-stage preparation</h3></div>
+              <span class="version-note">Architecture · sensing experiments</span>
+            </div>
+            <p>V2 existed to prepare the system architecture for a second stage — and to find out how to sense the projectile well enough to time it. The photoelectric sensing approach was tested here and later abandoned, which is what pushed the timing problem toward simulation in V3.</p>
+            <div class="gallery">
+              <figure><img src="../assets/coilgun/version2/v2 circuit example.png" alt="Version 2 prototype circuit setup" loading="lazy"><figcaption>V2 — Circuit setup / Overview of the Version 2 prototype circuit</figcaption></figure>
+              <figure><img src="../assets/coilgun/version2/v2 projectile size.JPG" alt="The ferrous projectile used in Versions 2 and 3" loading="lazy"><figcaption>V2 — Projectile / The 54.63 g slug used in both V2 and V3</figcaption></figure>
+            </div>
+            <div class="video-grid">
+              <div class="video-card" data-yt="qeQ20BRdlr8">
+                <button class="video-trigger" type="button" aria-label="Play: V2 — Test fires">
+                  <span class="video-frame"><img src="https://i.ytimg.com/vi/qeQ20BRdlr8/maxresdefault.jpg" alt="" loading="lazy" onerror="this.src='https://i.ytimg.com/vi/qeQ20BRdlr8/hqdefault.jpg'"><span class="video-play" aria-hidden="true"></span></span>
+                </button>
+                <div class="video-meta"><strong>V2 — Test fires</strong><span class="video-cta">Multiple voltages</span></div>
+              </div>
+              <div class="video-card" data-yt="N3XgrflNVNE">
+                <button class="video-trigger" type="button" aria-label="Play: V2 — Close-up footage">
+                  <span class="video-frame"><img src="https://i.ytimg.com/vi/N3XgrflNVNE/maxresdefault.jpg" alt="" loading="lazy" onerror="this.src='https://i.ytimg.com/vi/N3XgrflNVNE/hqdefault.jpg'"><span class="video-play" aria-hidden="true"></span></span>
+                </button>
+                <div class="video-meta"><strong>V2 — Close-up footage</strong><span class="video-cta">Watch here</span></div>
+              </div>
+              <div class="video-card" data-yt="TVuPhosdz58">
+                <button class="video-trigger" type="button" aria-label="Play: V2 — Photoelectric sensor test">
+                  <span class="video-frame"><img src="https://i.ytimg.com/vi/TVuPhosdz58/maxresdefault.jpg" alt="" loading="lazy" onerror="this.src='https://i.ytimg.com/vi/TVuPhosdz58/hqdefault.jpg'"><span class="video-play" aria-hidden="true"></span></span>
+                </button>
+                <div class="video-meta"><strong>V2 — Photoelectric sensor test</strong><span class="video-cta">Later abandoned</span></div>
+              </div>
+            </div>
+          </div>
+
+          <div class="version-block">
+            <div class="version-head">
+              <div><span class="version-tag">Version 3</span><h3>Functional two-stage design</h3></div>
+              <span class="version-note">Simulation-informed timing · ~16 m/s</span>
+            </div>
+            <p>The working build. Two stages sit close together and fire in sequence under Arduino control, with the timing derived from ANSYS Maxwell rather than from a sensor. Fusion 360 supports and 3D printing gave the assembly enough mechanical repeatability to test the same thing twice.</p>
+            <div class="gallery">
+              <figure><img src="../assets/coilgun/version3/v3 main setup.PNG" alt="Version 3 full bench setup" loading="lazy"><figcaption>V3 — Full setup / Overview of the Version 3 bench</figcaption></figure>
+              <figure><img src="../assets/coilgun/version3/v3 main part.png" alt="Version 3 two-stage launcher assembly" loading="lazy"><figcaption>V3 — Launcher / Two stages coupled and timed from simulated data</figcaption></figure>
+            </div>
+            <div class="gallery gallery-3">
+              <figure class="contain"><img src="../assets/coilgun/version3/sim main.png" alt="ANSYS Maxwell field model of the accelerator" loading="lazy"><figcaption>V3 — ANSYS Maxwell model</figcaption></figure>
+              <figure class="contain"><img src="../assets/coilgun/version3/sim circuit.png" alt="ANSYS Maxwell circuit model" loading="lazy"><figcaption>V3 — ANSYS Maxwell circuit</figcaption></figure>
+              <figure class="contain"><img src="../assets/coilgun/version3/coil support.png" alt="Fusion 360 coil support model" loading="lazy"><figcaption>V3 — Fusion 360 coil support</figcaption></figure>
+            </div>
+            <div class="video-grid">
+              <div class="video-card" data-yt="c915JSnlCdU">
+                <button class="video-trigger" type="button" aria-label="Play: V3 — Setup showcase">
+                  <span class="video-frame"><img src="https://i.ytimg.com/vi/c915JSnlCdU/maxresdefault.jpg" alt="" loading="lazy" onerror="this.src='https://i.ytimg.com/vi/c915JSnlCdU/hqdefault.jpg'"><span class="video-play" aria-hidden="true"></span></span>
+                </button>
+                <div class="video-meta"><strong>V3 — Setup showcase</strong><span class="video-cta">Watch here</span></div>
+              </div>
+              <div class="video-card" data-yt="-FK0ZTuaGw4">
+                <button class="video-trigger" type="button" aria-label="Play: V3 — Test fires">
+                  <span class="video-frame"><img src="https://i.ytimg.com/vi/-FK0ZTuaGw4/maxresdefault.jpg" alt="" loading="lazy" onerror="this.src='https://i.ytimg.com/vi/-FK0ZTuaGw4/hqdefault.jpg'"><span class="video-play" aria-hidden="true"></span></span>
+                </button>
+                <div class="video-meta"><strong>V3 — Test fires</strong><span class="video-cta">Watch here</span></div>
+              </div>
+              <div class="video-card" data-yt="FxNtk2qnkXo">
+                <button class="video-trigger" type="button" aria-label="Play: V3 — Failure example">
+                  <span class="video-frame"><img src="https://i.ytimg.com/vi/FxNtk2qnkXo/maxresdefault.jpg" alt="" loading="lazy" onerror="this.src='https://i.ytimg.com/vi/FxNtk2qnkXo/hqdefault.jpg'"><span class="video-play" aria-hidden="true"></span></span>
+                </button>
+                <div class="video-meta"><strong>V3 — Failure example</strong><span class="video-cta">What went wrong</span></div>
+              </div>
+            </div>
+          </div>
+
+          <p class="video-note">Videos play on this page. Full channel: <a href="https://www.youtube.com/@SomeHeresyGaming" target="_blank" rel="noopener noreferrer">@SomeHeresyGaming ↗</a></p></section>
+
         <section class="reveal"><span class="section-number">05</span><span class="section-label">Outcome</span><h2>A working system—and a better engineering method.</h2><p>The documented build reached approximately 16 m/s with a 54.63 g projectile. More importantly, the project taught me to connect simulation assumptions to embedded timing, physical fabrication, repeatable testing, and failure analysis instead of treating those disciplines as separate tasks.</p></section>
         <a class="next-project reveal" href="american-rocketry-challenge.html"><div><span>Next project</span><h2>American Rocketry Challenge</h2></div><b>→</b></a>
         <div class="detail-actions reveal">
@@ -64,6 +136,6 @@
     </div>
   </main>
   <footer class="contact"><div class="contact-inner"><div class="footer-line"><span>Calvin Yang / Engineering Portfolio</span><a href="mailto:calviny7@uci.edu">calviny7@uci.edu ↗</a></div></div></footer>
-  <script src="../portfolio.js?v=5"></script>
+  <script src="../portfolio.js?v=6"></script>
 </body>
 </html>
