@@ -71,9 +71,46 @@ The coil gun case study is organised by physical build — V1 (2022, single stag
 │   ├── american-rocketry-challenge.html
 │   └── arduino-sensor-control.html
 ├── assets/             # Project photography and simulation captures
-├── resume/             # Résumé PDF
+├── resume/
+│   ├── CalvinYangResume.pdf  # Stable path — the site always links here
+│   └── resume.json           # Parsed résumé; source for the inline HTML
+├── tools/
+│   └── sync_resume.py  # Regenerates the inline résumé from the PDF
 └── .nojekyll           # Opt out of Jekyll processing on GitHub Pages
 ```
+
+---
+
+## Updating the résumé
+
+The résumé lives on the page twice — as the PDF in `resume/` and as semantic
+HTML inside `index.html` — so the two can drift apart. `tools/sync_resume.py`
+removes that risk by treating the PDF as the input and the HTML as output:
+
+```bash
+python tools/sync_resume.py ~/Downloads/NewResume.pdf
+```
+
+That copies the PDF to `resume/CalvinYangResume.pdf` (the stable path every
+link on the site points at, so no href ever changes), parses it into
+`resume/resume.json`, and rewrites the block in `index.html` between the
+`RESUME:AUTO` markers. Read the diff, then commit.
+
+`resume.json` is the editable layer. If the parser mis-reads something — or
+the site should word it differently from the PDF, as it does with the contact
+line — fix the JSON and re-render without re-importing:
+
+```bash
+python tools/sync_resume.py
+```
+
+Never hand-edit the HTML between the markers; the next run overwrites it.
+`python tools/sync_resume.py --check` exits non-zero when the page has fallen
+behind `resume.json`, which makes it usable as a pre-commit or CI check.
+
+The script needs `pypdf` (`pip install pypdf`), and only for the parse step.
+It is a maintenance tool, not a build step: the site itself still ships
+exactly as committed, with no install and no runtime dependencies.
 
 ---
 

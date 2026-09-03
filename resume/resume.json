@@ -1,0 +1,125 @@
+{
+  "name": "Calvin Yang",
+  "contact": [
+    {
+      "label": "calviny7@uci.edu",
+      "href": "mailto:calviny7@uci.edu"
+    },
+    {
+      "label": "(949) 316-8256",
+      "href": "tel:+19493168256"
+    },
+    {
+      "label": "LinkedIn",
+      "href": "https://www.linkedin.com/in/calvinyang07/"
+    },
+    {
+      "label": "GitHub",
+      "href": "https://github.com/SomeHeresy"
+    },
+    {
+      "label": "YouTube",
+      "href": "https://www.youtube.com/@SomeHeresyGaming"
+    }
+  ],
+  "sections": [
+    {
+      "title": "Education",
+      "kind": "entries",
+      "entries": [
+        {
+          "heading": "University of California, Irvine",
+          "when": "Expected Jun. 2030",
+          "where": "Bachelor of Science, Computer Science and Engineering · Irvine, CA",
+          "link": "",
+          "bullets": []
+        }
+      ]
+    },
+    {
+      "title": "Skills",
+      "kind": "list",
+      "entries": [
+        {
+          "term": "Programming Languages",
+          "detail": "Java, Python, C/C++, JavaScript, HTML/CSS"
+        },
+        {
+          "term": "Software",
+          "detail": "ANSYS Maxwell, Fusion 360, VS Code, EasyEDA, OpenRocket, CapCut, Microsoft Office, Adobe Photoshop"
+        }
+      ]
+    },
+    {
+      "title": "Projects",
+      "kind": "entries",
+      "entries": [
+        {
+          "heading": "Electromagnetic Accelerator (Coil Gun)",
+          "when": "Jun. 2022 – Present",
+          "where": "Individual Project",
+          "link": "",
+          "bullets": [
+            "Designed and built a two-stage coil gun, solving the challenge of precisely timing sequential electromagnetic coils to efficiently accelerate a projectile.",
+            "Used ANSYS Maxwell 2D for electromagnetic field simulation and coil-timing optimization, Fusion 360 for mechanical design, 3D printing for fabrication, and Arduino for stage-control logic.",
+            "Achieved approximately 16 m/s projectile velocity with a 54.63 g projectile using four 400 V, 330 µF capacitors."
+          ]
+        },
+        {
+          "heading": "Arduino Sensor & Control System",
+          "when": "Jun. 2026 – Jul. 2026",
+          "where": "Individual Project",
+          "link": "",
+          "bullets": [
+            "Built a real-time sensor monitoring system using an Arduino Uno R3, integrating an ultrasonic distance sensor and temperature/humidity sensor with an OLED display.",
+            "Developed C/C++ firmware to collect sensor measurements and refresh the OLED display at 50 ms intervals.",
+            "Implemented I2C communication between the Arduino, sensors, and OLED display."
+          ]
+        }
+      ]
+    },
+    {
+      "title": "Experience",
+      "kind": "entries",
+      "entries": [
+        {
+          "heading": "UCI Master of Engineering Capstone Project Assistant",
+          "when": "Jan. 2025 – Jun. 2025",
+          "where": "Gaudi Technology · Irvine, CA",
+          "link": "",
+          "bullets": [
+            "Revised 3D CAD models in Fusion 360 for printable concrete structures.",
+            "Assisted with fabrication and preparation of concrete molds used for ASTM material strength testing.",
+            "Collaborated with 4 MoE student researchers during prototype development and testing."
+          ]
+        }
+      ]
+    },
+    {
+      "title": "Activities & leadership",
+      "kind": "entries",
+      "entries": [
+        {
+          "heading": "American Rocketry Challenge",
+          "when": "Nov. 2025 - Mar. 2026",
+          "where": "R&D and Simulation Lead",
+          "link": "",
+          "bullets": [
+            "Improved simulated flight accuracy by 23.2% through iterative OpenRocket analysis.",
+            "Collaborated with a 7-member engineering team to design and build a 25.6-inch competition rocket.",
+            "Completed two competition qualification flights, achieving an official score of 139.8 total."
+          ]
+        },
+        {
+          "heading": "YouTube",
+          "when": "Jan. 2026 - Present",
+          "where": "Content Creator",
+          "link": "youtube.com/@SomeHeresyGaming",
+          "bullets": [
+            "Built and grew a YouTube channel to 50,000+ subscribers and 150M+ total views."
+          ]
+        }
+      ]
+    }
+  ]
+}
