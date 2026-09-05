@@ -8,7 +8,13 @@
 *{box-sizing:border-box}
 html{scroll-behavior:smooth;background:var(--bg)}
 body{margin:0;min-width:320px;overflow-x:hidden;color:var(--ink);background:radial-gradient(circle at 90% 7%,rgba(56,112,103,.12),transparent 26rem),radial-gradient(circle at 4% 38%,rgba(94,70,139,.07),transparent 30rem),var(--bg);font-family:var(--body);line-height:1.6;text-rendering:optimizeLegibility;-webkit-font-smoothing:antialiased}
-body.menu-open{overflow:hidden}img{display:block;max-width:100%}a{color:inherit}button{font:inherit}button,a{-webkit-tap-highlight-color:transparent}
+body.menu-open{overflow:hidden}
+/* height:auto is required, not decorative: every <img> carries width/height
+   attributes for layout stability, and those map to a presentational height
+   that would otherwise beat aspect-ratio and stretch the box. Components that
+   want a fixed height (.gallery, .detail-visual, .experiment-image) set it
+   themselves at higher specificity. */
+img{display:block;max-width:100%;height:auto}a{color:inherit}button{font:inherit}button,a{-webkit-tap-highlight-color:transparent}
 ::selection{color:#06110e;background:var(--mint)}
 :focus-visible{outline:2px solid var(--mint);outline-offset:4px}
 .skip-link{position:fixed;z-index:1000;top:10px;left:10px;padding:10px 14px;color:#06110e;background:var(--mint);font:700 11px var(--mono);text-decoration:none;transform:translateY(-160%);transition:.2s}.skip-link:focus{transform:none}
@@ -49,7 +55,7 @@ body.menu-open{overflow:hidden}img{display:block;max-width:100%}a{color:inherit}
 .reveal{opacity:0;transform:translateY(22px);transition:opacity .7s,transform .7s cubic-bezier(.2,.7,.2,1)}.reveal.visible{opacity:1;transform:none}
 
 @media(max-width:980px){
-  .home-hero{grid-template-columns:1fr;padding-top:135px}.hero-copy{max-width:780px}.field-shell{width:min(720px,100%)}.field-stage{height:480px}.section-heading{grid-template-columns:1fr}.project-card-large{display:flex;grid-column:auto}.project-grid{grid-template-columns:1fr}.project-card-large .card-media{min-height:430px}.about-section{grid-template-columns:1fr}.profile-card{width:min(430px,100%)}.detail-layout{grid-template-columns:1fr}.project-meta{display:grid;grid-template-columns:repeat(3,1fr)}.project-meta div{padding-right:14px}.detail-visual{height:66vw}
+  .home-hero{grid-template-columns:1fr;padding-top:135px}.hero-copy{max-width:780px}.field-shell{width:min(720px,100%)}.field-stage{height:480px}.section-heading{grid-template-columns:1fr}.project-card-large{display:flex;grid-column:auto}.project-grid{grid-template-columns:1fr}.project-card-large .card-media{min-height:430px}.about-section{grid-template-columns:1fr}.profile-card{width:min(430px,100%)}.detail-layout{grid-template-columns:minmax(0,1fr)}.detail-content{min-width:0}.project-meta{display:grid;grid-template-columns:repeat(3,1fr)}.project-meta div{padding-right:14px}.detail-visual{height:66vw}
 }
 @media(max-width:720px){
   .site-nav{top:10px;width:calc(100% - 20px)}.nav-inner{min-height:55px;padding-left:15px}.menu-button{display:block}.nav-links{position:fixed;top:65px;right:-1px;left:-1px;display:grid;padding:13px;border:1px solid var(--line);background:rgba(7,11,13,.98);opacity:0;transform:translateY(-12px);pointer-events:none;transition:.2s}.menu-open .nav-links{opacity:1;transform:none;pointer-events:auto}.nav-links a{display:flex;min-height:46px;align-items:center}.nav-links .nav-contact{margin:3px 0 0}.home-hero,.section,.detail-hero,.detail-layout{width:calc(100% - 30px)}.home-hero{padding:118px 0 70px;gap:60px}.hero-copy h1{font-size:clamp(3.3rem,15vw,5rem)}.hero-facts{grid-template-columns:1fr}.hero-facts li{padding:14px 0}.hero-facts li+li{padding-left:0;border-top:1px solid var(--line);border-left:0}.field-topline{min-height:80px}.field-stage{height:390px}.section{padding:92px 0}.section-heading h2{font-size:clamp(2.65rem,12vw,4rem)}.card-media,.project-card-large .card-media{min-height:340px}.card-results{grid-template-columns:1fr}.card-results div{padding:12px 0}.card-results div+div{padding-left:0;border-top:1px solid var(--line);border-left:0}.capability-row{grid-template-columns:34px 1fr}.capability-row p{grid-column:2}.experience-row{grid-template-columns:1fr}.about-copy h2{font-size:clamp(2.75rem,13vw,4.5rem)}.education{grid-template-columns:1fr;gap:8px}.contact-bottom,.footer-line{align-items:flex-start;flex-direction:column}.contact-links{justify-content:flex-start}.contact h2{font-size:clamp(3.1rem,15vw,5.8rem)}.detail-hero{padding-top:120px}.detail-hero h1{font-size:clamp(2.8rem,11vw,5rem)}.detail-visual{width:calc(100% - 14px);height:78vw;min-height:360px}.project-meta{grid-template-columns:1fr}.metric-grid,.gallery,.video-links{grid-template-columns:1fr}.metric-grid div{padding:16px 0}.metric-grid div+div{padding-left:0;border-top:1px solid var(--line);border-left:0}.gallery figure.wide{grid-column:auto}.next-project{grid-template-columns:1fr}.system-illustration{transform:scale(.9)}
@@ -340,7 +346,10 @@ body{font-size:var(--fs-body);line-height:1.65}
 .repo-link svg{width:22px;height:22px;fill:var(--muted);transition:fill .28s,transform .4s var(--ease)}
 .repo-link:hover svg{fill:var(--mint);transform:rotate(-8deg) scale(1.08)}
 .repo-link small{display:block;color:var(--muted-2);font:700 var(--fs-2xs) var(--mono);letter-spacing:.13em;text-transform:uppercase}
-.repo-link strong{display:block;margin-top:3px;font:600 var(--fs-sm2) var(--mono);letter-spacing:-.01em;overflow-wrap:anywhere}
+/* Repo slugs are long and the sidebar column is 240px. Set small enough that
+   a hyphenated name breaks at its hyphen instead of mid-word; break-word is
+   the backstop for a name with no break opportunity at all. */
+.repo-link strong{display:block;margin-top:3px;font:600 var(--fs-xs) var(--mono);letter-spacing:-.02em;line-height:1.35;overflow-wrap:break-word}
 .repo-link .repo-go{color:var(--muted-2);font:600 var(--fs-md) var(--mono);transition:color .28s,transform .3s var(--ease)}
 .repo-link:hover .repo-go{color:var(--mint);transform:translate(3px,-3px)}
 .repo-link em{
@@ -440,7 +449,7 @@ body{font-size:var(--fs-body);line-height:1.65}
 
 .detail-visual{overflow:hidden}
 .detail-visual img{transition:transform 1.1s var(--ease)}
-.detail-visual:hover img{transform:scale(1.03)}
+.detail-visual:not(.contain):hover img{transform:scale(1.03)}
 
 @media(max-width:720px){
   .video-grid{grid-template-columns:1fr}

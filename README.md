@@ -14,13 +14,19 @@ Personal portfolio site for **Calvin Yang**, a Computer Science & Engineering st
 
 This is a hand-written static site — no framework, no build step, no package manager, and no third-party runtime dependencies. Everything ships as it is committed.
 
-The site documents three engineering projects in depth, each with its own case-study page covering the problem, the approach, the evidence, and in one case the failures. It also renders my full résumé inline so visitors can read it without downloading anything.
+The site documents three engineering projects in depth, each with its own case-study page, plus the early-stage Python coilgun simulator. It also renders my full résumé inline so visitors can read it without downloading anything.
 
 ---
 
 ## Highlights
 
-**Multistage coilgun hero animation.** A Canvas 2D simulation of a three-stage coilgun charging and firing. The magnetic field lines are real streamlines, integrated at layout time from a two-monopole model of a finite solenoid — which is why the field reads as dense through the bore and looping outside it. Each coil's field visibly builds and collapses with its current, and the projectile exits at ~16 m/s, matching the measured result from the physical build. Playback runs at roughly 1/20 speed, since a real shot is over in milliseconds. Pointer movement drives parallax and thickens the field around the nearest coil.
+**Engineering field notes.** A cool paper background, copper accents, oversized nameplate, and open project spreads built around actual workbench photography. The visual identity extends to all three case studies, the inline résumé, and mobile layouts. Personal copy draws on Calvin's interests in science fiction, electromagnetism, tennis, and video creation.
+
+**Compact two-stage field animation.** A small visual accent uses Biot–Savart quadrature of circular turns to draw axisymmetric magnetic flux contours and an accelerating projectile. The top-right button starts looping. Clicking again finishes the current run before stopping; clicking while it is finishing resumes looping. There is no autoplay, scrubber, speed selector, probe, or expanded view. Playback suspends off-screen and in background tabs. The dimensionless air-core model is illustrative rather than a prediction of real hardware; the separate Python simulator remains early work.
+
+**Motion and navigation.** Scroll-triggered, staggered reveals, gentle image drift, pointer-responsive project media, click feedback, and coordinated hover states retain the field-notes identity. On supporting browsers, native cross-document view transitions carry the selected project's image and title into its case study (and back). Other browsers get a short fade/slide with ordinary navigation. Modified clicks, downloads, hash navigation, browser history, no-JS reading, keyboard controls and reduced motion are preserved.
+
+**Coilgun simulator progress.** A separate project block identifies the Python prototype as early work as of September 2026. RK4, RC decay validation, and an RLC energy check are implemented; force/motion, timing, CLI, and hardware comparison remain future work. The ~16 m/s result elsewhere on the page belongs to the measured physical hardware.
 
 **Interactive wiring schematic.** The Arduino case study uses a hand-drawn SVG schematic rather than a stock photo: 5 V and ground rails, labelled pin assignments, junction dots, and a wire hop where two nets cross without connecting. Hovering a component isolates the nets it sits on and dims the rest.
 
@@ -28,7 +34,7 @@ The site documents three engineering projects in depth, each with its own case-s
 
 **On-page video.** Project videos play in place using a facade pattern — cards ship as thumbnails and the player iframe is only created on click, so six videos cost six images at page load instead of six embedded players.
 
-**Calibrated type scale.** A single 16-step scale spans 12 px to 88 px across every page. Small steps move linearly, where a single pixel is perceptible; display steps move geometrically at roughly 1.2×.
+**Accessible navigation.** The mobile menu supports Escape to close and restores focus. Main content stays visible without JavaScript. Page anchors, case-study links, the PDF, on-page video, and interactive wiring diagrams remain available.
 
 ---
 
@@ -64,18 +70,31 @@ The coil gun case study is organised by physical build — V1 (2022, single stag
 │                       # experience, inline résumé, about, contact
 ├── portfolio.css       # Shared stylesheet — design tokens, type scale,
 │                       # components, interaction layer
+├── field-notes.css     # Visual identity, project spreads, résumé, responsive layout
+├── coil-field-model.js # Pure numerical model and flux-contour extraction
+├── coil-animation.js   # Compact field visualization and finish-then-stop looping
+├── motion.css          # Scroll, hover, click and page transition styles
+├── motion.js           # Progressive interaction and scroll observers
+├── page-transitions.js # Shared-element page navigation and fallback
 ├── portfolio.js        # Shared script — navigation, scroll reveal,
 │                       # video embeds, schematic interaction
+├── 404.html            # Not-found page, in the same visual identity
 ├── projects/           # Case-study pages
 │   ├── electromagnetic-accelerator.html
 │   ├── american-rocketry-challenge.html
 │   └── arduino-sensor-control.html
 ├── assets/             # Project photography and simulation captures
+│   └── social/         # Generated 1200x630 Open Graph share cards
 ├── resume/
 │   ├── CalvinYangResume.pdf  # Stable path — the site always links here
 │   └── resume.json           # Parsed résumé; source for the inline HTML
 ├── tools/
-│   └── sync_resume.py  # Regenerates the inline résumé from the PDF
+│   ├── sync_resume.py     # Regenerates the inline résumé from the PDF
+│   └── optimize_images.py # Photography -> WebP; builds the share cards
+├── favicon.svg         # Brand mark, matching .brand-mark in the nav
+├── apple-touch-icon.png
+├── robots.txt
+├── sitemap.xml
 └── .nojekyll           # Opt out of Jekyll processing on GitHub Pages
 ```
 
@@ -114,6 +133,29 @@ exactly as committed, with no install and no runtime dependencies.
 
 ---
 
+## Images
+
+Photography ships as WebP capped at a 1600 px long edge. The originals stay in
+the repo as the archival copies; the HTML points at the `.webp` beside them.
+`tools/optimize_images.py` does the conversion and also renders the Open Graph
+share cards in `assets/social/`, which stay JPEG at 1200x630 because link
+crawlers are much less consistent about WebP than browsers are.
+
+```bash
+python tools/optimize_images.py
+```
+
+Run it after adding new photography; it skips anything already converted.
+`--force` re-encodes everything, and `--check` exits non-zero when a source
+image has no `.webp` companion, so it works as a pre-commit or CI check. The
+script needs Pillow (`pip install Pillow`); like `sync_resume.py`, it is a
+maintenance tool, not a build step.
+
+Simulation screen captures under ~120 KB are left as PNG — they are already
+small, and PNG keeps their edges crisp.
+
+---
+
 ## Running locally
 
 The site is fully static, so no install or build step is required. It does need to be served over HTTP, though — see the note below.
@@ -130,7 +172,7 @@ With Node:
 npx serve .
 ```
 
-Then open `http://localhost:8000`. In VS Code, the **Live Server** extension works too — right-click `index.html` and choose *Open with Live Server*.
+For the Python command, open `http://localhost:8000`; for `npx serve`, use the URL it prints. In VS Code, the **Live Server** extension works too — right-click `index.html` and choose *Open with Live Server*.
 
 > **Do not open `index.html` directly from the file system.** A `file://` page has no HTTP origin, so YouTube refuses to load the embedded project videos and the player reports a configuration error (error 153). Everything else renders, which makes the cause easy to misdiagnose. Always serve over HTTP.
 
@@ -144,12 +186,19 @@ The repository is a GitHub Pages user site, published from the root of the `main
 
 ---
 
+## Numerical checks
+
+Run `node tools/test_field_model.cjs` to check field symmetry, approximate axisymmetric divergence, flux-contour tangency, interpolation, stage acceleration, and current cutoff. These checks validate the illustrative model's internal consistency; they do not establish agreement with measured coilgun hardware.
+
+---
+
 ## Accessibility and performance
 
 - Honours `prefers-reduced-motion` — the hero animation renders a single static frame with no animation loop, and transitions are disabled site-wide
 - Skip link, semantic landmarks, visible focus states, and descriptive `aria-label` text on canvas and SVG graphics
-- Hero animation adapts quality to the device, pauses when off-screen or backgrounded, and caps device pixel ratio
+- Field animation starts only after a click, completes its current run when looping is switched off, and suspends off-screen or in a background tab
 - Diagrams pan horizontally on small screens rather than shrinking to an unreadable size
+- Photography ships as WebP with intrinsic `width`/`height` on every image, so pages do not reflow as photos arrive
 - No external fonts, analytics, trackers, or third-party scripts
 
 ---

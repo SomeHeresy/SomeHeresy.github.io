@@ -1,0 +1,11 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 32 32" role="img" aria-label="Calvin Yang">
+  <title>Calvin Yang</title>
+  <rect width="32" height="32" fill="#e9eae4"/>
+  <!-- The site's brand mark: skewed field lines, drawn thick enough to hold
+       together at 16px. Matches .brand-mark in field-notes.css. -->
+  <g fill="#a73512" transform="skewY(-24) translate(0 7)">
+    <rect x="5"  y="2" width="4" height="28"/>
+    <rect x="12" y="2" width="4" height="28"/>
+    <rect x="19" y="2" width="4" height="28"/>
+  </g>
+</svg>

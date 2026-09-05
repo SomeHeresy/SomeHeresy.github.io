@@ -3,16 +3,33 @@
 <head>
   <meta charset="utf-8"><meta name="viewport" content="width=device-width,initial-scale=1">
   <meta name="description" content="An Arduino Uno R3 sensor and control system by Calvin Yang, integrating distance, temperature and humidity sensing with a 100 ms OLED interface.">
-  <meta name="theme-color" content="#070b0d"><link rel="stylesheet" href="../portfolio.css?v=6">
+  <meta name="theme-color" content="#e9eae4">
+  <meta property="og:type" content="article">
+  <meta property="og:site_name" content="Calvin Yang">
+  <meta property="og:title" content="Arduino Sensor &amp; Control System | Calvin Yang">
+  <meta property="og:description" content="C/C++ firmware on an Arduino Uno R3: ultrasonic distance and temperature/humidity sensing driving an OLED over I²C.">
+  <meta property="og:url" content="https://someheresy.github.io/projects/arduino-sensor-control.html">
+  <meta property="og:image" content="https://someheresy.github.io/assets/social/arduino-sensor-control.jpg">
+  <meta property="og:image:width" content="1200">
+  <meta property="og:image:height" content="630">
+  <meta property="og:image:alt" content="Arduino Uno wired to distance and temperature sensors and an OLED on a breadboard">
+  <meta name="twitter:card" content="summary_large_image">
+  <link rel="canonical" href="https://someheresy.github.io/projects/arduino-sensor-control.html">
+  <link rel="icon" href="../favicon.svg" type="image/svg+xml">
+  <link rel="apple-touch-icon" href="../apple-touch-icon.png">
+  <link rel="stylesheet" href="../portfolio.css?v=14">
   <title>Arduino Sensor &amp; Control System | Calvin Yang</title>
+  <link rel="stylesheet" href="../field-notes.css?v=14">
+  <link rel="stylesheet" href="../motion.css?v=14">
+  <script src="../page-transitions.js?v=14"></script>
 </head>
 <body class="detail-page" id="top">
   <a class="skip-link" href="#case-study">Skip to case study</a><div class="scroll-progress" aria-hidden="true"></div>
-  <nav class="site-nav" aria-label="Primary navigation"><div class="nav-inner"><a class="brand" href="../index.html" aria-label="Calvin Yang, home"><span class="brand-mark" aria-hidden="true"></span><span>Calvin Yang</span></a><button class="menu-button" type="button" aria-expanded="false" aria-controls="nav-links">Menu</button><div class="nav-links" id="nav-links"><a href="../index.html#projects">Projects</a><a href="../index.html#experience">Experience</a><a href="../index.html#resume">Resume</a><a href="../index.html#about">About</a><a class="nav-contact" href="mailto:calviny7@uci.edu">Contact</a></div></div></nav>
+  <nav class="site-nav" aria-label="Primary navigation"><div class="nav-inner"><a class="brand" href="../index.html" aria-label="Calvin Yang, home"><span class="brand-mark" aria-hidden="true"></span><span>Calvin Yang</span></a><button class="menu-button" type="button" aria-expanded="false" aria-controls="nav-links">Menu</button><div class="nav-links" id="nav-links"><a href="../index.html#projects">Projects</a><a href="../index.html#about">About</a><a href="../index.html#experience">Experience</a><a href="../index.html#resume">Resume</a><a class="nav-contact" href="../index.html#contact">Contact</a></div></div></nav>
   <main class="detail-main" id="case-study">
-    <header class="detail-hero reveal"><a class="back-link" href="../index.html#projects"><span aria-hidden="true">←</span> All projects</a><p class="project-kicker">Embedded build · Project 03</p><h1>Arduino Sensor &amp; Control System</h1><p class="detail-lede">A real-time embedded monitor integrating ultrasonic distance sensing, temperature and humidity input, and an OLED display through C/C++ firmware and I²C communication.</p><div class="detail-tags"><span>Arduino Uno R3</span><span>C/C++</span><span>I²C</span><span>Sensors</span><span>OLED</span></div></header>
+    <header class="detail-hero reveal"><a class="back-link" href="../index.html#projects"><span aria-hidden="true">←</span> All projects</a><p class="project-kicker">Embedded build · Project 03</p><h1 data-project-title="arduino-sensor-control">Arduino Sensor &amp; Control System</h1><p class="detail-lede">A real-time embedded monitor integrating ultrasonic distance sensing, temperature and humidity input, and an OLED display through C/C++ firmware and I²C communication.</p><div class="detail-tags"><span>Arduino Uno R3</span><span>C/C++</span><span>I²C</span><span>Sensors</span><span>OLED</span></div></header>
 
-    <div class="detail-visual diagram reveal">
+    <div class="detail-visual diagram reveal" data-project-image="arduino-sensor-control">
       <div class="circuit-wrap">
         <svg class="circuit" viewBox="0 0 960 470" role="img" aria-labelledby="ckt-t ckt-d" preserveAspectRatio="xMidYMid meet">
           <title id="ckt-t">Wiring diagram of the Arduino sensor and control system</title>
@@ -259,7 +276,7 @@
           <h3>Firmware loop</h3><p>The controller reads both sensor sources, formats their values for a compact interface, and sends the display update through I²C. The approximately 100 ms refresh interval keeps the output responsive while preserving a straightforward acquisition loop.</p>
         </section>
 
-        <section class="reveal"><span class="section-number">04</span><span class="section-label">Outcome</span><h2>A complete embedded interaction.</h2><div class="gallery"><figure><img src="../assets/arduino/full-setup.jpg" alt="The assembled breadboard system: Arduino Uno R3 wired to the ultrasonic sensor, the temperature and humidity sensor, and the OLED display" loading="lazy"><figcaption>Full setup / Uno R3, both sensors and the display on one breadboard</figcaption></figure><figure><img src="../assets/arduino/oled-display.jpg" alt="Close-up of the OLED display showing live distance, temperature and humidity readings" loading="lazy"><figcaption>OLED output / Live readings, redrawn every 100 ms</figcaption></figure></div><p>The finished breadboard system produced a continuously refreshed monitor with working sensor acquisition and OLED output. It strengthened my understanding of how firmware behavior, peripheral communication, hardware wiring, and interface decisions come together in a small embedded system.</p></section>
+        <section class="reveal"><span class="section-number">04</span><span class="section-label">Outcome</span><h2>A complete embedded interaction.</h2><div class="gallery"><figure><img src="../assets/arduino/full-setup.webp" alt="The assembled breadboard system: Arduino Uno R3 wired to the ultrasonic sensor, the temperature and humidity sensor, and the OLED display" loading="lazy" width="1600" height="1200"><figcaption>Full setup / Uno R3, both sensors and the display on one breadboard</figcaption></figure><figure><img src="../assets/arduino/oled-display.webp" alt="Close-up of the OLED display showing live distance, temperature and humidity readings" loading="lazy" width="1600" height="1200"><figcaption>OLED output / Live readings, redrawn every 100 ms</figcaption></figure></div><p>The finished breadboard system produced a continuously refreshed monitor with working sensor acquisition and OLED output. It strengthened my understanding of how firmware behavior, peripheral communication, hardware wiring, and interface decisions come together in a small embedded system.</p></section>
 
         <a class="next-project reveal" href="electromagnetic-accelerator.html"><div><span>Back to project 01</span><h2>Electromagnetic Accelerator</h2></div><b>→</b></a>
 
@@ -272,6 +289,7 @@
     </div>
   </main>
   <footer class="contact"><div class="contact-inner"><div class="footer-line"><span>Calvin Yang / Engineering Portfolio</span><a href="mailto:calviny7@uci.edu">calviny7@uci.edu ↗</a></div></div></footer>
-  <script src="../portfolio.js?v=6"></script>
+  <script src="../portfolio.js?v=14"></script>
+  <script src="../motion.js?v=14"></script>
 </body>
 </html>
