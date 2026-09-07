@@ -1,0 +1,81 @@
+<!doctype html>
+<html lang="en">
+<head>
+  <meta charset="utf-8"><meta name="viewport" content="width=device-width,initial-scale=1">
+  <meta name="description" content="Calvin Yang's coilgun timing simulator case study: a Python physics engine coupling capacitor discharge to projectile motion, validated by energy conservation and against measured hardware.">
+  <meta name="theme-color" content="#e9eae4">
+  <meta property="og:type" content="article">
+  <meta property="og:site_name" content="Calvin Yang">
+  <meta property="og:title" content="Coilgun Timing Simulator | Calvin Yang">
+  <meta property="og:description" content="A Python physics simulator coupling capacitor discharge to projectile motion through position-dependent inductance. Quantified a 46.8% suckback loss on my own hardware.">
+  <meta property="og:url" content="https://someheresy.github.io/projects/coilgun-simulator.html">
+  <meta property="og:image" content="https://someheresy.github.io/assets/coilgun-simulator/velocity-vs-start-position.png">
+  <meta property="og:image:width" content="1050">
+  <meta property="og:image:height" content="675">
+  <meta property="og:image:alt" content="Simulated projectile velocity plotted against starting position, showing a clear optimum">
+  <meta name="twitter:card" content="summary_large_image">
+  <link rel="canonical" href="https://someheresy.github.io/projects/coilgun-simulator.html">
+  <link rel="icon" href="../favicon.svg" type="image/svg+xml">
+  <link rel="apple-touch-icon" href="../apple-touch-icon.png">
+  <link rel="stylesheet" href="../portfolio.css?v=14">
+  <title>Coilgun Timing Simulator | Calvin Yang</title>
+  <link rel="stylesheet" href="../field-notes.css?v=14">
+  <link rel="stylesheet" href="../motion.css?v=14">
+  <script src="../page-transitions.js?v=14"></script>
+</head>
+<body class="detail-page" id="top">
+  <a class="skip-link" href="#case-study">Skip to case study</a><div class="scroll-progress" aria-hidden="true"></div>
+  <nav class="site-nav" aria-label="Primary navigation"><div class="nav-inner"><a class="brand" href="../index.html" aria-label="Calvin Yang, home"><span class="brand-mark" aria-hidden="true"></span><span>Calvin Yang</span></a><button class="menu-button" type="button" aria-expanded="false" aria-controls="nav-links">Menu</button><div class="nav-links" id="nav-links"><a href="../index.html#projects">Projects</a><a href="../index.html#about">About</a><a href="../index.html#experience">Experience</a><a href="../index.html#resume">Resume</a><a class="nav-contact" href="../index.html#contact">Contact</a></div></div></nav>
+  <main class="detail-main" id="case-study">
+    <header class="detail-hero reveal"><a class="back-link" href="../index.html#projects">← All projects</a><p class="project-kicker">Independent R&amp;D · Project 02</p><h1 data-project-title="coilgun-simulator">Coilgun Timing Simulator</h1><p class="detail-lede">I built the coilgun first and measured it. Then I wrote the physics engine that explains it — a Python simulator coupling capacitor discharge to projectile motion through a position-dependent inductance, solved with a custom RK4 integrator and checked against conservation laws rather than against the answer I wanted.</p><div class="detail-tags"><span>Python</span><span>NumPy</span><span>Numerical methods</span><span>Electromagnetics</span><span>pytest</span><span>GitHub Actions</span></div></header>
+    <figure class="detail-visual contain reveal" data-project-image="coilgun-simulator"><img src="../assets/coilgun-simulator/velocity-vs-start-position.png" alt="Simulated peak and exit velocity plotted against the projectile's starting position, both curves rising to a clear maximum and falling away" loading="lazy" width="1050" height="675"><figcaption>Projectile velocity against starting position. The peak of the exit-velocity curve is the answer the simulator exists to find.</figcaption></figure>
+    <div class="detail-layout">
+      <aside class="project-meta reveal" aria-label="Project metadata"><div><span class="detail-label">Role</span><strong>Sole developer</strong></div><div><span class="detail-label">Timeline</span><strong>Sep 2026</strong></div><div><span class="detail-label">Project type</span><strong>Physics simulation</strong></div><div><span class="detail-label">Language</span><strong>Python</strong></div>
+        <a class="repo-link" href="https://github.com/SomeHeresy/Coilgun-Simulator" target="_blank" rel="noopener noreferrer">
+          <svg viewBox="0 0 16 16" aria-hidden="true"><path d="M8 0C3.58 0 0 3.58 0 8c0 3.54 2.29 6.53 5.47 7.59.4.07.55-.17.55-.38 0-.19-.01-.82-.01-1.49-2.01.37-2.53-.49-2.69-.94-.09-.23-.48-.94-.82-1.13-.28-.15-.68-.52-.01-.53.63-.01 1.08.58 1.23.82.72 1.21 1.87.87 2.33.66.07-.52.28-.87.51-1.07-1.78-.2-3.64-.89-3.64-3.95 0-.87.31-1.59.82-2.15-.08-.2-.36-1.02.08-2.12 0 0 .67-.21 2.2.82.64-.18 1.32-.27 2-.27s1.36.09 2 .27c1.53-1.04 2.2-.82 2.2-.82.44 1.1.16 1.92.08 2.12.51.56.82 1.27.82 2.15 0 3.07-1.87 3.75-3.65 3.95.29.25.54.73.54 1.48 0 1.07-.01 1.93-.01 2.2 0 .21.15.46.55.38A8.01 8.01 0 0 0 16 8c0-4.42-3.58-8-8-8Z"/></svg>
+          <span><small>Source code</small><strong>Coilgun-Simulator</strong></span>
+          <span class="repo-go" aria-hidden="true">&#8599;</span>
+        </a>      </aside>
+      <div class="detail-content">
+        <section class="reveal"><span class="section-number">01</span><span class="section-label">Overview</span><h2>The hardware came first. Now the model.</h2><p>My two-stage accelerator chronographs at 6–7 m/s on a single stage with a 54.64 g steel slug at 350 V. That number was measured, not predicted — I had no way to say why it was that value, or what to change to improve it. This simulator answers both questions from first principles.</p><div class="metric-grid"><div><strong>46.8%</strong><span>Velocity lost to suckback</span></div><div><strong>6e-14</strong><span>Energy conservation error</span></div><div><strong>22</strong><span>Automated tests</span></div></div></section>
+
+        <section class="reveal"><span class="section-number">02</span><span class="section-label">The challenge</span><h2>The force has to come from somewhere real.</h2><p>A coilgun is not two independent problems. The capacitor discharge drives the coil, but the projectile moving through that coil changes the coil's inductance, which feeds back into the circuit. Model them separately and you get a simulation that looks plausible and is quietly wrong.</p><ul><li>Integrate a stiff, oscillatory circuit accurately enough that timing predictions mean something.</li><li>Couple the projectile's motion to the circuit without breaking energy conservation.</li><li>Handle two physically different projectiles — a ferromagnetic slug and a permanent magnet — under one set of equations.</li><li>Verify the result without tuning parameters until it matched the measurement.</li></ul></section>
+
+        <section class="reveal"><span class="section-number">03</span><span class="section-label">Engineering process</span><h2>Build the solver, then the physics, then the proof.</h2>
+          <h3>A physics-agnostic integrator</h3><p>I wrote a generic 4th-order Runge–Kutta stepper that takes a state vector, a step size, and a derivative function. It knows no physics at all, which is why growing from a one-variable RC circuit to a five-variable coupled model never required rewriting it.</p>
+          <h3>Coupling the circuit to the projectile</h3><p>The coil's inductance depends on where the projectile is, and that dependence is the entire source of the force. The state becomes <code>[V, I, x, v, W]</code> — voltage, current, position, velocity, and cumulative resistive heat. The force term and the back-EMF term both derive from the same <code>dL/dx</code>; keeping one without the other would let the projectile gain energy the capacitor never supplied. Not an inaccuracy — a free-energy machine that would neither crash nor look obviously wrong.</p>
+          <h3>Two projectiles, one model</h3><p>A ferromagnetic slug only changes the coil's own inductance. A permanent magnet also pushes its own flux through the coil, independent of current — a force linear in current rather than quadratic. Writing the total flux linkage as <code>λ = L(x)·I + λ_pm(x)</code> covers both, and setting the magnet term to zero reduces exactly to the ferromagnetic case.</p>
+          <h3>Tooling</h3><p>A CLI accepting JSON config files, per-parameter flags, or an interactive prompt; CSV export; a parameter sweep with matplotlib output; and a pytest suite running on three Python versions in GitHub Actions.</p>
+        </section>
+
+        <section class="reveal"><span class="section-number">04</span><span class="section-label">Validation</span><h2>Four checks, and proof they can fail.</h2><p>A simulation that produces plausible numbers is worthless without evidence it is right. I validated four ways, each catching a different class of error.</p>
+          <ul>
+            <li><strong>Against the closed-form solution.</strong> The underdamped RLC circuit has an exact analytic answer to compare against.</li>
+            <li><strong>Convergence order.</strong> A true 4th-order method cuts its error 16× when the step size halves. Measured 16.01 for the circuit and 16.04 for the coupled model.</li>
+            <li><strong>Energy conservation.</strong> Capacitor, inductor, kinetic, and dissipated heat must sum to a constant at every step. Holds to 6×10⁻¹⁴ relative.</li>
+            <li><strong>Numerical differentiation.</strong> Both analytic derivatives checked against central differences, since a dropped factor of two would not crash — it would just produce a confident wrong answer.</li>
+          </ul>
+          <p>One result was worth the detour: at my production step size the convergence ratio read 14.7 instead of 16, and nothing was wrong. The error had fallen to 10⁻¹⁴ relative — the double-precision floor — so the test was measuring rounding noise rather than the method. The fix was to test at a coarser step where truncation error still dominates.</p>
+          <p>I also broke the code on purpose to confirm the tests could fail: removing the back-EMF term, flipping the force sign, and dropping a factor of two each triggered exactly the test written to catch it, with no spurious failures elsewhere.</p>
+        </section>
+
+        <figure class="detail-visual contain reveal"><img src="../assets/coilgun-simulator/time-series.png" alt="Four panels showing capacitor voltage, coil current, projectile position, and projectile velocity against time through a single shot" loading="lazy" width="1500" height="1050"><figcaption>One shot, end to end. Velocity peaks exactly as the projectile reaches the coil centre, then falls as the coil pulls it back.</figcaption></figure>
+
+        <section class="reveal"><span class="section-number">05</span><span class="section-label">Result</span><h2>Nearly half the muzzle velocity was being thrown away.</h2><p>The model reproduces suckback without being told to: the inductance gradient changes sign at the coil centre, so the coil pulls the projectile in on approach and drags it back on the way out. Simulated peak velocity lands at the coil centre to within a hundredth of a millimetre — a behaviour that emerges from the equations rather than being programmed in.</p><p>At my actual projectile placement, the simulator predicts a peak of 18.14 m/s but an exit velocity of only 9.64 m/s. <strong>46.8% of the velocity is lost after the projectile passes the coil centre.</strong></p><p>Sweeping the starting position produced a testable prediction about my own hardware: I had placed the projectile almost exactly where <em>peak</em> velocity is maximised, but peak is not what leaves the barrel. Starting it about 12 mm further back trades a little peak speed for far less braking time — a predicted gain from 9.64 to 13.22 m/s, roughly 37%, for free.</p></section>
+
+        <section class="reveal"><span class="section-number">06</span><span class="section-label">Honesty</span><h2>What the model gets wrong, and why I left it wrong.</h2><p>The simulator predicts 9.64 m/s where I measure 6–7. It over-predicts by roughly 45%, and I did not tune any parameter to close that gap.</p><p>Over-prediction is the expected direction. The model omits eddy currents in a solid 44 mm slug, magnetic saturation at peak currents in the hundreds of amps, barrel friction, and the rise in coil resistance as it heats — every one of which removes energy. Several inputs are also estimates rather than measurements: I derived the inductance-bump width from geometry rather than fitting it, and Wheeler's formula puts my assumed coil inductance within about 27% of an independent estimate.</p><p>A model fitted until it matches its own validation data proves nothing. A model that misses by 45% in the direction its missing physics predicts is evidence the structure is right, and it tells me exactly what to measure next.</p></section>
+
+        <a class="next-project reveal" href="electromagnetic-accelerator.html"><div><span>Next project</span><h2>Electromagnetic Accelerator</h2></div><b>→</b></a>
+        <div class="detail-actions reveal">
+          <a class="button button-primary button-back" href="../index.html#projects"><span aria-hidden="true">&#8592;</span> All projects</a>
+          <a class="button" href="../index.html#resume">Read my resume <span aria-hidden="true">&#8599;</span></a>
+          <a class="button" href="mailto:calviny7@uci.edu">Get in touch <span aria-hidden="true">&#8599;</span></a>
+        </div>
+      </div>
+    </div>
+  </main>
+  <footer class="contact"><div class="contact-inner"><div class="footer-line"><span>Calvin Yang / Engineering Portfolio</span><a href="mailto:calviny7@uci.edu">calviny7@uci.edu ↗</a></div></div></footer>
+  <script src="../portfolio.js?v=14"></script>
+  <script src="../motion.js?v=14"></script>
+</body>
+</html>

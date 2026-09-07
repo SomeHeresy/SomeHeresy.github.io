@@ -62,7 +62,7 @@
           "bullets": [
             "Designed and built a two-stage coil gun, solving the challenge of precisely timing sequential electromagnetic coils to efficiently accelerate a projectile.",
             "Used ANSYS Maxwell 2D for electromagnetic field simulation and coil-timing optimization, Fusion 360 for mechanical design, 3D printing for fabrication, and Arduino for stage-control logic.",
-            "Achieved approximately 16 m/s projectile velocity with a 54.63 g projectile using four 400 V, 330 µF capacitors."
+            "Achieved approximately 11 m/s projectile velocity with a 54.63 g projectile using four 400 V, 330 µF capacitors."
           ]
         },
         {

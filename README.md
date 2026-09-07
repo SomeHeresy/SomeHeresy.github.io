@@ -26,7 +26,7 @@ The site documents three engineering projects in depth, each with its own case-s
 
 **Motion and navigation.** Scroll-triggered, staggered reveals, gentle image drift, pointer-responsive project media, click feedback, and coordinated hover states retain the field-notes identity. On supporting browsers, native cross-document view transitions carry the selected project's image and title into its case study (and back). Other browsers get a short fade/slide with ordinary navigation. Modified clicks, downloads, hash navigation, browser history, no-JS reading, keyboard controls and reduced motion are preserved.
 
-**Coilgun simulator progress.** A separate project block identifies the Python prototype as early work as of September 2026. RK4, RC decay validation, and an RLC energy check are implemented; force/motion, timing, CLI, and hardware comparison remain future work. The ~16 m/s result elsewhere on the page belongs to the measured physical hardware.
+**Coilgun simulator.** A separate project block links to the [simulator case study](https://someheresy.github.io/projects/coilgun-simulator.html), completed September 2026: a custom RK4 integrator, a coupled circuit-and-projectile model, an energy-conservation identity holding to 6e-14, and 22 tests running in CI. Two velocity figures appear across the site and they are not the same measurement — the ~11 m/s two-stage result belongs to the physical hardware, while the simulator's 9.64 m/s prediction and 6-7 m/s comparison are single-stage at 350 V.
 
 **Interactive wiring schematic.** The Arduino case study uses a hand-drawn SVG schematic rather than a stock photo: 5 V and ground rails, labelled pin assignments, junction dots, and a wire hop where two nets cross without connecting. Hovering a component isolates the nets it sits on and dims the rest.
 
@@ -42,7 +42,7 @@ The site documents three engineering projects in depth, each with its own case-s
 
 | Project | Period | Tools | Outcome | Source |
 |---|---|---|---|---|
-| [Electromagnetic Accelerator](https://someheresy.github.io/projects/electromagnetic-accelerator.html) | 2022 – present | ANSYS Maxwell 2D, Fusion 360, Arduino, 3D printing | ~16 m/s with a 54.63 g projectile | [Stage control](https://github.com/SomeHeresy/Electromagnetic-Accelerator) |
+| [Electromagnetic Accelerator](https://someheresy.github.io/projects/electromagnetic-accelerator.html) | 2022 – present | ANSYS Maxwell 2D, Fusion 360, Arduino, 3D printing | ~11 m/s with a 54.63 g projectile | [Stage control](https://github.com/SomeHeresy/Electromagnetic-Accelerator) |
 | [American Rocketry Challenge](https://someheresy.github.io/projects/american-rocketry-challenge.html) | Nov 2025 – Mar 2026 | OpenRocket | 23.2% simulation accuracy gain, official score 139.8 | — |
 | [Arduino Sensor & Control System](https://someheresy.github.io/projects/arduino-sensor-control.html) | Jun – Jul 2026 | Arduino Uno R3, C/C++, I²C | Two sensor inputs on a 100 ms OLED refresh | [Firmware](https://github.com/SomeHeresy/2026-summer-projects/tree/main/Arduino/Advanced) |
 
