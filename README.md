@@ -7,12 +7,23 @@ Personal portfolio site for **Calvin Yang**, a Computer Science & Engineering st
 [![Live](https://img.shields.io/badge/live-someheresy.github.io-9ee5d1)](https://someheresy.github.io/)
 ![Built with](https://img.shields.io/badge/built%20with-HTML%20%C2%B7%20CSS%20%C2%B7%20JS-edba72)
 ![Dependencies](https://img.shields.io/badge/dependencies-none-b6a9ed)
+![Code](https://img.shields.io/badge/code-AI%20built-c9a2ff)
+
+---
+
+## How this site was built
+
+**This website was built by AI. I did not write the HTML, CSS, or JavaScript in this repository.**
+
+What I did was direct it: I chose the visual style I wanted, decided what the site should say, supplied all of the engineering content, photography, simulation captures, and résumé, and reviewed each iteration until it looked and read the way I had in mind. Claude wrote the code from that guidance.
+
+The engineering projects this site documents — the coil gun, the simulator, the rocketry work, the Arduino system — are my own work. The website that presents them is not, and I would rather say so plainly than let anyone assume otherwise.
 
 ---
 
 ## About
 
-This is a hand-written static site — no framework, no build step, no package manager, and no third-party runtime dependencies. Everything ships as it is committed.
+This is a dependency-free static site — no framework, no build step, no package manager, and no third-party runtime dependencies. Everything ships as it is committed.
 
 The site documents four engineering projects in depth, each with its own case-study page. It also renders my full résumé inline so visitors can read it without downloading anything.
 
@@ -28,7 +39,7 @@ The site documents four engineering projects in depth, each with its own case-st
 
 **Coilgun simulator.** A separate project block links to the [simulator case study](https://someheresy.github.io/projects/coilgun-simulator.html), completed September 2026: a custom RK4 integrator, a coupled circuit-and-projectile model, an energy-conservation identity holding to 6e-14, and 22 tests running in CI. Two velocity figures appear across the site and they are not the same measurement — the ~11 m/s two-stage result belongs to the physical hardware, while the simulator's 9.64 m/s prediction and 6-7 m/s comparison are single-stage at 350 V.
 
-**Interactive wiring schematic.** The Arduino case study uses a hand-drawn SVG schematic rather than a stock photo: 5 V and ground rails, labelled pin assignments, junction dots, and a wire hop where two nets cross without connecting. Hovering a component isolates the nets it sits on and dims the rest.
+**Interactive wiring schematic.** The Arduino case study uses a purpose-drawn SVG schematic rather than a stock photo: 5 V and ground rails, labelled pin assignments, junction dots, and a wire hop where two nets cross without connecting. Hovering a component isolates the nets it sits on and dims the rest.
 
 **Inline résumé.** The résumé is rendered as semantic HTML at full size and readable on any screen. The PDF download is a secondary, optional action rather than a prerequisite.
 
@@ -56,7 +67,7 @@ The coil gun case study is organised by physical build — V1 (2022, single stag
 | Layer | Choice |
 |---|---|
 | Markup | Semantic HTML5 |
-| Styling | Hand-written CSS with custom properties, fluid `clamp()` type, CSS Grid and Flexbox |
+| Styling | Plain CSS with custom properties, fluid `clamp()` type, CSS Grid and Flexbox |
 | Scripting | Vanilla ES2020+ JavaScript, no libraries |
 | Graphics | Canvas 2D for the hero animation, inline SVG for diagrams |
 | Hosting | GitHub Pages |
@@ -184,7 +195,7 @@ For the Python command, open `http://localhost:8000`; for `npx serve`, use the U
 
 The repository is a GitHub Pages user site, published from the root of the `main` branch. Any push to `main` redeploys automatically.
 
-`.nojekyll` disables the default Jekyll build step. Without it, GitHub Pages would silently drop any directory whose name begins with an underscore and would try to interpret `{{ … }}` and `{% … %}` as Liquid template syntax. Since this site is hand-written and needs no preprocessing, opting out removes a class of confusing build failures.
+`.nojekyll` disables the default Jekyll build step. Without it, GitHub Pages would silently drop any directory whose name begins with an underscore and would try to interpret `{{ … }}` and `{% … %}` as Liquid template syntax. Since this site ships as plain files and needs no preprocessing, opting out removes a class of confusing build failures.
 
 ---
 
@@ -218,4 +229,6 @@ Open to engineering internships, UCI student teams, research opportunities, and 
 
 ## Usage
 
-The source is public so others can read how the site is built, and you are welcome to learn from it. Project write-ups, photography, and résumé content are personal to me — please do not republish them as your own.
+The source is public so others can read how the site is built, and you are welcome to learn from it. Note that the code is AI-generated, so treat it as such — it is not a sample of my own programming.
+
+Project write-ups, photography, and résumé content are personal to me — please do not republish them as your own.
