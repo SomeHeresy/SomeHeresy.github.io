@@ -57,6 +57,7 @@ SOCIAL_CARDS = {
     "electromagnetic-accelerator": "coilgun/version3/v3 main setup.PNG",
     "american-rocketry-challenge": "ARC Project/rocket body.png",
     "arduino-sensor-control": "arduino/full-setup.jpg",
+    "coilgun-simulator": "coilgun-simulator/velocity-vs-start-position.png",
 }
 
 
