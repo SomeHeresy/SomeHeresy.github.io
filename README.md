@@ -14,15 +14,15 @@ Personal portfolio site for **Calvin Yang**, a Computer Science & Engineering st
 
 This is a hand-written static site — no framework, no build step, no package manager, and no third-party runtime dependencies. Everything ships as it is committed.
 
-The site documents three engineering projects in depth, each with its own case-study page, plus the early-stage Python coilgun simulator. It also renders my full résumé inline so visitors can read it without downloading anything.
+The site documents four engineering projects in depth, each with its own case-study page. It also renders my full résumé inline so visitors can read it without downloading anything.
 
 ---
 
 ## Highlights
 
-**Engineering field notes.** A cool paper background, copper accents, oversized nameplate, and open project spreads built around actual workbench photography. The visual identity extends to all three case studies, the inline résumé, and mobile layouts. Personal copy draws on Calvin's interests in science fiction, electromagnetism, tennis, and video creation.
+**Engineering field notes.** A cool paper background, copper accents, oversized nameplate, and open project spreads built around actual workbench photography. The visual identity extends to all four case studies, the inline résumé, and mobile layouts. Personal copy draws on Calvin's interests in science fiction, electromagnetism, tennis, and video creation.
 
-**Compact two-stage field animation.** A small visual accent uses Biot–Savart quadrature of circular turns to draw axisymmetric magnetic flux contours and an accelerating projectile. The top-right button starts looping. Clicking again finishes the current run before stopping; clicking while it is finishing resumes looping. There is no autoplay, scrubber, speed selector, probe, or expanded view. Playback suspends off-screen and in background tabs. The dimensionless air-core model is illustrative rather than a prediction of real hardware; the separate Python simulator remains early work.
+**Compact two-stage field animation.** A small visual accent uses Biot–Savart quadrature of circular turns to draw axisymmetric magnetic flux contours and an accelerating projectile. The top-right button starts looping. Clicking again finishes the current run before stopping; clicking while it is finishing resumes looping. There is no autoplay, scrubber, speed selector, probe, or expanded view. Playback suspends off-screen and in background tabs. The dimensionless air-core model is illustrative rather than a prediction of real hardware; quantitative predictions come from the separate Python simulator.
 
 **Motion and navigation.** Scroll-triggered, staggered reveals, gentle image drift, pointer-responsive project media, click feedback, and coordinated hover states retain the field-notes identity. On supporting browsers, native cross-document view transitions carry the selected project's image and title into its case study (and back). Other browsers get a short fade/slide with ordinary navigation. Modified clicks, downloads, hash navigation, browser history, no-JS reading, keyboard controls and reduced motion are preserved.
 
@@ -42,7 +42,8 @@ The site documents three engineering projects in depth, each with its own case-s
 
 | Project | Period | Tools | Outcome | Source |
 |---|---|---|---|---|
-| [Electromagnetic Accelerator](https://someheresy.github.io/projects/electromagnetic-accelerator.html) | 2022 – present | ANSYS Maxwell 2D, Fusion 360, Arduino, 3D printing | ~11 m/s with a 54.63 g projectile | [Stage control](https://github.com/SomeHeresy/Electromagnetic-Accelerator) |
+| [Electromagnetic Accelerator](https://someheresy.github.io/projects/electromagnetic-accelerator.html) | 2022 – present | ANSYS Maxwell 2D, Fusion 360, Arduino, 3D printing | ~11 m/s with a 54.64 g projectile | [Stage control](https://github.com/SomeHeresy/Electromagnetic-Accelerator) |
+| [Coilgun Timing Simulator](https://someheresy.github.io/projects/coilgun-simulator.html) | Aug – Sep 2026 | Python, NumPy, pytest, GitHub Actions | 46.8% suckback loss quantified; energy conserved to 6e-14 | [Simulator](https://github.com/SomeHeresy/Coilgun-Simulator) |
 | [American Rocketry Challenge](https://someheresy.github.io/projects/american-rocketry-challenge.html) | Nov 2025 – Mar 2026 | OpenRocket | 23.2% simulation accuracy gain, official score 139.8 | — |
 | [Arduino Sensor & Control System](https://someheresy.github.io/projects/arduino-sensor-control.html) | Jun – Jul 2026 | Arduino Uno R3, C/C++, I²C | Two sensor inputs on a 100 ms OLED refresh | [Firmware](https://github.com/SomeHeresy/2026-summer-projects/tree/main/Arduino/Advanced) |
 
@@ -81,6 +82,7 @@ The coil gun case study is organised by physical build — V1 (2022, single stag
 ├── 404.html            # Not-found page, in the same visual identity
 ├── projects/           # Case-study pages
 │   ├── electromagnetic-accelerator.html
+│   ├── coilgun-simulator.html
 │   ├── american-rocketry-challenge.html
 │   └── arduino-sensor-control.html
 ├── assets/             # Project photography and simulation captures

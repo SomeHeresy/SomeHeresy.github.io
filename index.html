@@ -168,7 +168,7 @@
             <div>
               <dl class="resume-skills">
                 <div><dt>Programming Languages</dt><dd>Java, Python, C/C++, JavaScript, HTML/CSS</dd></div>
-                <div><dt>Software</dt><dd>ANSYS Maxwell, Fusion 360, VS Code, EasyEDA, OpenRocket, CapCut, Microsoft Office, Adobe Photoshop</dd></div>
+                <div><dt>Software</dt><dd>ANSYS Maxwell, Fusion 360, VS Code, EasyEDA, OpenRocket, NumPy, pytest, Git, GitHub Actions, CapCut,</dd></div>
               </dl>
             </div>
           </div>
@@ -182,7 +182,16 @@
                 <ul>
                   <li>Designed and built a two-stage coil gun, solving the challenge of precisely timing sequential electromagnetic coils to efficiently accelerate a projectile.</li>
                   <li>Used ANSYS Maxwell 2D for electromagnetic field simulation and coil-timing optimization, Fusion 360 for mechanical design, 3D printing for fabrication, and Arduino for stage-control logic.</li>
-                  <li>Achieved approximately 11 m/s projectile velocity with a 54.63 g projectile using four 400 V, 330 µF capacitors.</li>
+                  <li>Achieved approximately 11 m/s projectile velocity with a 54.64 g projectile using four 400 V, 330 µF capacitors.</li>
+                </ul>
+              </div>
+              <div class="resume-entry">
+                <div class="resume-entry-head"><h5>Coilgun Timing Simulator</h5><span class="resume-when">Aug. 2026 – Sep. 2026</span></div>
+                <p class="resume-where">Individual Project</p>
+                <ul>
+                  <li>Built a Python simulator coupling capacitor-discharge circuit dynamics to projectile motion through a position-dependent inductance model, solving the resulting 5-variable coupled ODE system with a custom 4th-order Runge-Kutta integrator.</li>
+                  <li>Validated numerically rather than by fitting: matched the closed-form RLC solution, confirmed 4th-order convergence (16.0× error reduction per step halving), and enforced energy conservation to 6×10⁻¹⁴ relative across circuit, kinetic, and resistive terms.</li>
+                  <li>Automated 22 tests across 3 Python versions in GitHub Actions; quantified a 46.8% velocity loss to magnetic suckback and identified a projectile-placement change predicted to recover 37% of muzzle velocity.</li>
                 </ul>
               </div>
               <div class="resume-entry">
