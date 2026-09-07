@@ -7,17 +7,15 @@ Personal portfolio site for **Calvin Yang**, a Computer Science & Engineering st
 [![Live](https://img.shields.io/badge/live-someheresy.github.io-9ee5d1)](https://someheresy.github.io/)
 ![Built with](https://img.shields.io/badge/built%20with-HTML%20%C2%B7%20CSS%20%C2%B7%20JS-edba72)
 ![Dependencies](https://img.shields.io/badge/dependencies-none-b6a9ed)
-![Code](https://img.shields.io/badge/code-AI%20built-c9a2ff)
+![Code](https://img.shields.io/badge/code-written%20with%20AI-c9a2ff)
 
 ---
 
 ## How this site was built
 
-**This website was built by AI. I did not write the HTML, CSS, or JavaScript in this repository.**
+I built this site with AI. The HTML, CSS, and JavaScript here were written by Claude, not typed by me. My work was everything on either side of that: the visual direction and the look I was after, what each page needed to say, all of the engineering content, photography, simulation captures, and résumé, and the review loop that took each page from close to correct.
 
-What I did was direct it: I chose the visual style I wanted, decided what the site should say, supplied all of the engineering content, photography, simulation captures, and résumé, and reviewed each iteration until it looked and read the way I had in mind. Claude wrote the code from that guidance.
-
-The engineering projects this site documents — the coil gun, the simulator, the rocketry work, the Arduino system — are my own work. The website that presents them is not, and I would rather say so plainly than let anyone assume otherwise.
+I am stating it up front because the projects this site documents — the coil gun, the simulator, the rocketry work, the Arduino system — are hardware and firmware I designed, built, and debugged myself. Those are the work. This site is how I present it, and I would rather the line between the two be explicit than inferred.
 
 ---
 
