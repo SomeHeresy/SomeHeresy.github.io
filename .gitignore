@@ -1,0 +1,11 @@
+# Local editor / assistant settings
+.claude/
+.vscode/
+
+# Python
+__pycache__/
+*.pyc
+
+# OS clutter
+.DS_Store
+Thumbs.db

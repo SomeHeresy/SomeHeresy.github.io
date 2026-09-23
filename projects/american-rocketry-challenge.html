@@ -1,9 +1,15 @@
 <!doctype html>
 <html lang="en">
 <head>
-  <meta charset="utf-8"><meta name="viewport" content="width=device-width,initial-scale=1">
+  <!-- BUILD:head -->
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <title>American Rocketry Challenge | Calvin Yang</title>
   <meta name="description" content="Calvin Yang's American Rocketry Challenge case study: OpenRocket simulation, iterative flight analysis, team engineering, and two qualification flights.">
-  <meta name="theme-color" content="#e9eae4">
+  <meta name="color-scheme" content="light dark">
+  <meta name="theme-color" content="#f1f0ea" media="(prefers-color-scheme: light)">
+  <meta name="theme-color" content="#0b0c0b" media="(prefers-color-scheme: dark)">
+  <link rel="canonical" href="https://someheresy.github.io/projects/american-rocketry-challenge.html">
   <meta property="og:type" content="article">
   <meta property="og:site_name" content="Calvin Yang">
   <meta property="og:title" content="American Rocketry Challenge | Calvin Yang">
@@ -12,61 +18,181 @@
   <meta property="og:image" content="https://someheresy.github.io/assets/social/american-rocketry-challenge.jpg">
   <meta property="og:image:width" content="1200">
   <meta property="og:image:height" content="630">
-  <meta property="og:image:alt" content="The team’s purple competition rocket">
+  <meta property="og:image:alt" content="The team's purple competition rocket, fins and nose cone">
   <meta name="twitter:card" content="summary_large_image">
-  <link rel="canonical" href="https://someheresy.github.io/projects/american-rocketry-challenge.html">
   <link rel="icon" href="../favicon.svg" type="image/svg+xml">
   <link rel="apple-touch-icon" href="../apple-touch-icon.png">
-  <link rel="stylesheet" href="../portfolio.css?v=14">
-  <title>American Rocketry Challenge | Calvin Yang</title>
-  <link rel="stylesheet" href="../field-notes.css?v=14">
-  <link rel="stylesheet" href="../motion.css?v=14">
-  <script src="../page-transitions.js?v=14"></script>
+  <link rel="preload" href="../fonts/unbounded-800.woff2" as="font" type="font/woff2" crossorigin>
+  <link rel="preload" href="../fonts/geist-variable.woff2" as="font" type="font/woff2" crossorigin>
+  <link rel="preload" href="../fonts/martian-mono-400.woff2" as="font" type="font/woff2" crossorigin>
+  <link rel="stylesheet" href="../css/site.css?v=175f6655">
+  <script src="../js/head.js?v=999e1c6e"></script>
+  <!-- /BUILD:head -->
 </head>
-<body class="detail-page" id="top">
-  <a class="skip-link" href="#case-study">Skip to case study</a><div class="scroll-progress" aria-hidden="true"></div>
-  <nav class="site-nav" aria-label="Primary navigation"><div class="nav-inner"><a class="brand" href="../index.html" aria-label="Calvin Yang, home"><span class="brand-mark" aria-hidden="true"></span><span>Calvin Yang</span></a><button class="menu-button" type="button" aria-expanded="false" aria-controls="nav-links">Menu</button><div class="nav-links" id="nav-links"><a href="../index.html#projects">Projects</a><a href="../index.html#about">About</a><a href="../index.html#experience">Experience</a><a href="../index.html#resume">Resume</a><a class="nav-contact" href="../index.html#contact">Contact</a></div></div></nav>
-  <main class="detail-main" id="case-study">
-    <header class="detail-hero reveal"><a class="back-link" href="../index.html#projects">← All projects</a><p class="project-kicker">Team engineering · Project 02</p><h1 data-project-title="american-rocketry-challenge">American Rocketry Challenge</h1><p class="detail-lede">R&D and simulation work for a seven-member engineering team designing, building, and flying a competition rocket—with iterative analysis connected to two qualification flights.</p><div class="detail-tags"><span>OpenRocket</span><span>Aerospace</span><span>Simulation</span><span>Teamwork</span><span>Flight testing</span></div></header>
-    <figure class="detail-visual rocket reveal" data-project-image="american-rocketry-challenge"><img src="../assets/ARC Project/rocket body.webp" alt="Purple American Rocketry Challenge rocket body and fins" width="806" height="1438"></figure>
-    <div class="detail-layout">
-      <aside class="project-meta reveal" aria-label="Project metadata"><div><span class="detail-label">Role</span><strong>R&D and Simulation Lead</strong></div><div><span class="detail-label">Timeline</span><strong>Nov 2025–Mar 2026</strong></div><div><span class="detail-label">Team</span><strong>7 members</strong></div><div><span class="detail-label">Tool</span><strong>OpenRocket</strong></div>
-        <!-- No repo card here on purpose: the simulation files are not
-             published, and a "Source code" button that lands on the profile
-             page is worse than no button. Add one back when the repo exists,
-             copying the .repo-link markup from the coil gun case study. -->
-      </aside>
-      <div class="detail-content">
-        <section class="reveal"><span class="section-number">01</span><span class="section-label">Overview</span><h2>Simulation that had to survive launch day.</h2><p>My role centered on flight simulation and design iteration. I used OpenRocket to evaluate vehicle behavior and help the team develop the rocket around aerodynamic stability and competition constraints.</p><div class="metric-grid"><div><strong>23.2%</strong><span>Flight accuracy improvement</span></div><div><strong>25.6 in</strong><span>Vehicle length</span></div><div><strong>139.8</strong><span>Official score</span></div></div></section>
-        <section class="reveal"><span class="section-number">02</span><span class="section-label">The challenge</span><h2>Turn a model into a predictable vehicle.</h2><p>Competition performance depended on more than producing a flyable rocket. The team needed a vehicle whose simulated behavior could guide design decisions and improve the precision of the physical flights.</p><ul><li>Iterate on the vehicle model using OpenRocket.</li><li>Evaluate aerodynamic and stability considerations as the design developed.</li><li>Communicate simulation findings to a seven-member build team.</li><li>Compare the analysis against physical qualification-flight performance.</li></ul></section>
-        <section class="reveal"><span class="section-number">03</span><span class="section-label">My contribution</span><h2>R&D connected to the team build.</h2><h3>Flight analysis</h3><p>I ran iterative OpenRocket analysis and used the resulting behavior to inform design decisions. The work improved simulated flight accuracy by 23.2%.</p><h3>Team engineering</h3><p>I collaborated with six other team members throughout the design and build of the 25.6-inch vehicle, keeping the simulation work grounded in the team’s physical configuration.</p><h3>Qualification flights</h3><p>The completed rocket flew twice in competition qualification and recorded an official total score of 139.8.</p></section>
-        <section class="reveal"><span class="section-number">04</span><span class="section-label">Flight evidence</span><h2>From the workbench to two launches.</h2><div class="gallery"><figure class="wide"><img src="../assets/ARC Project/rocket body.webp" alt="Full American Rocketry Challenge competition rocket" loading="lazy" width="806" height="1438"><figcaption>Competition vehicle / 25.6-inch assembled rocket</figcaption></figure></div><div class="video-grid">
-            <div class="video-card" data-yt="N5_v7aXseQs">
-              <button class="video-trigger" type="button" aria-label="Play: Qualification rocket launch">
-                <span class="video-frame"><img src="https://i.ytimg.com/vi/N5_v7aXseQs/maxresdefault.jpg" alt="" loading="lazy" onerror="this.src='https://i.ytimg.com/vi/N5_v7aXseQs/hqdefault.jpg'" width="1280" height="720"><span class="video-play" aria-hidden="true"></span></span>
-              </button>
-              <div class="video-meta"><strong>Qualification rocket launch</strong><span class="video-cta">Watch here</span></div>
+<body>
+  <!-- BUILD:header -->
+  <a class="skip-link" href="#main">Skip to content</a>
+  <div class="progress" aria-hidden="true"></div>
+  <header class="site-header">
+    <div class="wrap site-header__inner">
+      <a class="brand" href="../" aria-label="Calvin Yang, home"><svg class="brand__mark" viewBox="4 1 24 30" aria-hidden="true" focusable="false"><g fill="currentColor"><polygon points="7,11 11,9.22 11,27.22 7,29"/><polygon points="14,7.89 18,6.11 18,24.11 14,25.89"/><polygon points="21,4.77 25,3 25,21 21,22.77"/></g></svg><span class="brand__name">Calvin Yang</span></a>
+      <nav class="nav" id="site-nav" aria-label="Primary">
+        <ul class="nav__list">
+          <li><a class="nav__link" href="../#work">Work</a></li>
+          <li><a class="nav__link" href="../#about">About</a></li>
+          <li><a class="nav__link" href="../#experience">Experience</a></li>
+          <li><a class="nav__link" href="../#resume">Résumé</a></li>
+          <li><a class="nav__link" href="../#contact">Contact</a></li>
+        </ul>
+      </nav>
+      <button class="icon-btn theme-toggle" type="button" data-theme-toggle aria-label="Switch theme"><svg class="icon-moon" viewBox="0 0 24 24" aria-hidden="true" focusable="false" fill="none" stroke="currentColor" stroke-width="1.6"><path d="M20 14.5A8 8 0 0 1 9.5 4a8 8 0 1 0 10.5 10.5Z"/></svg><svg class="icon-sun" viewBox="0 0 24 24" aria-hidden="true" focusable="false" fill="none" stroke="currentColor" stroke-width="1.6"><circle cx="12" cy="12" r="4.2"/><path d="M12 2.5v2.2M12 19.3v2.2M2.5 12h2.2M19.3 12h2.2M5.3 5.3l1.6 1.6M17.1 17.1l1.6 1.6M5.3 18.7l1.6-1.6M17.1 6.9l1.6-1.6"/></svg></button>
+      <button class="icon-btn menu-btn" type="button" data-menu-toggle aria-expanded="false" aria-controls="site-nav"><span data-menu-label>Menu</span></button>
+    </div>
+  </header>
+  <!-- /BUILD:header -->
+
+  <main id="main">
+    <article class="cs" aria-labelledby="cs-title">
+      <header class="cs-hero">
+        <div class="wrap">
+          <!-- BUILD:kicker -->
+          <div class="crumbs label">
+            <a href="../#work"><span aria-hidden="true">←</span> All projects</a>
+            <span>Project 03 / 04</span>
+          </div>
+          <p class="label label--accent cs-kicker">Team engineering · Flight</p>
+          <!-- /BUILD:kicker -->
+          <h1 class="cs-title" id="cs-title" data-project-title="american-rocketry-challenge">American Rocketry Challenge</h1>
+          <div class="cs-intro">
+            <div>
+              <p class="cs-lede">R&amp;D and simulation work for a seven-member engineering team designing, building, and flying a competition rocket — with iterative analysis connected to two qualification flights.</p>
+              <ul class="chips" aria-label="Tools and methods"><li>OpenRocket</li><li>Aerospace</li><li>Simulation</li><li>Teamwork</li><li>Flight testing</li></ul>
             </div>
-            <div class="video-card" data-yt="GN1G7JiqXjM">
-              <button class="video-trigger" type="button" aria-label="Play: Launch setup">
-                <span class="video-frame"><img src="https://i.ytimg.com/vi/GN1G7JiqXjM/maxresdefault.jpg" alt="" loading="lazy" onerror="this.src='https://i.ytimg.com/vi/GN1G7JiqXjM/hqdefault.jpg'" width="1280" height="720"><span class="video-play" aria-hidden="true"></span></span>
-              </button>
-              <div class="video-meta"><strong>Launch setup</strong><span class="video-cta">Watch here</span></div>
+            <div>
+              <dl class="spec">
+                <div><dt>Role</dt><dd>R&amp;D and Simulation Lead</dd></div>
+                <div><dt>Timeline</dt><dd>Nov 2025 – Mar 2026</dd></div>
+                <div><dt>Team</dt><dd>7 members</dd></div>
+                <div><dt>Tool</dt><dd>OpenRocket</dd></div>
+              </dl>
+              <!-- No source link on purpose: the simulation files are not
+                   published. Add a .repo-link (see the coilgun page) when they are. -->
             </div>
           </div>
-          <p class="video-note">Videos play on this page. Full channel: <a href="https://www.youtube.com/@SomeHeresyGaming" target="_blank" rel="noopener noreferrer">@SomeHeresyGaming &#8599;</a></p></section>
-        <section class="reveal"><span class="section-number">05</span><span class="section-label">Outcome</span><h2>Better predictions and a complete flight cycle.</h2><p>The project strengthened my ability to use simulation as a collaborative engineering tool—not just a model. It required translating analysis into shared design decisions, then watching those decisions meet fabrication constraints and real flight conditions.</p></section>
-        <a class="next-project reveal" href="arduino-sensor-control.html"><div><span>Next project</span><h2>Arduino Sensor & Control System</h2></div><b>→</b></a>
-        <div class="detail-actions reveal">
-          <a class="button button-primary button-back" href="../index.html#projects"><span aria-hidden="true">&#8592;</span> All projects</a>
-          <a class="button" href="../index.html#resume">Read my resume <span aria-hidden="true">&#8599;</span></a>
-          <a class="button" href="mailto:calviny7@uci.edu">Get in touch <span aria-hidden="true">&#8599;</span></a>
+        </div>
+        <div class="wrap">
+          <figure class="figure cs-media">
+            <div class="frame">
+              <div class="frame__media" data-project-image="american-rocketry-challenge" style="--ratio: 1438 / 806"><img src="../assets/arc/rocket-body-landscape.webp" srcset="../assets/arc/rocket-body-landscape-800.webp 800w, ../assets/arc/rocket-body-landscape.webp 1438w" sizes="(max-width: 1360px) 100vw, 1320px" alt="The team's purple competition rocket photographed from above, lying across its shipping box: black and yellow fins at the tail, nose cone at the right" width="1438" height="806"></div>
+            </div>
+            <figcaption><span class="figure__num">Fig. 01</span>The 25.6-inch competition vehicle, assembled.</figcaption>
+          </figure>
+        </div>
+      </header>
+
+      <div class="wrap cs-layout">
+        <nav class="cs-toc" aria-label="On this page">
+          <p class="label">On this page</p>
+          <ol>
+            <li><a href="#overview"><span>01</span>Overview</a></li>
+            <li><a href="#challenge"><span>02</span>The challenge</a></li>
+            <li><a href="#contribution"><span>03</span>My contribution</a></li>
+            <li><a href="#flights"><span>04</span>Flight evidence</a></li>
+            <li><a href="#outcome"><span>05</span>Outcome</a></li>
+          </ol>
+        </nav>
+
+        <div class="cs-body">
+          <section class="cs-section flow" id="overview" aria-labelledby="overview-title">
+            <p class="label label--accent">01 — Overview</p>
+            <h2 id="overview-title">Simulation that had to survive launch day.</h2>
+            <p>My role centered on flight simulation and design iteration. I used OpenRocket to evaluate vehicle behavior and help the team develop the rocket around aerodynamic stability and competition constraints.</p>
+            <dl class="readouts">
+              <div class="readout"><dt>Simulated flight accuracy gain</dt><dd>23.2<span class="unit">%</span></dd></div>
+              <div class="readout"><dt>Vehicle length</dt><dd>25.6<span class="unit">in</span></dd></div>
+              <div class="readout"><dt>Official score</dt><dd>139.8</dd></div>
+            </dl>
+          </section>
+
+          <section class="cs-section flow" id="challenge" aria-labelledby="challenge-title">
+            <p class="label label--accent">02 — The challenge</p>
+            <h2 id="challenge-title">Turn a model into a predictable vehicle.</h2>
+            <p>Competition performance depended on more than producing a flyable rocket. The team needed a vehicle whose simulated behavior could guide design decisions and improve the precision of the physical flights.</p>
+            <ul class="ticks">
+              <li>Iterate on the vehicle model using OpenRocket.</li>
+              <li>Evaluate aerodynamic and stability considerations as the design developed.</li>
+              <li>Communicate simulation findings to a seven-member build team.</li>
+              <li>Compare the analysis against physical qualification-flight performance.</li>
+            </ul>
+          </section>
+
+          <section class="cs-section flow" id="contribution" aria-labelledby="contribution-title">
+            <p class="label label--accent">03 — My contribution</p>
+            <h2 id="contribution-title">R&amp;D connected to the team build.</h2>
+            <h3>Flight analysis</h3>
+            <p>I ran iterative OpenRocket analysis and used the resulting behavior to inform design decisions. The work improved simulated flight accuracy by 23.2%.</p>
+            <h3>Team engineering</h3>
+            <p>I collaborated with six other team members throughout the design and build of the 25.6-inch vehicle, keeping the simulation work grounded in the team’s physical configuration.</p>
+            <h3>Qualification flights</h3>
+            <p>The completed rocket flew twice in competition qualification and recorded an official total score of 139.8.</p>
+          </section>
+
+          <section class="cs-section flow" id="flights" aria-labelledby="flights-title">
+            <p class="label label--accent">04 — Flight evidence</p>
+            <h2 id="flights-title">From the workbench to two launches.</h2>
+            <div class="video-grid">
+              <div class="video" data-yt="N5_v7aXseQs">
+                <div class="video__screen"><button class="video__play" type="button" aria-label="Play video: Qualification launch"><img src="https://i.ytimg.com/vi/N5_v7aXseQs/hqdefault.jpg" alt="" loading="lazy" width="480" height="360"><span class="video__icon" aria-hidden="true"></span></button></div>
+                <p class="video__meta"><span class="video__title">Qualification launch</span><a class="video__out" href="https://www.youtube.com/watch?v=N5_v7aXseQs" target="_blank" rel="noopener noreferrer">YouTube <span aria-hidden="true">↗</span><span class="sr-only"> (opens in a new tab)</span></a></p>
+              </div>
+              <div class="video" data-yt="GN1G7JiqXjM">
+                <div class="video__screen"><button class="video__play" type="button" aria-label="Play video: Launch setup"><img src="https://i.ytimg.com/vi/GN1G7JiqXjM/hqdefault.jpg" alt="" loading="lazy" width="480" height="360"><span class="video__icon" aria-hidden="true"></span></button></div>
+                <p class="video__meta"><span class="video__title">Launch setup</span><a class="video__out" href="https://www.youtube.com/watch?v=GN1G7JiqXjM" target="_blank" rel="noopener noreferrer">YouTube <span aria-hidden="true">↗</span><span class="sr-only"> (opens in a new tab)</span></a></p>
+              </div>
+            </div>
+            <p class="label mt-6">Videos play on this page. Full channel: <a href="https://www.youtube.com/@SomeHeresyGaming" target="_blank" rel="noopener noreferrer">@SomeHeresyGaming <span aria-hidden="true">↗</span><span class="sr-only"> (opens in a new tab)</span></a></p>
+          </section>
+
+          <section class="cs-section flow" id="outcome" aria-labelledby="outcome-title">
+            <p class="label label--accent">05 — Outcome</p>
+            <h2 id="outcome-title">Better predictions and a complete flight cycle.</h2>
+            <p>The project strengthened my ability to use simulation as a collaborative engineering tool — not just a model. It required translating analysis into shared design decisions, then watching those decisions meet fabrication constraints and real flight conditions.</p>
+          </section>
+
+          <!-- BUILD:next -->
+          <a class="next-project" href="arduino-sensor-control.html">
+            <span>
+              <span class="label">Next · Project 04</span>
+              <span class="next-project__title">Arduino Sensor &amp; Control System</span>
+            </span>
+            <span class="next-project__arrow" aria-hidden="true">→</span>
+          </a>
+          <!-- /BUILD:next -->
+
+          <div class="cs-actions">
+            <a class="btn btn--primary" href="../#work"><span class="btn__icon btn__icon--left" aria-hidden="true">←</span>All projects</a>
+            <a class="btn" href="../#resume">Read my résumé <span class="btn__icon btn__icon--right" aria-hidden="true">→</span></a>
+            <a class="btn" href="mailto:calviny7@uci.edu">Get in touch <span class="btn__icon btn__icon--up-right" aria-hidden="true">↗</span></a>
+          </div>
         </div>
       </div>
-    </div>
+    </article>
   </main>
-  <footer class="contact"><div class="contact-inner"><div class="footer-line"><span>Calvin Yang / Engineering Portfolio</span><a href="mailto:calviny7@uci.edu">calviny7@uci.edu ↗</a></div></div></footer>
-  <script src="../portfolio.js?v=14"></script>
-  <script src="../motion.js?v=14"></script>
+
+  <!-- BUILD:footer -->
+  <footer class="site-footer">
+    <div class="wrap">
+      <dl class="title-block">
+        <div><dt>Title</dt><dd>American Rocketry Challenge</dd></div>
+        <div><dt>Drawn by</dt><dd>Calvin Yang</dd></div>
+        <div><dt>Sheet</dt><dd>4 / 5</dd></div>
+        <div><dt>Rev</dt><dd>2026.09</dd></div>
+        <div class="title-block__wide"><dt>Source</dt><dd><a href="https://github.com/SomeHeresy/SomeHeresy.github.io" target="_blank" rel="noopener noreferrer">github.com/SomeHeresy/SomeHeresy.github.io <span class="ext" aria-hidden="true">↗</span><span class="sr-only"> (opens in a new tab)</span></a></dd></div>
+      </dl>
+      <p class="site-footer__note label">© <span data-year>2026</span> Calvin Yang · Irvine, California</p>
+    </div>
+  </footer>
+  <script src="../js/site.js?v=5edd7288" defer></script>
+  <!-- /BUILD:footer -->
 </body>
 </html>

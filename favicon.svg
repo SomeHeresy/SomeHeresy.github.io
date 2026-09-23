@@ -1,11 +1,21 @@
 <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 32 32" role="img" aria-label="Calvin Yang">
   <title>Calvin Yang</title>
-  <rect width="32" height="32" fill="#e9eae4"/>
-  <!-- The site's brand mark: skewed field lines, drawn thick enough to hold
-       together at 16px. Matches .brand-mark in field-notes.css. -->
-  <g fill="#a73512" transform="skewY(-24) translate(0 7)">
-    <rect x="5"  y="2" width="4" height="28"/>
-    <rect x="12" y="2" width="4" height="28"/>
-    <rect x="19" y="2" width="4" height="28"/>
+  <!-- The brand mark: three skewed field lines, centred with room to spare so
+       they stay crisp at 16px. The header logo (tools/build_pages.py) and
+       apple-touch-icon.png use the same geometry. Colors are --bg and
+       --accent from css/site.css, with the dark theme's pair for dark UIs. -->
+  <style>
+    .ground { fill: #f1f0ea; }
+    .lines { fill: #e4531b; }
+    @media (prefers-color-scheme: dark) {
+      .ground { fill: #0b0c0b; }
+      .lines { fill: #ff6a2b; }
+    }
+  </style>
+  <rect class="ground" width="32" height="32" rx="4"/>
+  <g class="lines">
+    <polygon points="7,11 11,9.22 11,27.22 7,29"/>
+    <polygon points="14,7.89 18,6.11 18,24.11 14,25.89"/>
+    <polygon points="21,4.77 25,3 25,21 21,22.77"/>
   </g>
 </svg>

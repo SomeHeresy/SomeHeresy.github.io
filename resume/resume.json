@@ -46,7 +46,7 @@
         },
         {
           "term": "Software",
-          "detail": "ANSYS Maxwell, Fusion 360, VS Code, EasyEDA, OpenRocket, NumPy, pytest, Git, GitHub Actions, CapCut,"
+          "detail": "ANSYS Maxwell, Fusion 360, VS Code, EasyEDA, OpenRocket, NumPy, pytest, Git, GitHub Actions, CapCut"
         }
       ]
     },
@@ -83,7 +83,7 @@
           "link": "",
           "bullets": [
             "Built a real-time sensor monitoring system using an Arduino Uno R3, integrating an ultrasonic distance sensor and temperature/humidity sensor with an OLED display.",
-            "Developed C/C++ firmware to collect sensor measurements and refresh the OLED display at 50 ms intervals.",
+            "Developed C/C++ firmware to collect sensor measurements and refresh the OLED display at approximately 100 ms intervals.",
             "Implemented I2C communication between the Arduino, sensors, and OLED display."
           ]
         }

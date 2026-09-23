@@ -1,0 +1,96 @@
+{
+  "site": {
+    "name": "Calvin Yang",
+    "url": "https://someheresy.github.io/",
+    "repo": "https://github.com/SomeHeresy/SomeHeresy.github.io",
+    "email": "calviny7@uci.edu",
+    "revision": "2026.09",
+    "location": "Irvine, California",
+    "theme_colors": { "light": "#f1f0ea", "dark": "#0b0c0b" },
+    "nav": [
+      { "label": "Work", "id": "work" },
+      { "label": "About", "id": "about" },
+      { "label": "Experience", "id": "experience" },
+      { "label": "Résumé", "id": "resume" },
+      { "label": "Contact", "id": "contact" }
+    ],
+    "person": {
+      "jobTitle": "Computer Science & Engineering student",
+      "description": "Computer Science & Engineering student building embedded systems, electronics, firmware, CAD, simulation, and electromechanical prototypes.",
+      "affiliation": "University of California, Irvine",
+      "knowsAbout": [
+        "Embedded systems",
+        "Electromagnetic simulation",
+        "Firmware development",
+        "Numerical methods",
+        "Electronics prototyping",
+        "CAD and 3D printing"
+      ],
+      "sameAs": [
+        "https://github.com/SomeHeresy",
+        "https://www.linkedin.com/in/calvinyang07/",
+        "https://www.youtube.com/@SomeHeresyGaming"
+      ]
+    }
+  },
+
+  "pages": {
+    "index.html": {
+      "title": "Calvin Yang | Embedded Systems & Engineering Portfolio",
+      "short_title": "Engineering portfolio",
+      "description": "Calvin Yang is a Computer Science & Engineering student at UC Irvine building embedded systems, electronics, firmware, electromagnetic hardware, and the simulations that explain them.",
+      "og_title": "Calvin Yang | Embedded Systems & Engineering Portfolio",
+      "og_description": "A two-stage coilgun, the physics simulator that explains it, a competition rocket, and embedded firmware — built, measured, and documented.",
+      "image": "assets/social/home.jpg",
+      "image_alt": "Calvin Yang — Computer Science & Engineering, UC Irvine. Engineering portfolio.",
+      "type": "website",
+      "scripts": ["js/coil-field-model.js", "js/coil-animation.js"],
+      "person_schema": true
+    },
+    "404.html": {
+      "title": "Page not found | Calvin Yang",
+      "short_title": "Page not found",
+      "description": "That page does not exist on Calvin Yang's engineering portfolio.",
+      "noindex": true
+    }
+  },
+
+  "projects": [
+    {
+      "slug": "electromagnetic-accelerator",
+      "title": "Electromagnetic Accelerator",
+      "category": "Independent R&D · Hardware",
+      "description": "A three-version electromagnetic accelerator case study by Calvin Yang, combining ANSYS Maxwell simulation, Arduino control, Fusion 360 CAD, and physical testing.",
+      "og_description": "Three physical versions of a two-stage coilgun: ANSYS Maxwell field simulation, Fusion 360 CAD, Arduino stage timing, and ~11 m/s measured on hardware.",
+      "image": "assets/social/electromagnetic-accelerator.jpg",
+      "image_alt": "The Version 3 coilgun workbench: capacitors, Arduino, and stage-control wiring"
+    },
+    {
+      "slug": "coilgun-simulator",
+      "title": "Coilgun Timing Simulator",
+      "category": "Independent R&D · Software",
+      "description": "Calvin Yang's coilgun timing simulator case study: a Python physics engine coupling capacitor discharge to projectile motion, validated by energy conservation and against measured hardware.",
+      "og_description": "A Python physics simulator coupling capacitor discharge to projectile motion through position-dependent inductance. Quantified a 46.8% suckback loss on my own hardware.",
+      "image": "assets/social/coilgun-simulator.jpg",
+      "image_alt": "Simulated projectile velocity plotted against starting position, showing a clear optimum"
+    },
+    {
+      "slug": "american-rocketry-challenge",
+      "title": "American Rocketry Challenge",
+      "category": "Team engineering · Flight",
+      "description": "Calvin Yang's American Rocketry Challenge case study: OpenRocket simulation, iterative flight analysis, team engineering, and two qualification flights.",
+      "og_description": "R&D and simulation lead for a seven-member team: iterative OpenRocket analysis, a 25.6-inch competition vehicle, and two qualification flights.",
+      "image": "assets/social/american-rocketry-challenge.jpg",
+      "image_alt": "The team's purple competition rocket, fins and nose cone"
+    },
+    {
+      "slug": "arduino-sensor-control",
+      "title": "Arduino Sensor & Control System",
+      "category": "Embedded build · Firmware",
+      "description": "An Arduino Uno R3 sensor and control system by Calvin Yang, integrating distance, temperature and humidity sensing with a 100 ms OLED interface.",
+      "og_description": "C/C++ firmware on an Arduino Uno R3: ultrasonic distance and temperature/humidity sensing driving an OLED over I²C.",
+      "image": "assets/social/arduino-sensor-control.jpg",
+      "image_alt": "Arduino Uno wired to distance and temperature sensors and an OLED on a breadboard"
+    }
+  ]
+}

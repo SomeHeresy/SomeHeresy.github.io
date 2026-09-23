@@ -1,0 +1,39 @@
+# Keeps the generated parts of the site honest. Each tool below has a --check
+# mode that exits non-zero when the committed files are out of date.
+name: checks
+
+on:
+  push:
+  pull_request:
+
+permissions:
+  contents: read
+
+jobs:
+  checks:
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v4
+
+      - uses: actions/setup-python@v5
+        with:
+          python-version: "3.12"
+
+      - uses: actions/setup-node@v4
+        with:
+          node-version: "22"
+
+      - name: Install tool dependencies
+        run: pip install pypdf Pillow
+
+      - name: Page chrome and sitemap are up to date
+        run: python tools/build_pages.py --check
+
+      - name: Inline résumé matches resume.json
+        run: python tools/sync_resume.py --check
+
+      - name: Every photo has its WebP versions and share cards exist
+        run: python tools/optimize_images.py --check
+
+      - name: Coil field model checks
+        run: node tools/test_field_model.cjs

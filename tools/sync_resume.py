@@ -262,11 +262,18 @@ def dashes(when: str) -> str:
     return re.sub(r"\s-\s", " – ", when)
 
 
-def anchor(display: str) -> str:
+def external(href: str, text: str) -> str:
+    """A link that leaves the site: it opens a new tab and says so, matching
+    the external links tools/build_pages.py writes."""
     return (
-        '<a href="' + href_for(display) + '" target="_blank" '
-        'rel="noopener noreferrer">' + esc(display) + "</a>"
+        '<a href="' + href + '" target="_blank" rel="noopener noreferrer">' + text
+        + ' <span class="ext" aria-hidden="true">↗</span>'
+        + '<span class="sr-only"> (opens in a new tab)</span></a>'
     )
+
+
+def anchor(display: str) -> str:
+    return external(href_for(display), esc(display))
 
 
 def render(data: dict) -> str:
@@ -285,10 +292,7 @@ def render(data: dict) -> str:
         elif href.startswith(("mailto:", "tel:")):
             add('              <li><a href="' + href + '">' + label + "</a></li>")
         else:
-            add(
-                '              <li><a href="' + href + '" target="_blank" '
-                'rel="noopener noreferrer">' + label + "</a></li>"
-            )
+            add("              <li>" + external(href, label) + "</li>")
     add("            </ul>")
     add("          </div>")
 
