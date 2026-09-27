@@ -1,13 +1,9 @@
 {
-  "name": "Calvin Yang",
+  "name": "Junzhe “Calvin” Yang",
   "contact": [
     {
       "label": "calviny7@uci.edu",
       "href": "mailto:calviny7@uci.edu"
-    },
-    {
-      "label": "(949) 316-8256",
-      "href": "tel:+19493168256"
     },
     {
       "label": "LinkedIn",
@@ -30,7 +26,7 @@
         {
           "heading": "University of California, Irvine",
           "when": "Expected Jun. 2030",
-          "where": "Bachelor of Science, Computer Science and Engineering · Irvine, CA",
+          "where": "Bachelor of Science, Computer Science and Engineering · Irvine, CA · GPA: 4.00/4.00",
           "link": "",
           "bullets": []
         }
@@ -46,7 +42,7 @@
         },
         {
           "term": "Software",
-          "detail": "ANSYS Maxwell, Fusion 360, VS Code, EasyEDA, OpenRocket, NumPy, pytest, Git, GitHub Actions, CapCut"
+          "detail": "ANSYS Maxwell, Fusion 360, VS Code, EasyEDA, OpenRocket, NumPy, pytest, Git, GitHub Actions, CapCut, Microsoft Office, Adobe Photoshop, Claude, Codex"
         }
       ]
     },
@@ -83,7 +79,7 @@
           "link": "",
           "bullets": [
             "Built a real-time sensor monitoring system using an Arduino Uno R3, integrating an ultrasonic distance sensor and temperature/humidity sensor with an OLED display.",
-            "Developed C/C++ firmware to collect sensor measurements and refresh the OLED display at approximately 100 ms intervals.",
+            "Developed C/C++ firmware to collect sensor measurements and refresh the OLED display at 50 ms intervals.",
             "Implemented I2C communication between the Arduino, sensors, and OLED display."
           ]
         }
