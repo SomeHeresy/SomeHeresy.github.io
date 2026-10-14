@@ -13,7 +13,7 @@
   <meta property="og:type" content="article">
   <meta property="og:site_name" content="Calvin Yang">
   <meta property="og:title" content="Coilgun Timing Simulator | Calvin Yang">
-  <meta property="og:description" content="A Python physics simulator coupling capacitor discharge to projectile motion through position-dependent inductance. Quantified a 46.8% suckback loss on my own hardware.">
+  <meta property="og:description" content="A Python physics simulator coupling capacitor discharge to projectile motion through position-dependent inductance. Predicts a 46.8% suckback loss for my own single-stage hardware.">
   <meta property="og:url" content="https://someheresy.github.io/projects/coilgun-simulator.html">
   <meta property="og:image" content="https://someheresy.github.io/assets/social/coilgun-simulator.jpg">
   <meta property="og:image:width" content="1200">
@@ -88,7 +88,7 @@
         <div class="wrap">
           <figure class="figure figure--contain cs-media">
             <div class="frame">
-              <div class="frame__media" data-project-image="coilgun-simulator" style="--ratio: 1050 / 675"><img src="../assets/coilgun-simulator/velocity-vs-start-position.png" alt="Simulated peak and exit velocity plotted against the projectile's starting position: peak velocity rises to about 18 m/s while exit velocity peaks near 13 m/s at a start position of −33.8 mm" width="1050" height="675"></div>
+              <div class="frame__media" data-project-image="coilgun-simulator" style="--ratio: 1050 / 675"><img src="../assets/coilgun-simulator/velocity-vs-start-position.webp" alt="Simulated peak and exit velocity plotted against the projectile's starting position: peak velocity rises to about 18 m/s while exit velocity peaks near 13 m/s at a start position of −33.8 mm" width="1050" height="675"></div>
             </div>
             <figcaption><span class="figure__num">Fig. 01</span>Projectile velocity against starting position. The peak of the exit-velocity curve is the answer the simulator exists to find.</figcaption>
           </figure>
@@ -112,9 +112,9 @@
           <section class="cs-section flow" id="overview" aria-labelledby="overview-title">
             <p class="label label--accent">01 — Overview</p>
             <h2 id="overview-title">The hardware came first. Now the model.</h2>
-            <p>My two-stage accelerator chronographs at 6–7 m/s on a single stage with a 54.64 g steel slug at 350 V. That number was measured, not predicted — I had no way to say why it was that value, or what to change to improve it. This simulator answers both questions from first principles.</p>
+            <p>My two-stage accelerator reaches about 11 m/s with both stages firing. Fired on a single stage at 350 V, the 54.64 g steel slug chronographs at 6–7 m/s, and that single-stage shot is what this simulator models. That number was measured, not predicted — I had no way to say why it was that value, or what to change to improve it. This simulator answers both questions from first principles.</p>
             <dl class="readouts">
-              <div class="readout"><dt>Velocity lost to suckback</dt><dd>46.8<span class="unit">%</span></dd></div>
+              <div class="readout"><dt>Predicted suckback loss</dt><dd>46.8<span class="unit">%</span></dd></div>
               <div class="readout"><dt>Energy conservation error</dt><dd>6e-14</dd></div>
               <div class="readout"><dt>Automated tests</dt><dd>22</dd></div>
             </dl>
@@ -125,7 +125,7 @@
             <h2 id="challenge-title">The force has to come from somewhere real.</h2>
             <p>A coilgun is not two independent problems. The capacitor discharge drives the coil, but the projectile moving through that coil changes the coil’s inductance, which feeds back into the circuit. Model them separately and you get a simulation that looks plausible and is quietly wrong.</p>
             <ul class="ticks">
-              <li>Integrate a stiff, oscillatory circuit accurately enough that timing predictions mean something.</li>
+              <li>Integrate a lightly damped, oscillatory circuit accurately enough that timing predictions mean something.</li>
               <li>Couple the projectile’s motion to the circuit without breaking energy conservation.</li>
               <li>Handle two physically different projectiles — a ferromagnetic slug and a permanent magnet — under one set of equations.</li>
               <li>Verify the result without tuning parameters until it matched the measurement.</li>
@@ -161,14 +161,14 @@
 
           <section class="cs-section flow" id="result" aria-labelledby="result-title">
             <p class="label label--accent">05 — Result</p>
-            <h2 id="result-title">Nearly half the muzzle velocity was being thrown away.</h2>
+            <h2 id="result-title">The model says nearly half the muzzle velocity is thrown away.</h2>
             <figure class="figure figure--contain">
-              <div class="frame"><div class="frame__media" style="--ratio: 1500 / 1050"><img src="../assets/coilgun-simulator/time-series.webp" srcset="../assets/coilgun-simulator/time-series-800.webp 800w, ../assets/coilgun-simulator/time-series.webp 1500w" sizes="(max-width: 960px) 100vw, 780px" alt="Four panels showing capacitor voltage, coil current, projectile position, and projectile velocity against time through a single shot" loading="lazy" width="1500" height="1050"></div></div>
-              <figcaption><span class="figure__num">Fig. 02</span>One shot, end to end. Velocity peaks exactly as the projectile reaches the coil centre, then falls as the coil pulls it back.</figcaption>
+              <div class="frame"><div class="frame__media" style="--ratio: 1500 / 1050"><img src="../assets/coilgun-simulator/time-series.webp" srcset="../assets/coilgun-simulator/time-series-800.webp 800w, ../assets/coilgun-simulator/time-series.webp 1500w" sizes="(max-width: 960px) 100vw, 780px" alt="Four panels showing capacitor voltage, coil current, projectile position, and projectile velocity against time through a single simulated shot starting at −33.8 mm" loading="lazy" width="1500" height="1050"></div></div>
+              <figcaption><span class="figure__num">Fig. 02</span>One simulated shot from the optimised start at −33.8 mm, not my current −22 mm placement. Velocity peaks as the projectile reaches the coil centre, then falls as the coil pulls it back.</figcaption>
             </figure>
             <p>The model reproduces suckback without being told to: the inductance gradient changes sign at the coil centre, so the coil pulls the projectile in on approach and drags it back on the way out. Simulated peak velocity lands at the coil centre to within a hundredth of a millimetre — a behaviour that emerges from the equations rather than being programmed in.</p>
-            <p>At my actual projectile placement, the simulator predicts a peak of 18.14 m/s but an exit velocity of only 9.64 m/s. <strong>46.8% of the velocity is lost after the projectile passes the coil centre.</strong></p>
-            <p>Sweeping the starting position produced a testable prediction about my own hardware: I had placed the projectile almost exactly where <em>peak</em> velocity is maximised, but peak is not what leaves the barrel. Starting it about 12 mm further back trades a little peak speed for far less braking time — a predicted gain from 9.64 to 13.22 m/s, roughly 37%, for free.</p>
+            <p>At my actual projectile placement, the simulator predicts a peak of 18.14 m/s but an exit velocity of only 9.64 m/s. <strong>In the model, 46.8% of the velocity is lost after the projectile passes the coil centre.</strong></p>
+            <p>Sweeping the starting position produced a testable prediction about my own hardware: I had placed the projectile almost exactly where <em>peak</em> velocity is maximised, but peak is not what leaves the barrel. Starting it about 12 mm further back trades a little peak speed for far less braking time — a predicted gain from 9.64 to 13.22 m/s, roughly 37%, that I have not yet tested on the hardware.</p>
             <dl class="readouts">
               <div class="readout"><dt>Predicted exit velocity today</dt><dd>9.64<span class="unit">m/s</span></dd></div>
               <div class="readout"><dt>After moving the slug 12 mm back</dt><dd>13.22<span class="unit">m/s</span></dd></div>

@@ -120,9 +120,9 @@
         </div>
 
         <dl class="facts">
-          <div class="fact"><dt>Measured muzzle velocity, V3 coilgun</dt><dd>~11<span class="unit">m/s</span></dd></div>
-          <div class="fact"><dt>Velocity lost to suckback, found in simulation</dt><dd>46.8<span class="unit">%</span></dd></div>
-          <div class="fact"><dt>Views on my YouTube channel</dt><dd>150M+</dd></div>
+          <div class="fact"><dt>Measured muzzle velocity, V3 coilgun, two stages</dt><dd>~11<span class="unit">m/s</span></dd></div>
+          <div class="fact"><dt>Velocity lost to suckback, predicted in simulation</dt><dd>46.8<span class="unit">%</span></dd></div>
+          <div class="fact"><dt>Coilgun versions built and tested since 2022</dt><dd>3</dd></div>
           <div class="fact"><dt>Expected B.S. Computer Science &amp; Engineering, UC Irvine</dt><dd>2030</dd></div>
         </dl>
       </div>
@@ -141,14 +141,14 @@
           <a class="work__media frame" href="projects/electromagnetic-accelerator.html" tabindex="-1" aria-hidden="true">
             <span class="frame__media" data-project-image="electromagnetic-accelerator"><img src="assets/coilgun/version3/v3-main-setup.webp" srcset="assets/coilgun/version3/v3-main-setup-800.webp 800w, assets/coilgun/version3/v3-main-setup.webp 1125w" sizes="(max-width: 900px) 100vw, 58vw" alt="" width="1125" height="640" loading="lazy"></span>
             <span class="frame__tag">Fig. 01 — V3 two-stage bench</span>
-            <span class="work__inset"><img src="assets/coilgun/version3/sim-model-cover.png" alt="" width="932" height="536" loading="lazy"><span>ANSYS Maxwell model</span></span>
+            <span class="work__inset"><img src="assets/coilgun/version3/sim-model-cover.webp" alt="" width="932" height="536" loading="lazy"><span>ANSYS Maxwell model</span></span>
           </a>
           <div class="work__body flow">
             <p class="work__meta label"><b>Project 01</b><span>Hardware</span><span>2022 – present</span></p>
             <h3 class="work__title" id="ema-title" data-project-title="electromagnetic-accelerator"><a href="projects/electromagnetic-accelerator.html">Electromagnetic Accelerator</a></h3>
             <p>Four years, three versions, and a fascination with making invisible forces move something real. A two-stage coilgun built through failed tests, field simulations, CAD, and Arduino timing logic.</p>
             <dl class="readouts">
-              <div class="readout"><dt>Measured on V3 hardware</dt><dd>~11<span class="unit">m/s</span></dd></div>
+              <div class="readout"><dt>Measured on V3 hardware, two stages</dt><dd>~11<span class="unit">m/s</span></dd></div>
               <div class="readout"><dt>Projectile mass</dt><dd>54.64<span class="unit">g</span></dd></div>
               <div class="readout"><dt>Sequential stages</dt><dd>2</dd></div>
             </dl>
@@ -162,9 +162,9 @@
             <p class="work__meta label"><b>Project 02</b><span>Software</span><span class="status"><span class="led" aria-hidden="true"></span>Complete · Sep 2026</span></p>
             <h3 class="work__title" id="sim-title" data-project-title="coilgun-simulator"><a href="projects/coilgun-simulator.html">Coilgun Timing Simulator</a></h3>
             <p class="work__kicker">The hardware came first. Now, the model.</p>
-            <p>A Python physics simulator coupling capacitor discharge to projectile motion through a position-dependent inductance, solved with a custom RK4 integrator. It found that <strong>46.8% of my muzzle velocity was being lost to suckback</strong> — and where to move the projectile to get most of it back.</p>
+            <p>A Python physics simulator coupling capacitor discharge to projectile motion through a position-dependent inductance, solved with a custom RK4 integrator. It predicts that <strong>46.8% of my single-stage muzzle velocity is lost to suckback</strong> — and where moving the projectile could win much of it back.</p>
             <dl class="readouts">
-              <div class="readout"><dt>Velocity lost after coil centre</dt><dd>46.8<span class="unit">%</span></dd></div>
+              <div class="readout"><dt>Predicted loss after coil centre</dt><dd>46.8<span class="unit">%</span></dd></div>
               <div class="readout"><dt>Energy conservation error</dt><dd>6e-14</dd></div>
               <div class="readout"><dt>Automated tests in CI</dt><dd>22</dd></div>
             </dl>
@@ -173,7 +173,7 @@
           </div>
           <div class="work__aside">
             <a class="frame" href="projects/coilgun-simulator.html" tabindex="-1" aria-hidden="true">
-              <span class="frame__media plate" data-project-image="coilgun-simulator"><img src="assets/coilgun-simulator/velocity-vs-start-position.png" alt="" width="1050" height="675" loading="lazy"></span>
+              <span class="frame__media plate" data-project-image="coilgun-simulator"><img src="assets/coilgun-simulator/velocity-vs-start-position.webp" alt="" width="1050" height="675" loading="lazy"></span>
             </a>
             <ol class="checklist" aria-label="Build log">
               <li><span class="checklist__tick" aria-hidden="true">✓</span><div><strong>Numerical foundation</strong><p>Generic RK4 integrator; 4th-order convergence verified.</p></div><span class="checklist__state label">Built</span></li>
@@ -181,7 +181,7 @@
               <li><span class="checklist__tick" aria-hidden="true">✓</span><div><strong>Force &amp; motion</strong><p>Five-variable state; energy conserved to 6e-14.</p></div><span class="checklist__state label">Built</span></li>
               <li><span class="checklist__tick" aria-hidden="true">✓</span><div><strong>CLI, tests &amp; validation</strong><p>22 tests in CI; compared against measured hardware.</p></div><span class="checklist__state label">Built</span></li>
             </ol>
-            <p class="work__foot">Predicts 9.64 m/s against a measured 6–7 m/s. The gap is documented, not tuned away.</p>
+            <p class="work__foot">Predicts 9.64 m/s against a measured 6–7 m/s, single stage at 350 V. The gap is documented, not tuned away.</p>
           </div>
         </article>
 
@@ -208,7 +208,7 @@
             </a>
             <p class="work__meta label"><b>Project 04</b><span>Embedded</span><span>2026</span></p>
             <h3 class="work__title" id="ard-title" data-project-title="arduino-sensor-control"><a href="projects/arduino-sensor-control.html">Arduino Sensor &amp; Control System</a></h3>
-            <p>Distance, temperature, and humidity brought into one working monitor. C/C++ sensor acquisition with an OLED display over I²C.</p>
+            <p>Distance, temperature, and humidity brought into one working monitor. C/C++ sensor acquisition, with the OLED display driven over I²C.</p>
             <dl class="readouts">
               <div class="readout"><dt>Display refresh</dt><dd>~100<span class="unit">ms</span></dd></div>
               <div class="readout"><dt>Sensors on one loop</dt><dd>2</dd></div>
@@ -251,20 +251,6 @@
         </header>
         <ol class="timeline">
           <li class="timeline__item reveal">
-            <p class="timeline__when label"><time datetime="2026-01">Jan 2026</time> – Present</p>
-            <div>
-              <h3 class="timeline__title">Independent Content Creator</h3>
-              <p class="timeline__org">YouTube · <a href="https://www.youtube.com/@SomeHeresyGaming" target="_blank" rel="noopener noreferrer">@SomeHeresyGaming <span class="ext" aria-hidden="true">↗</span><span class="sr-only"> (opens in a new tab)</span></a></p>
-              <dl class="readouts">
-                <div class="readout"><dt>Subscribers</dt><dd>50K+</dd></div>
-                <div class="readout"><dt>Total views</dt><dd>150M+</dd></div>
-              </dl>
-              <ul class="ticks">
-                <li>Developed practical experience in audience analytics, rapid iteration, editing, and visual communication.</li>
-              </ul>
-            </div>
-          </li>
-          <li class="timeline__item reveal">
             <p class="timeline__when label"><time datetime="2025-11">Nov 2025</time> – <time datetime="2026-03">Mar 2026</time></p>
             <div>
               <h3 class="timeline__title">R&amp;D and Simulation Lead</h3>
@@ -285,6 +271,20 @@
                 <li>Revised 3D CAD models in Fusion 360 for printable concrete structures.</li>
                 <li>Prepared concrete molds used for ASTM material strength testing.</li>
                 <li>Collaborated with four Master of Engineering researchers through prototype development and testing.</li>
+              </ul>
+            </div>
+          </li>
+          <li class="timeline__item reveal">
+            <p class="timeline__when label"><time datetime="2026-01">Jan 2026</time> – Present</p>
+            <div>
+              <h3 class="timeline__title">Independent Content Creator</h3>
+              <p class="timeline__org">YouTube · <a href="https://www.youtube.com/@SomeHeresyGaming" target="_blank" rel="noopener noreferrer">@SomeHeresyGaming <span class="ext" aria-hidden="true">↗</span><span class="sr-only"> (opens in a new tab)</span></a></p>
+              <dl class="readouts">
+                <div class="readout"><dt>Subscribers</dt><dd>50K+</dd></div>
+                <div class="readout"><dt>Total views</dt><dd>150M+</dd></div>
+              </dl>
+              <ul class="ticks">
+                <li>Developed practical experience in audience analytics, rapid iteration, editing, and visual communication.</li>
               </ul>
             </div>
           </li>
@@ -361,7 +361,7 @@
           <!-- RESUME:AUTO START - generated by tools/sync_resume.py, do not edit by hand -->
         <article class="resume-doc">
           <div class="resume-doc-head">
-            <h3>Junzhe “Calvin” Yang</h3>
+            <h3>Junzhe (Calvin) Yang</h3>
             <ul class="resume-contact">
               <li><a href="mailto:calviny7@uci.edu">calviny7@uci.edu</a></li>
               <li><a href="https://www.linkedin.com/in/calvinyang07/" target="_blank" rel="noopener noreferrer">LinkedIn <span class="ext" aria-hidden="true">↗</span><span class="sr-only"> (opens in a new tab)</span></a></li>
@@ -394,30 +394,30 @@
             <h4>Projects</h4>
             <div>
               <div class="resume-entry">
-                <div class="resume-entry-head"><h5>Electromagnetic Accelerator (Coil Gun)</h5><span class="resume-when">Jun. 2022 – Present</span></div>
-                <p class="resume-where">Individual Project</p>
+                <div class="resume-entry-head"><h5>Electromagnetic Accelerator</h5><span class="resume-when">Jun. 2022 – Present</span></div>
+                <p class="resume-where">Individual Project · Irvine, CA</p>
                 <ul>
                   <li>Designed and built a two-stage coil gun, solving the challenge of precisely timing sequential electromagnetic coils to efficiently accelerate a projectile.</li>
                   <li>Used ANSYS Maxwell 2D for electromagnetic field simulation and coil-timing optimization, Fusion 360 for mechanical design, 3D printing for fabrication, and Arduino for stage-control logic.</li>
-                  <li>Achieved approximately 11 m/s projectile velocity with a 54.64 g projectile using four 400 V, 330 µF capacitors.</li>
+                  <li>Achieved approximately 11 m/s across two stages with a 54.64 g projectile using four 400 V, 330 µF capacitors.</li>
                 </ul>
               </div>
               <div class="resume-entry">
                 <div class="resume-entry-head"><h5>Coilgun Timing Simulator</h5><span class="resume-when">Aug. 2026 – Sep. 2026</span></div>
-                <p class="resume-where">Individual Project</p>
+                <p class="resume-where">Individual Project · Irvine, CA</p>
                 <ul>
-                  <li>Built a Python simulator coupling capacitor-discharge circuit dynamics to projectile motion through a position-dependent inductance model, solving the resulting 5-variable coupled ODE system with a custom 4th-order Runge-Kutta integrator.</li>
-                  <li>Validated numerically rather than by fitting: matched the closed-form RLC solution, confirmed 4th-order convergence (16.0× error reduction per step halving), and enforced energy conservation to 6×10⁻¹⁴ relative across circuit, kinetic, and resistive terms.</li>
-                  <li>Automated 22 tests across 3 Python versions in GitHub Actions; quantified a 46.8% velocity loss to magnetic suckback and identified a projectile-placement change predicted to recover 37% of muzzle velocity.</li>
+                  <li>Built a Python coilgun simulator coupling circuit dynamics and projectile motion via position-dependent inductance, using a custom 4th-order Runge-Kutta solver.</li>
+                  <li>Validated against the analytical RLC solution; confirmed 4th-order convergence and energy conservation with a relative error of 6×10⁻¹⁴.</li>
+                  <li>Automated 22 tests across 3 Python versions in GitHub Actions. The model predicts a 46.8% velocity loss to magnetic suckback and a projectile-placement change that could raise exit velocity by 37%, pending hardware testing.</li>
                 </ul>
               </div>
               <div class="resume-entry">
                 <div class="resume-entry-head"><h5>Arduino Sensor &amp; Control System</h5><span class="resume-when">Jun. 2026 – Jul. 2026</span></div>
-                <p class="resume-where">Individual Project</p>
+                <p class="resume-where">Individual Project · Irvine, CA</p>
                 <ul>
                   <li>Built a real-time sensor monitoring system using an Arduino Uno R3, integrating an ultrasonic distance sensor and temperature/humidity sensor with an OLED display.</li>
-                  <li>Developed C/C++ firmware to collect sensor measurements and refresh the OLED display at 50 ms intervals.</li>
-                  <li>Implemented I2C communication between the Arduino, sensors, and OLED display.</li>
+                  <li>Developed C++ firmware to read sensors, update an OLED display, and handle errors.</li>
+                  <li>Integrated digital sensor inputs and implemented I2C communication with the OLED display.</li>
                 </ul>
               </div>
             </div>
@@ -443,7 +443,7 @@
             <div>
               <div class="resume-entry">
                 <div class="resume-entry-head"><h5>American Rocketry Challenge</h5><span class="resume-when">Nov. 2025 – Mar. 2026</span></div>
-                <p class="resume-where">R&amp;D and Simulation Lead</p>
+                <p class="resume-where">R&amp;D and Simulation Lead · Irvine, CA</p>
                 <ul>
                   <li>Improved simulated flight accuracy by 23.2% through iterative OpenRocket analysis.</li>
                   <li>Collaborated with a 7-member engineering team to design and build a 25.6-inch competition rocket.</li>
@@ -452,7 +452,7 @@
               </div>
               <div class="resume-entry">
                 <div class="resume-entry-head"><h5>YouTube</h5><span class="resume-when">Jan. 2026 – Present</span></div>
-                <p class="resume-where">Content Creator · <a href="https://www.youtube.com/@SomeHeresyGaming" target="_blank" rel="noopener noreferrer">youtube.com/@SomeHeresyGaming <span class="ext" aria-hidden="true">↗</span><span class="sr-only"> (opens in a new tab)</span></a></p>
+                <p class="resume-where">Content Creator · Irvine, CA · <a href="https://www.youtube.com/@SomeHeresyGaming" target="_blank" rel="noopener noreferrer">youtube.com/@SomeHeresyGaming <span class="ext" aria-hidden="true">↗</span><span class="sr-only"> (opens in a new tab)</span></a></p>
                 <ul>
                   <li>Built and grew a YouTube channel to 50,000+ subscribers and 150M+ total views.</li>
                 </ul>

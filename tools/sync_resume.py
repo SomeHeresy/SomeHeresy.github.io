@@ -96,7 +96,9 @@ def is_section_header(line: str) -> bool:
         return False
     body = line.strip()
     letters = [c for c in body if c.isalpha()]
-    return bool(letters) and all(c.isupper() for c in letters) and len(body) < 48
+    # "GPA: 4.00/4.00" is all caps too, but no section title carries a digit.
+    return (bool(letters) and all(c.isupper() for c in letters) and len(body) < 48
+            and not any(c.isdigit() for c in body))
 
 
 # A parenthesised handle at the end of an entry heading, e.g.
@@ -123,16 +125,21 @@ def split_columns(line: str) -> tuple[str, str]:
     return parts[0], parts[-1]
 
 
+PHONE = re.compile(r"[\d()\-.\s+]{7,}")
+
+
 def parse_contact(line: str) -> list[dict]:
     out = []
     for raw in line.split("|"):
         label = raw.strip()
         if not label:
             continue
+        # The PDF may carry a phone number for applications; the public site
+        # never shows one, so drop it here rather than trusting a later edit.
+        if PHONE.fullmatch(label):
+            continue
         if "@" in label and " " not in label:
             href = "mailto:" + label
-        elif re.fullmatch(r"[\d()\-.\s+]{7,}", label):
-            href = "tel:+1" + re.sub(r"\D", "", label)
         else:
             href = LINKS.get(label.lower(), "")
         out.append({"label": label, "href": href})
@@ -204,6 +211,11 @@ def parse_pdf(pdf: Path) -> dict:
 
         if section["kind"] == "list":
             label, sep, detail = stripped.partition(":")
+            # No colon: the previous "Label: value" line wrapped onto this one.
+            if not sep and section["entries"]:
+                last = section["entries"][-1]
+                last["detail"] = last["detail"] + " " + re.sub(r"\s{2,}", " ", stripped)
+                continue
             if sep:
                 section["entries"].append(
                     {"term": label.strip(), "detail": re.sub(r"\s{2,}", " ", detail.strip())}
@@ -230,6 +242,10 @@ def parse_pdf(pdf: Path) -> dict:
                 # the degree and its date on the next. One entry, not two.
                 entry["when"] = right
                 entry["where"] = " · ".join(x for x in (left, entry["where"]) if x)
+                continue
+            if not right and ":" in left:
+                # A "Label: value" detail under an entry, e.g. "GPA: 4.00/4.00".
+                entry["where"] = entry["where"] + " · " + left
                 continue
 
         heading, link = split_heading_link(left)
@@ -379,11 +395,12 @@ def main() -> int:
         )
         print("wrote " + str(JSON_PATH.relative_to(ROOT)))
 
+        # --json is parse-only, as documented above: the PDF is not published.
+        if args.json:
+            return 0
         if src.resolve() != PDF_PATH.resolve():
             shutil.copyfile(src, PDF_PATH)
             print("copied PDF -> " + str(PDF_PATH.relative_to(ROOT)))
-        if args.json:
-            return 0
     else:
         if not JSON_PATH.exists():
             sys.exit("error: " + str(JSON_PATH) + " not found - pass a PDF to create it")

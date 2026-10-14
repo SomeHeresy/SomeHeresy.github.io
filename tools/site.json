@@ -70,7 +70,7 @@
       "title": "Coilgun Timing Simulator",
       "category": "Independent R&D · Software",
       "description": "Calvin Yang's coilgun timing simulator case study: a Python physics engine coupling capacitor discharge to projectile motion, validated by energy conservation and against measured hardware.",
-      "og_description": "A Python physics simulator coupling capacitor discharge to projectile motion through position-dependent inductance. Quantified a 46.8% suckback loss on my own hardware.",
+      "og_description": "A Python physics simulator coupling capacitor discharge to projectile motion through position-dependent inductance. Predicts a 46.8% suckback loss for my own single-stage hardware.",
       "image": "assets/social/coilgun-simulator.jpg",
       "image_alt": "Simulated projectile velocity plotted against starting position, showing a clear optimum"
     },
